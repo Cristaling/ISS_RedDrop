@@ -1,8 +1,7 @@
 package io.cristaling.iss.reddrop.web.controllers;
 
-import io.cristaling.iss.reddrop.core.DonatorUser;
-import io.cristaling.iss.reddrop.repositories.DonatorUsersRepository;
-import io.cristaling.iss.reddrop.services.DonatorsService;
+import io.cristaling.iss.reddrop.core.Donator;
+import io.cristaling.iss.reddrop.repositories.DonatorRepository;
 import io.cristaling.iss.reddrop.web.controllers.requests.CenterLoginRequest;
 import io.cristaling.iss.reddrop.web.controllers.requests.DonorLoginRequest;
 import io.cristaling.iss.reddrop.web.controllers.requests.HospitalLoginRequest;
@@ -25,27 +24,22 @@ import java.util.UUID;
 @RequestMapping("/login")
 public class LoginController {
 
-	DonatorUsersRepository donatorUsersRepository;
+	DonatorRepository donatorRepository;
 
 	@Autowired
-	public LoginController(DonatorUsersRepository donatorUsersRepository) {
-		this.donatorUsersRepository = donatorUsersRepository;
-	}
+	public LoginController(DonatorRepository donatorRepository) { throw new NotImplementedException(); }
 
 	@RequestMapping("/donorusers")
-	public List<DonatorUser> getAllDonatorUsers() {
-		return donatorUsersRepository.findAll();
+	public List<Donator> getAllDonatorUsers() {
+		throw new NotImplementedException();
 	}
 
 	@RequestMapping("/adddonor")
-	public void addDonor(@RequestBody DonatorUser donatorUser) {
-		donatorUser.setUuid(UUID.randomUUID());
-		donatorUsersRepository.save(donatorUser);
-	}
+	public void addDonor(@RequestBody Donator donatorUser) { throw new NotImplementedException(); }
 
 	@RequestMapping("/deletedonor")
 	public void deleteDonor(@RequestBody String uuid) {
-		donatorUsersRepository.deleteById(UUID.fromString(uuid));
+		throw new NotImplementedException();
 	}
 
 	@RequestMapping("/donor")
