@@ -27,7 +27,7 @@ public class LoginController {
 	DonatorRepository donatorRepository;
 
 	@Autowired
-	public LoginController(DonatorRepository donatorRepository) { throw new NotImplementedException(); }
+	public LoginController(DonatorRepository donatorRepository) {}
 
 	@RequestMapping("/donorusers")
 	public List<Donator> getAllDonatorUsers() {

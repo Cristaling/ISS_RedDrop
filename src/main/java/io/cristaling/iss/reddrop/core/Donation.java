@@ -3,15 +3,17 @@ package io.cristaling.iss.reddrop.core;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Table(name = "donations")
 public class Donation {
+
     @Id
     UUID uuid;
-    @Column
-    UUID bloodBag;
+    @OneToMany(mappedBy = "donation", cascade = CascadeType.ALL)
+    List<BloodBag> bloodBag;
     @ManyToOne
     @JoinColumn(name="donator_uuid")
     Donator donator;
@@ -29,14 +31,21 @@ public class Donation {
         return uuid;
     }
 
-    public UUID getBloodBag() {
+    public List<BloodBag> getBloodBag() {
         return bloodBag;
     }
 
-    public void setBloodBag(UUID bloodBag) {
+    public void setBloodBag(List<BloodBag> bloodBag) {
         this.bloodBag = bloodBag;
     }
 
+    public AnalysisResult getAnalysisResult() {
+        return analysisResult;
+    }
+
+    public void setAnalysisResult(AnalysisResult analysisResult) {
+        this.analysisResult = analysisResult;
+    }
 
     public Donator getDonator() {
         return donator;

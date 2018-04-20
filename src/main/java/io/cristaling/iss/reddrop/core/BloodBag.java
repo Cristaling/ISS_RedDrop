@@ -2,19 +2,18 @@ package io.cristaling.iss.reddrop.core;
 
 import io.cristaling.iss.reddrop.utils.BloodBagType;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.UUID;
 
 @Entity
-@Table(name = "bags")
+@Table(name = "bloodbags")
 public class BloodBag {
+
     @Id
     UUID uuid;
-    @Column
+    @ManyToOne
+    @JoinColumn(name = "donation_uuid")
     Donation donation;
     @Column
     boolean tested;
@@ -22,4 +21,44 @@ public class BloodBag {
     Date expireDate;
     @Column
     BloodBagType type;
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
+    }
+
+    public Donation getDonation() {
+        return donation;
+    }
+
+    public void setDonation(Donation donation) {
+        this.donation = donation;
+    }
+
+    public boolean isTested() {
+        return tested;
+    }
+
+    public void setTested(boolean tested) {
+        this.tested = tested;
+    }
+
+    public Date getExpireDate() {
+        return expireDate;
+    }
+
+    public void setExpireDate(Date expireDate) {
+        this.expireDate = expireDate;
+    }
+
+    public BloodBagType getType() {
+        return type;
+    }
+
+    public void setType(BloodBagType type) {
+        this.type = type;
+    }
 }
