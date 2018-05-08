@@ -8,4 +8,7 @@ import java.util.UUID;
 
 @Repository
 public interface DonatorRepository extends JpaRepository<Donator,UUID> {
+
+	Donator findDonatorByCnp(String cnp);
+
 }

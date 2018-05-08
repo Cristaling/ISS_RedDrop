@@ -1,16 +1,16 @@
 package io.cristaling.iss.reddrop.web.controllers.responses;
 
-public class DonorLoginResponse {
+public class DonatorLoginResponse {
 
 	boolean succesful;
 	String token;
 
-	public DonorLoginResponse(boolean succesful, String token) {
+	public DonatorLoginResponse(boolean succesful, String token) {
 		this.succesful = succesful;
 		this.token = token;
 	}
 
-	public DonorLoginResponse() {
+	public DonatorLoginResponse() {
 	}
 
 	public boolean isSuccesful() {

@@ -121,4 +121,8 @@ public class Donator {
     public void setDonations(List<Donation> donations) {
         this.donations = donations;
     }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
+    }
 }
