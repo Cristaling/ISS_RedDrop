@@ -17,7 +17,7 @@ public class Donator {
     private String nume;
     @Column
     private String prenume;
-    @Column
+    @Column(unique = true)
     private String cnp;
     @Column
     private String nrTel;

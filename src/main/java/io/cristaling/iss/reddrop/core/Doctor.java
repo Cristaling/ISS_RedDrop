@@ -12,7 +12,7 @@ public class Doctor {
     @ManyToOne
     @JoinColumn(name = "hospital_id")
     Hospital hospital;
-    @Column
+    @Column(unique = true)
     String cnp;
     @Column
     String fullName;
