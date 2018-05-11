@@ -31,6 +31,11 @@
                 controller: 'AdminLoginController',
                 controllerAs: 'ctrl'
             })
+            .when("/admin/main", {
+                templateUrl: "views/AdminMainPage.html",
+                controller: 'AdminMainController',
+                controllerAs: 'ctrl'
+            })
             .when("/medic/login", {
                 templateUrl: "views/MedicLoginPage.html",
                 controller: 'MedicLoginController',
