@@ -17,7 +17,6 @@ import java.util.UUID;
 @RequestMapping("/api/hospital")
 public class HospitalController {
 
-
 	HospitalRepository hospitalRepository;
 
 	@Autowired
@@ -30,8 +29,9 @@ public class HospitalController {
 		return hospitalRepository.findAll();
 	}
 
-	@RequestMapping("/savehospital")
+	@RequestMapping("/add")
 	public void addHospital(@RequestBody Hospital hospital){
+		hospital.setUuid(UUID.randomUUID());
 		hospitalRepository.save(hospital);
 	}
 
