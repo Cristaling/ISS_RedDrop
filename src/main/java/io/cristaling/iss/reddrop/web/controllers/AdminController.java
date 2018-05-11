@@ -1,7 +1,6 @@
 package io.cristaling.iss.reddrop.web.controllers;
 
-import io.cristaling.iss.reddrop.core.Donator;
-import io.cristaling.iss.reddrop.services.DonatorService;
+import io.cristaling.iss.reddrop.services.AdminService;
 import io.cristaling.iss.reddrop.web.requests.LoginRequest;
 import io.cristaling.iss.reddrop.web.responses.LoginResponse;
 import io.cristaling.iss.reddrop.web.utils.LoginUtils;
@@ -15,24 +14,15 @@ import java.util.UUID;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/donator")
-public class DonatorController {
-
-	DonatorService donatorService;
+@RequestMapping("/api/admin")
+public class AdminController {
 
 	@Autowired
-	public DonatorController(DonatorService donatorService) {
-		this.donatorService = donatorService;
-		Donator donator = new Donator();
-		donator.setUuid(UUID.randomUUID());
-		donator.setCnp("1971211055084");
-		donator.setPassword("bh06fvb");
-		donatorService.getRepository().save(donator);
-	}
+	AdminService adminService;
 
 	@RequestMapping("/login")
-	public LoginResponse loginDonator(@RequestBody LoginRequest loginRequest) {
-		UUID token = donatorService.tryToLogin(loginRequest.getCnp(), loginRequest.getPassword());
+	public LoginResponse loginAdmin(@RequestBody LoginRequest loginRequest) {
+		UUID token = adminService.tryToLogin(loginRequest.getCnp(), loginRequest.getPassword());
 		return LoginUtils.generateLoginResponse(token);
 	}
 
