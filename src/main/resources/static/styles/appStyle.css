@@ -1,4 +1,8 @@
 
+body {
+    background-color: #252525;
+}
+
 .form-element {
     margin-bottom: 25px;
 }
@@ -13,4 +17,50 @@
 
 .button-wrapper .txt-i {
     margin-bottom: 25px;
+}
+
+.btn-reddrop {
+    color: #ffffff;
+    background-color: #AA3030;
+    border-color: #550000;
+}
+
+.btn-reddrop:hover,
+.btn-reddrop:focus,
+.btn-reddrop:active,
+.btn-reddrop.active,
+.open .dropdown-toggle.btn-reddrop {
+    color: #ffffff;
+    background-color: #880000;
+    border-color: #550000;
+}
+
+.btn-reddrop:active,
+.btn-reddrop.active,
+.open .dropdown-toggle.btn-reddrop {
+    background-image: none;
+}
+
+.btn-reddrop.disabled,
+.btn-reddrop[disabled],
+fieldset[disabled] .btn-reddrop,
+.btn-reddrop.disabled:hover,
+.btn-reddrop[disabled]:hover,
+fieldset[disabled] .btn-reddrop:hover,
+.btn-reddrop.disabled:focus,
+.btn-reddrop[disabled]:focus,
+fieldset[disabled] .btn-reddrop:focus,
+.btn-reddrop.disabled:active,
+.btn-reddrop[disabled]:active,
+fieldset[disabled] .btn-reddrop:active,
+.btn-reddrop.disabled.active,
+.btn-reddrop[disabled].active,
+fieldset[disabled] .btn-reddrop.active {
+    background-color: #AA3030;
+    border-color: #550000;
+}
+
+.btn-reddrop .badge {
+    color: #AA3030;
+    background-color: #ffffff;
 }
