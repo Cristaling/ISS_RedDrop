@@ -9,8 +9,8 @@
             $location.path("/donator/login");
         }
 
-        vm.goToLoginMedic = function () {
-            $location.path("/medic/login");
+        vm.goToLoginDoctor = function () {
+            $location.path("/doctor/login");
         }
 
     }]);

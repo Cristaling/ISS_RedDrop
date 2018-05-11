@@ -65,3 +65,15 @@ fieldset[disabled] .btn-reddrop.active {
     color: #AA3030;
     background-color: #ffffff;
 }
+
+.panel-reddrop > .panel-heading {
+    background-image: none;
+    background-color: #AA3030;
+    color: white;
+
+}
+
+.panel-reddrop > .panel-body {
+    background-color: #333333;
+    color: white;
+}

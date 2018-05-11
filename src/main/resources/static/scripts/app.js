@@ -37,7 +37,7 @@
                 controllerAs: 'ctrl'
             })
             .when("/doctor/login", {
-                templateUrl: "views/DoctorLoginPage.html",
+                templateUrl: "views/login/DoctorLoginPage.html",
                 controller: 'DoctorLoginController',
                 controllerAs: 'ctrl'
             })
