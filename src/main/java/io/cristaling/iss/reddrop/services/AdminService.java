@@ -13,6 +13,10 @@ public class AdminService {
 
 	public UUID tryToLogin(String cnp, String password) {
 
+		if (cnp == null || password == null) {
+			return null;
+		}
+
 		if (cnp.equalsIgnoreCase(adminCNP) && password.equalsIgnoreCase(adminPassword)) {
 			return UUID.fromString(adminUUID);
 		}
