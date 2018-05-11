@@ -3,7 +3,9 @@
     var app = angular.module('RedDrop');
     app.directive('registerDoctor', function () {
         return {
-            scope: {},
+            scope: {
+                hospitalID:'@'
+            },
             templateUrl: "views/directives/DoctorRegistrationDirective.html",
             controller: function () {
 
@@ -17,6 +19,7 @@
                             uuid: "",
                             password: vm.doctorPassword,
                             name : vm.nameRegister,
+                            hospital: hospitalID,
                             cnp : vm.doctorCNP
                         }
                     }).then(function (response) {
