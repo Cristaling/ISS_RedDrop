@@ -32,7 +32,7 @@
                 controllerAs: 'ctrl'
             })
             .when("/admin/main", {
-                templateUrl: "views/AdminMainPage.html",
+                templateUrl: "views/admin/AdminMainPage.html",
                 controller: 'AdminMainController',
                 controllerAs: 'ctrl'
             })

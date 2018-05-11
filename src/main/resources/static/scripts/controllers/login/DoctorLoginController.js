@@ -11,13 +11,13 @@
             $location.path("/doctor/main");
         }
 
-        vm.tryLoginDonator = function () {
+        vm.tryLoginDoctor = function () {
             $http({
                 method: 'POST',
                 url: apiIP + '/api/doctor/login',
                 data: {
-                    cnp: vm.donatorCNP,
-                    password: vm.donatorPassword
+                    cnp: vm.doctorCNP,
+                    password: vm.doctorPassword
                 }
             }).then(function (response) {
                 if (response.data.succesful) {

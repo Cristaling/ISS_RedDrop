@@ -39,5 +39,5 @@ public class HospitalController {
 	public void deleteHospital(String uuid){
 		hospitalRepository.deleteById(UUID.fromString(uuid));
 	}
-	
+
 }

@@ -11,7 +11,7 @@
             $location.path("/admin/login");
         }
 
-        vm.tryLoginDonator = function () {
+        vm.tryLoginAdmin = function () {
             $http({
                 method: 'POST',
                 url: apiIP + '/api/admin/login',
