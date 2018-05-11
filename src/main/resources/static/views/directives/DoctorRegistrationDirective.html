@@ -1,4 +1,4 @@
-<div class="panel panel-reddrop">
+<div class="panel panel-reddrop" style="margin-bottom: 0px">
     <div class="panel-heading">
         Register a Doctor
     </div>
@@ -13,7 +13,7 @@
             <div class="form-group">
                 <label for="nameRegister">Name</label>
                 <input ng-model="ctrl.nameRegister" type="text" class="form-control" id="nameRegister"
-                       placeholder="Password">
+                       placeholder="Name">
             </div>
 
             <div class="form-group">
@@ -24,7 +24,7 @@
 
 
             <div class="btn-lg btn-reddrop form-group" style="text-align: center"
-                 ng-click="ctrl.doRegisterDoctor()">
+                 ng-click="ctrl.tryRegisterDoctor()">
                 Register
             </div>
         </form>
