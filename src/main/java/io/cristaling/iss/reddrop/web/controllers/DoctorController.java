@@ -24,17 +24,18 @@ public class DoctorController {
 	}
 
 	@RequestMapping("/getall")
-	public List<Doctor> getAllHospitals(){
+	public List<Doctor> getAllDoctors(){
 		return doctorRepository.findAll();
 	}
 
-	@RequestMapping("/savehospital")
-	public void addHospital(@RequestBody Doctor doctor){
+	@RequestMapping("/add")
+	public void addDoctor(@RequestBody Doctor doctor){
+		doctor.setUuid(UUID.randomUUID());
 		doctorRepository.save(doctor);
 	}
 
 	@RequestMapping("/delete")
-	public void deleteHospital(String uuid){
+	public void deleteDoctor(String uuid){
 		doctorRepository.deleteById(UUID.fromString(uuid));
 	}
 

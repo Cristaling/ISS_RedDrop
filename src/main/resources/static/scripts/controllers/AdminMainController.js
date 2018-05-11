@@ -14,7 +14,7 @@
 
         vm.openRegisterDoctorDialog = function (hospitalToken) {
             $mdDialog.show({
-                template: '<div register-doctor hospitalID="' + hospitalToken + '"></div>',
+                template: '<div register-doctor data-hospital-id="' + hospitalToken + '"></div>',
                 clickOutsideToClose:true
             });
         };

@@ -2,7 +2,7 @@
     'use strict'
     var app = angular.module('RedDrop', ['ngRoute', 'ngAnimate', 'ngCookies', 'ngAria', 'ngMaterial', 'ngMessages'])
 
-    app.value('apiIP',  'http://127.0.0.1:8080');
+    app.value('apiIP',  'http://127.0.0.1');
 
     app.config(function ($routeProvider) {
         $routeProvider

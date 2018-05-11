@@ -6,10 +6,10 @@
     app.directive('registerDoctor', function () {
         return {
             scope: {
-                hospitalID:'@'
+                hospitalId:'@'
             },
             templateUrl: "views/directives/DoctorRegistrationDirective.html",
-            controller: function ($http) {
+            controller: function ($scope, $http, apiIP) {
 
                 var vm = this;
 
@@ -21,7 +21,7 @@
                             uuid: "",
                             password: vm.doctorPassword,
                             name : vm.nameRegister,
-                            hospital: hospitalID,
+                            hospital: $scope.hospitalId,
                             cnp : vm.doctorCNP
                         }
                     }).then(function (response) { }, function (error) { });
