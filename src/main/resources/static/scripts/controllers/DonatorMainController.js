@@ -5,15 +5,10 @@
     {
         var vm = this;
 
-        vm.userToken = $cookies.get("userToken");
+        vm.donatorToken = $cookies.get("donatorToken");
 
-        if (!vm.userToken) {
-            $location.path("/landing");
-        }
-
-        vm.logout = function() {
-            $cookies.remove("userToken");
-            $location.path("/landing");
+        if (!vm.donatorToken) {
+            $location.path("/donator/login");
         }
 
     }]);

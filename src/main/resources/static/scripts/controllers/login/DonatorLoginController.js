@@ -5,9 +5,9 @@
     {
         var vm = this;
 
-        vm.userToken = $cookies.get("userToken");
+        vm.donatorToken = $cookies.get("donatorToken");
 
-        if (vm.userToken) {
+        if (vm.donatorToken) {
             $location.path("/donator/main");
         }
 
@@ -25,7 +25,7 @@
                 }
             }).then(function (response) {
                 if (response.data.succesful) {
-                    $cookies.put("userToken", response.data.token);
+                    $cookies.put("donatorToken", response.data.token);
                     $location.path("/donator/main");
                 }
             }, function (error) { });

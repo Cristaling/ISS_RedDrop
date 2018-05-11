@@ -36,9 +36,9 @@
                 controller: 'AdminMainController',
                 controllerAs: 'ctrl'
             })
-            .when("/medic/login", {
-                templateUrl: "views/MedicLoginPage.html",
-                controller: 'MedicLoginController',
+            .when("/doctor/login", {
+                templateUrl: "views/DoctorLoginPage.html",
+                controller: 'DoctorLoginController',
                 controllerAs: 'ctrl'
             })
             .when("/user/:userToken", {

@@ -11,10 +11,5 @@
             $location.path("/admin/login");
         }
 
-        vm.logout = function() {
-            $cookies.remove("adminToken");
-            $location.path("/admin/login");
-        }
-
     }]);
 })();
