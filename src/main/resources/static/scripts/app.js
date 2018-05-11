@@ -12,7 +12,7 @@
                 controllerAs: 'ctrl'
             })
             .when("/donator/login", {
-                templateUrl: "views/DonatorLoginPage.html",
+                templateUrl: "views/login/DonatorLoginPage.html",
                 controller: 'DonatorLoginController',
                 controllerAs: 'ctrl'
             })
@@ -24,6 +24,11 @@
             .when("/donator/main", {
                 templateUrl: "views/DonatorMainPage.html",
                 controller: 'DonatorMainController',
+                controllerAs: 'ctrl'
+            })
+            .when("/admin/login", {
+                templateUrl: "views/login/AdminLoginPage.html",
+                controller: 'AdminLoginController',
                 controllerAs: 'ctrl'
             })
             .when("/medic/login", {
