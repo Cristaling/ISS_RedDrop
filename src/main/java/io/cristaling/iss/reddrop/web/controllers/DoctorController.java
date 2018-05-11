@@ -2,6 +2,7 @@ package io.cristaling.iss.reddrop.web.controllers;
 
 import io.cristaling.iss.reddrop.core.Doctor;
 import io.cristaling.iss.reddrop.repositories.DoctorRepository;
+import io.cristaling.iss.reddrop.repositories.HospitalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +18,8 @@ import java.util.UUID;
 public class DoctorController {
 
 	DoctorRepository doctorRepository;
+	@Autowired
+	HospitalRepository hospitalRepository;
 
 	@Autowired
 	public DoctorController(DoctorRepository doctorRepository) {
@@ -31,6 +34,7 @@ public class DoctorController {
 	@RequestMapping("/add")
 	public void addDoctor(@RequestBody Doctor doctor){
 		doctor.setUuid(UUID.randomUUID());
+		doctor.setHospital(hospitalRepository.getOne(doctor.getHospital().getUuid()));
 		doctorRepository.save(doctor);
 	}
 

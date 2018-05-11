@@ -16,6 +16,13 @@ public class Hospital {
     @Column
     String county;
 
+    public Hospital() {
+    }
+
+    public Hospital(String uuid) {
+        this.uuid = UUID.fromString(uuid);
+    }
+
     public UUID getUuid() {
         return uuid;
     }
