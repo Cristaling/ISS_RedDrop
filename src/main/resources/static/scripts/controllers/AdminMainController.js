@@ -12,6 +12,13 @@
 
         vm.hospitals = [];
 
+        vm.openRegisterDoctorDialog = function (hospitalToken) {
+            $mdDialog.show({
+                template: '<div register-doctor hospitalID="' + hospitalToken + '"></div>',
+                clickOutsideToClose:true
+            });
+        };
+
         vm.addHospital = function () {
             var addHospitalPanel = $mdDialog.prompt()
                 .title('Add a new hospital')
