@@ -23,7 +23,7 @@
             $mdDialog.show({
                 template: '<div add-hospital></div>',
                 clickOutsideToClose:true
-            });
+            }).then(vm.refreshHospitalList,vm.refreshHospitalList);
         };
 
         // vm.addHospital = function () {

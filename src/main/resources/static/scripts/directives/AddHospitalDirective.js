@@ -7,7 +7,7 @@
         return {
             scope: {},
             templateUrl: "views/directives/AddHospital.html",
-            controller: function ($http, apiIP) {
+            controller: function ($mdDialog, $scope, $http, apiIP) {
 
                 var vm = this;
 
@@ -17,13 +17,14 @@
                         url: apiIP + '/api/hospital/add',
                         data: {
                             uuid: "",
-                            name : vm.hospitalName,
-                            county : vm.hospitalCounty,
-                            city : vm.hospitalCity
+                            name: vm.hospitalName,
+                            city: vm.hospitalCity,
+                            county: vm.hospitalCounty
                         }
-                    }).then(function (response) {
-                        vm.refreshHospitalList();
-                    }, function (error) { });
+                    }).then(function () {
+                        $mdDialog.cancel();
+                    }, function (error) {
+                    });
                 }
             },
             controllerAs: "ctrl"

@@ -30,9 +30,10 @@ public class HospitalController {
 	}
 
 	@RequestMapping("/add")
-	public void addHospital(@RequestBody Hospital hospital){
+	public String addHospital(@RequestBody Hospital hospital){
 		hospital.setUuid(UUID.randomUUID());
 		hospitalRepository.save(hospital);
+		return "<div></div>";
 	}
 
 	@RequestMapping("/delete")
