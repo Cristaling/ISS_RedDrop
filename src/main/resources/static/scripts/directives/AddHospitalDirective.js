@@ -7,11 +7,11 @@
         return {
             scope: {},
             templateUrl: "views/directives/AddHospital.html",
-            controller: function ($scope, $http, apiIP) {
+            controller: function ($http, apiIP) {
 
                 var vm = this;
 
-                vm.tryRegisterDoctor = function () {
+                vm.tryRegisterHospital = function () {
                     $http({
                         method: 'POST',
                         url: apiIP + '/api/hospital/add',
@@ -21,7 +21,9 @@
                             county : vm.hospitalCounty,
                             city : vm.hospitalCity
                         }
-                    }).then(function (response) { }, function (error) { });
+                    }).then(function (response) {
+                        vm.refreshHospitalList();
+                    }, function (error) { });
                 }
             },
             controllerAs: "ctrl"
