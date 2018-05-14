@@ -21,32 +21,32 @@
 
         vm.openAddHospitalDialog = function () {
             $mdDialog.show({
-                template: '<div add-hospital></div>',
+                controller : function($mdDialog,$http,apiIP){
+                    var vm = this;
+
+                    vm.tryRegisterHospital = function () {
+                        $http({
+                            method: 'POST',
+                            url: apiIP + '/api/hospital/add',
+                            data: {
+                                uuid: "",
+                                name: vm.hospitalName,
+                                city: vm.hospitalCity,
+                                county: vm.hospitalCounty
+                            }
+                        }).then(function () {
+                            $mdDialog.hide();
+                        }, function (error) {
+                            $mdDialog.hide();
+                        });
+                    }
+                },
+                controllerAs: 'ctrl',
+                templateUrl: '/views/directives/AddHospital.html',
+                parent: angular.element(document.body),
                 clickOutsideToClose:true
             }).then(vm.refreshHospitalList,vm.refreshHospitalList);
         };
-
-        // vm.addHospital = function () {
-        //     var addHospitalPanel = $mdDialog.prompt()
-        //         .title('Add a new hospital')
-        //         .initialValue('County Hospital')
-        //         .ok('Save')
-        //         .cancel('Cancel');
-        //
-        //     $mdDialog.show(addHospitalPanel).then(function (result) {
-        //         $http({
-        //             method: 'POST',
-        //             url: apiIP + '/api/hospital/add',
-        //             data: {
-        //                 uuid: "",
-        //                 name: result
-        //             }
-        //         }).then(function (response) {
-        //             vm.refreshHospitalList();
-        //         }, function (error) { });
-        //     }, function () {
-        //     });
-        // };
 
         vm.deleteHospital = function (hospitalId) {
             $http.get(apiIP + '/api/hospital/delete?uuid=' + hospitalId).then(function (response) {

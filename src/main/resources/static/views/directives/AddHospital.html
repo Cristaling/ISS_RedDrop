@@ -1,32 +1,35 @@
-<div class="panel panel-reddrop" style="margin-bottom: 0px">
+<md-dialog class="panel panel-reddrop" style="margin-bottom: 0px" aria-label="Add Hospital">
     <div class="panel-heading">
         Add a Hospital
     </div>
     <div class="panel-body">
-        <form>
+            <md-dialog-content>
+                <div class="form-group">
+                    <label for="hospitalName">Name</label>
+                    <input ng-model="ctrl.hospitalName" type="text" class="form-control" id="hospitalName"
+                           placeholder="Hospital Name">
+                </div>
 
-            <div class="form-group">
-                <label for="hospitalName">Name</label>
-                <input ng-model="ctrl.hospitalName" type="text" class="form-control" id="hospitalName"
-                       placeholder="Hospital Name">
-            </div>
+                <div class="form-group">
+                    <label for="hospitalCounty">County</label>
+                    <input ng-model="ctrl.hospitalCounty" type="text" class="form-control" id="hospitalCounty"
+                           placeholder="County">
+                </div>
 
-            <div class="form-group">
-                <label for="hospitalCounty">County</label>
-                <input ng-model="ctrl.hospitalCounty" type="text" class="form-control" id="hospitalCounty"
-                       placeholder="County">
-            </div>
+                <div class="form-group">
+                    <label for="hospitalCity">City</label>
+                    <input ng-model="ctrl.hospitalCity" type="text" class="form-control" id="hospitalCity"
+                           placeholder="City">
+                </div>
+            </md-dialog-content>
 
-            <div class="form-group">
-                <label for="hospitalCity">City</label>
-                <input ng-model="ctrl.hospitalCity" type="text" class="form-control" id="hospitalCity"
-                       placeholder="City">
-            </div>
+            <md-dialog-actions>
+                <md-button class="btn-lg btn-reddrop form-group" style="text-align: center"
+                     ng-click="ctrl.tryRegisterHospital()">
+                    Add Hospital
+                </md-button>
+            </md-dialog-actions>
 
-            <div class="btn-lg btn-reddrop form-group" style="text-align: center"
-                 ng-click="ctrl.tryRegisterHospital()">
-                Add Hospital
-            </div>
-        </form>
     </div>
-</div>
+
+</md-dialog>
