@@ -42,6 +42,11 @@
                 controller: 'DoctorLoginController',
                 controllerAs: 'ctrl'
             })
+            .when("/doctor/main", {
+                templateUrl: "views/DoctorMainPage.html",
+                controller: 'DoctorMainController',
+                controllerAs: 'ctrl'
+            })
             .when("/hospital/:hospitalToken", {
                 templateUrl: "views/HospitalPage.html",
                 controller: 'HospitalController',
