@@ -17,8 +17,12 @@ import java.util.UUID;
 @RequestMapping("/api/admin")
 public class AdminController {
 
-	@Autowired
 	AdminService adminService;
+
+	@Autowired
+	public AdminController(AdminService adminService) {
+		this.adminService = adminService;
+	}
 
 	@RequestMapping("/login")
 	public LoginResponse loginAdmin(@RequestBody LoginRequest loginRequest) {

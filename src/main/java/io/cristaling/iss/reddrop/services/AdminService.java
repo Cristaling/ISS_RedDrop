@@ -1,5 +1,8 @@
 package io.cristaling.iss.reddrop.services;
 
+import io.cristaling.iss.reddrop.core.Admin;
+import io.cristaling.iss.reddrop.repositories.AdminRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -7,9 +10,17 @@ import java.util.UUID;
 @Service
 public class AdminService {
 
-	private String adminCNP = "1971211055088";
-	private String adminPassword = "1971211055088";
-	private String adminUUID = "fdeeffa0-f714-4653-a9ed-0763d81249cb";
+	AdminRepository adminRepository;
+
+	@Autowired
+	public AdminService(AdminRepository adminRepository) {
+		this.adminRepository = adminRepository;
+		Admin admin = new Admin();
+		admin.setUuid(UUID.randomUUID());
+		admin.setCnp("1971211055088");
+		admin.setPassword("1971211055088");
+		adminRepository.save(admin);
+	}
 
 	public UUID tryToLogin(String cnp, String password) {
 
@@ -17,8 +28,14 @@ public class AdminService {
 			return null;
 		}
 
-		if (cnp.equalsIgnoreCase(adminCNP) && password.equalsIgnoreCase(adminPassword)) {
-			return UUID.fromString(adminUUID);
+		Admin toLogin = this.adminRepository.getAdminByCnp(cnp);
+
+		if (toLogin == null) {
+			return null;
+		}
+
+		if (password.equals(toLogin.getPassword())) {
+			return toLogin.getUuid();
 		}
 
 		return null;

@@ -24,7 +24,7 @@ public class DonatorController {
 		Donator donator = new Donator();
 		donator.setUuid(UUID.randomUUID());
 		donator.setCnp("1971211055084");
-		donator.setPassword("bh06fvb");
+		donator.setPassword("1971211055084");
 		donatorService.getRepository().save(donator);
 	}
 
