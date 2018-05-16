@@ -36,12 +36,12 @@ public class DoctorController {
 		return LoginUtils.generateLoginResponse(token);
 	}
 
-	@RequestMapping("/getall")
-	public List<Doctor> getAllDoctors(UUID token) {
+	@RequestMapping("/getbyhospital")
+	public List<Doctor> getDoctorsByHospital(UUID token, UUID uuid) {
 		if (!permissionsService.hasPermission(token, Permission.ADMIN)) {
 			return null;
 		}
-		return doctorService.getAllDoctors();
+		return doctorService.getDoctorsByHospital(uuid);
 	}
 
 	@RequestMapping("/add")

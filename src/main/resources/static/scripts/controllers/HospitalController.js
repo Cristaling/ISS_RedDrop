@@ -12,6 +12,7 @@
         var vm = this;
 
         vm.adminToken = $cookies.get("adminToken");
+        vm.hospitalID = $routeParams["hospitalToken"];
 
         if (!vm.adminToken) {
             $location.path("/admin/login");
@@ -23,8 +24,8 @@
 
         };
 
-        vm.deleteDoctor = function (hospitalId) {
-            $http.get(apiIP + '/api/doctor/delete?uuid=' + hospitalId).then(function (response) {
+        vm.deleteDoctor = function (doctorId) {
+            $http.get(apiIP + '/api/doctor/delete?token=' + vm.adminToken + '&uuid=' + doctorId).then(function () {
                 vm.refreshDoctorList();
             }, function (reason) {
 
@@ -32,7 +33,7 @@
         };
 
         vm.refreshDoctorList = function () {
-            $http.get(apiIP + '/api/doctor/getall').then(function (response) {
+            $http.get(apiIP + '/api/doctor/getbyhospital?token=' + vm.adminToken + '&uuid=' + hospitalID).then(function (response) {
                 vm.doctors = response.data;
             }, function (reason) {
 
