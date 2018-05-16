@@ -6,10 +6,8 @@ import io.cristaling.iss.reddrop.web.requests.LoginRequest;
 import io.cristaling.iss.reddrop.web.responses.LoginResponse;
 import io.cristaling.iss.reddrop.web.utils.LoginUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -34,6 +32,13 @@ public class DonatorController {
 	public LoginResponse loginDonator(@RequestBody LoginRequest loginRequest) {
 		UUID token = donatorService.tryToLogin(loginRequest.getCnp(), loginRequest.getPassword());
 		return LoginUtils.generateLoginResponse(token);
+	}
+
+	@RequestMapping("/register")
+	@ResponseStatus(value = HttpStatus.NO_CONTENT)
+	public void registerDonator(@RequestBody Donator donator){
+		donator.setUuid(UUID.randomUUID());
+		donatorService.registerDonator(donator);
 	}
 
 }

@@ -30,9 +30,8 @@ public class DonatorService {
         return null;
     }
 
-    public boolean tryToRegister() {
-
-        return true;
+    public void registerDonator(Donator donator) {
+        repository.save(donator);
     }
 
     public DonatorRepository getRepository() {
