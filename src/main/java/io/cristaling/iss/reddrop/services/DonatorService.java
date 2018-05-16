@@ -10,31 +10,39 @@ import java.util.UUID;
 @Service
 public class DonatorService {
 
-    DonatorRepository repository;
+    DonatorRepository donatorRepository;
 
     @Autowired
     public DonatorService(DonatorRepository repository) {
-        this.repository = repository;
+        this.donatorRepository = repository;
+        Donator donator = new Donator();
+        donator.setUuid(UUID.randomUUID());
+        donator.setCnp("1971211055084");
+        donator.setPassword("1971211055084");
+        donatorRepository.save(donator);
     }
 
     public UUID tryToLogin(String cnp, String password) {
-        Donator toCheck = repository.findDonatorByCnp(cnp);
 
-        if (toCheck == null) {
+        if (cnp == null || password == null) {
             return null;
         }
 
-        if (password.equals(toCheck.getPassword())) {
-            return toCheck.getUuid();
+        Donator toLogin = this.donatorRepository.getDonatorByCnp(cnp);
+
+        if (toLogin == null) {
+            return null;
         }
+
+        if (password.equals(toLogin.getPassword())) {
+            return toLogin.getUuid();
+        }
+
         return null;
     }
 
     public void registerDonator(Donator donator) {
-        repository.save(donator);
+        donatorRepository.save(donator);
     }
 
-    public DonatorRepository getRepository() {
-        return repository;
-    }
 }
