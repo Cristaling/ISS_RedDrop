@@ -17,54 +17,29 @@
             $location.path("/admin/login");
         }
 
-        vm.hospitals = [];
+        vm.doctors = [];
 
-        vm.openRegisterDoctorDialog = function (hospitalToken) {
-            $mdDialog.show({
-                template: '<div register-doctor data-hospital-id="' + hospitalToken + '"></div>',
-                clickOutsideToClose:true
-            });
+        vm.addDoctor = function () {
+
         };
 
-        vm.addHospital = function () {
-            var addHospitalPanel = $mdDialog.prompt()
-                .title('Add a new hospital')
-                .initialValue('County Hospital')
-                .ok('Save')
-                .cancel('Cancel');
-
-            $mdDialog.show(addHospitalPanel).then(function (result) {
-                $http({
-                    method: 'POST',
-                    url: apiIP + '/api/hospital/add',
-                    data: {
-                        uuid: "",
-                        name: result
-                    }
-                }).then(function (response) {
-                    vm.refreshHospitalList();
-                }, function (error) { });
-            }, function () {
-            });
-        };
-
-        vm.deleteHospital = function (hospitalId) {
-            $http.get(apiIP + '/api/hospital/delete?uuid=' + hospitalId).then(function (response) {
-                vm.refreshHospitalList();
+        vm.deleteDoctor = function (hospitalId) {
+            $http.get(apiIP + '/api/doctor/delete?uuid=' + hospitalId).then(function (response) {
+                vm.refreshDoctorList();
             }, function (reason) {
 
             });
         };
 
-        vm.refreshHospitalList = function () {
-            $http.get(apiIP + '/api/hospital/getall').then(function (response) {
-                vm.hospitals = response.data;
+        vm.refreshDoctorList = function () {
+            $http.get(apiIP + '/api/doctor/getall').then(function (response) {
+                vm.doctors = response.data;
             }, function (reason) {
 
             });
         };
 
-        vm.refreshHospitalList();
+        vm.refreshDoctorList();
 
     }]);
 })();
