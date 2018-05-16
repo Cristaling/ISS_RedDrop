@@ -4,6 +4,8 @@ import io.cristaling.iss.reddrop.core.Doctor;
 import io.cristaling.iss.reddrop.repositories.DoctorRepository;
 import io.cristaling.iss.reddrop.repositories.HospitalRepository;
 import io.cristaling.iss.reddrop.services.DoctorService;
+import io.cristaling.iss.reddrop.services.PermissionsService;
+import io.cristaling.iss.reddrop.utils.Permission;
 import io.cristaling.iss.reddrop.web.requests.LoginRequest;
 import io.cristaling.iss.reddrop.web.responses.LoginResponse;
 import io.cristaling.iss.reddrop.web.utils.LoginUtils;
@@ -19,41 +21,45 @@ import java.util.UUID;
 @RequestMapping("/api/doctor")
 public class DoctorController {
 
-	DoctorRepository doctorRepository;
-	@Autowired
-	HospitalRepository hospitalRepository;
-
 	DoctorService doctorService;
+	PermissionsService permissionsService;
 
 	@Autowired
-	public DoctorController(DoctorRepository doctorRepository, DoctorService doctorService) {
-		this.doctorRepository = doctorRepository;
+	public DoctorController(PermissionsService permissionsService, DoctorService doctorService) {
+		this.permissionsService = permissionsService;
 		this.doctorService = doctorService;
 	}
 
 	@RequestMapping("/login")
-	public LoginResponse loginAdmin(@RequestBody LoginRequest loginRequest) {
+	public LoginResponse loginDoctor(@RequestBody LoginRequest loginRequest) {
 		UUID token = doctorService.tryToLogin(loginRequest.getCnp(), loginRequest.getPassword());
 		return LoginUtils.generateLoginResponse(token);
 	}
 
 	@RequestMapping("/getall")
-	public List<Doctor> getAllDoctors(){
-		return doctorRepository.findAll();
+	public List<Doctor> getAllDoctors(UUID token) {
+		if (!permissionsService.hasPermission(token, Permission.ADMIN)) {
+			return null;
+		}
+		return doctorService.getAllDoctors();
 	}
 
 	@RequestMapping("/add")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	public void addDoctor(@RequestBody Doctor doctor){
-		doctor.setUuid(UUID.randomUUID());
-		doctor.setHospital(hospitalRepository.getOne(doctor.getHospital().getUuid()));
-		doctorRepository.save(doctor);
+	public void addDoctor(UUID token, @RequestBody Doctor doctor) {
+		if (!permissionsService.hasPermission(token, Permission.ADMIN)) {
+			return;
+		}
+		doctorService.registerDoctor(doctor);
 	}
 
 	@RequestMapping("/delete")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	public void deleteDoctor(String uuid){
-		doctorRepository.deleteById(UUID.fromString(uuid));
+	public void deleteDoctor(UUID token, UUID uuid) {
+		if (!permissionsService.hasPermission(token, Permission.ADMIN)) {
+			return;
+		}
+		doctorService.deleteDoctor(uuid);
 	}
 
 }
