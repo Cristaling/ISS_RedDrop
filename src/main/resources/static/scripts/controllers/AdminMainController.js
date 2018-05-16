@@ -14,9 +14,32 @@
 
         vm.openRegisterDoctorDialog = function (hospitalToken) {
             $mdDialog.show({
-                template: '<div register-doctor data-hospital-id="' + hospitalToken + '"></div>',
+                controller : function ($mdDialog,$http,apiIP) {
+                    var vm=this;
+
+                    vm.tryRegisterDoctor= function() {
+                        $http({
+                            method: 'POST',
+                            url: apiIP + '/api/doctor/add',
+                            data: {
+                                uuid: "",
+                                password: vm.doctorPassword,
+                                fullName: vm.nameRegister,
+                                hospital: hospitalToken,
+                                cnp: vm.doctorCNP
+                            }
+                        }).then(function (response) {
+                            $mdDialog.hide();
+                        }, function (error) {
+                            $mdDialog.hide();
+                        });
+                    };
+                },
+                controllerAs: 'ctrl',
+                templateUrl: '/views/directives/DoctorRegistrationDirective.html',
+                parent: angular.element(document.body),
                 clickOutsideToClose:true
-            });
+            }).then(vm.refreshHospitalList,vm.refreshHospitalList);
         };
 
         vm.openAddHospitalDialog = function () {
