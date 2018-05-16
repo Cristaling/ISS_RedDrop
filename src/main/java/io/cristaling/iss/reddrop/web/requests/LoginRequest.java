@@ -1,16 +1,16 @@
-package io.cristaling.iss.reddrop.web.controllers.requests;
+package io.cristaling.iss.reddrop.web.requests;
 
-public class DonatorLoginRequest {
+public class LoginRequest {
 
 	String cnp;
 	String password;
 
-	public DonatorLoginRequest(String cnp, String password) {
+	public LoginRequest(String cnp, String password) {
 		this.cnp = cnp;
 		this.password = password;
 	}
 
-	public DonatorLoginRequest() {
+	public LoginRequest() {
 	}
 
 	public String getCnp() {

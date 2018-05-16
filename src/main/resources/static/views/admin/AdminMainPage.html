@@ -1,0 +1,36 @@
+<div style="padding-top: 5vh;">
+
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-reddrop">
+            <div class="panel-heading">
+            <span>
+                Hospitals
+            </span>
+                <div style="float: right;" ng-click="ctrl.addHospital()">
+                    <i class="material-icons">add</i>
+                </div>
+            </div>
+            <div class="panel-body">
+                <md-list>
+                    <md-list-item ng-repeat="hospital in ctrl.hospitals">
+                        <p>{{ hospital.name }}</p>
+                        <!--<md-checkbox class="md-secondary" ng-model="person.selected"></md-checkbox>
+                        <md-icon md-svg-icon="communication:email"  ng-click="doSecondaryAction($event)" aria-label="Send Email" class="md-secondary md-hue-3" ></md-icon>
+                        <md-icon class="md-secondary" ng-click="doSecondaryAction($event)" aria-label="Chat" md-svg-icon="communication:message"></md-icon>-->
+                        <div ng-click="ctrl.openRegisterDoctorDialog(hospital.uuid)">
+                            <i class="material-icons">person_add</i>
+                        </div>
+                        <div ng-click="ctrl.deleteHospital(hospital.uuid)">
+                            <i class="material-icons">delete</i>
+                        </div>
+                    </md-list-item>
+                </md-list>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12" style="text-align: center">
+        <div logout-btn></div>
+    </div>
+
+</div>
