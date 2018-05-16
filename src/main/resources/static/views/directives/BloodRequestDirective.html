@@ -1,6 +1,6 @@
 <div class="panel panel-reddrop" style="margin-bottom: 0px">
     <div class="panel-heading">
-        Register a Doctor
+        Add a Blood Request for Patient:
     </div>
     <div class="panel-body">
         <form>
@@ -13,19 +13,19 @@
             <div class="form-group">
                 <label for="patientName">Full Name</label>
                 <input ng-model="ctrl.patientRegisterFullName" type="text" class="form-control" id="patientName"
-                       placeholder="Name">
+                       placeholder="Full Name">
             </div>
 
             <div class="form-group">
                 <label for="patientImportance">Importance</label>
                 <input ng-model="ctrl.patientRegisterImportance" type="text" class="form-control" id="patientImportance"
-                       placeholder="Password">
+                       placeholder="Importance">
             </div>
 
 
             <div class="btn-lg btn-reddrop form-group" style="text-align: center"
                  ng-click="ctrl.tryRegisterBloodRequest()">
-                Register
+                Request
             </div>
         </form>
     </div>

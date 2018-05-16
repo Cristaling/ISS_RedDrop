@@ -1,7 +1,7 @@
 (function () {
     'use strict'
     var app = angular.module('RedDrop');
-    app.controller('DoctorMainController', ['$location', '$cookies','$http','apiIP', function ($location, $cookies,$http,apiIP) {
+    app.controller('DoctorMainController', ['$location', '$cookies','$http','$mdDialog','apiIP', function ($location, $cookies,$http,$mdDialog,apiIP) {
         var vm = this;
 
         vm.doctorToken = $cookies.get("doctorToken");
@@ -36,7 +36,7 @@
                     }
                 },
                 controllerAs: 'ctrl',
-                templateUrl: '/views/DoctorMainPage.html',
+                templateUrl: '/views/directives/BloodRequestDirective.html',
                 parent: angular.element(document.body),
                 clickOutsideToClose:true
             }).then(vm.refreshRequestList,vm.refreshRequestList);
