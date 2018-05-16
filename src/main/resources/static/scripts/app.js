@@ -42,9 +42,9 @@
                 controller: 'DoctorLoginController',
                 controllerAs: 'ctrl'
             })
-            .when("/user/:userToken", {
-                templateUrl: "views/FriendsPage.html",
-                controller: 'FriendsController',
+            .when("/hospital/:hospitalToken", {
+                templateUrl: "views/HospitalPage.html",
+                controller: 'HospitalController',
                 controllerAs: 'ctrl'
             })
             .otherwise({ redirectTo: "/landing" });
