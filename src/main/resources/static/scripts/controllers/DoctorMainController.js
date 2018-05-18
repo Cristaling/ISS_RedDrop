@@ -14,8 +14,15 @@
 
         vm.openAddRequestDialog = function () {
             $mdDialog.show({
-                controller : function($mdDialog,$http,apiIP){
+                controller : function($mdDialog,$http,$cookies,$location,apiIP){
                     var vm = this;
+
+                    vm.doctorToken = $cookies.get("doctorToken");
+
+                    if (!vm.doctorToken) {
+                        $location.path("/doctor/login");
+                    }
+
 
                     vm.tryRegisterBloodRequest = function () {
                         $http({
@@ -42,19 +49,20 @@
             }).then(vm.refreshRequestList,vm.refreshRequestList);
         };
 
-        vm.deleteRequest = function (doctorId) {
-            $http.get(apiIP + '/api/bloodrequest/delete?token=' + vm.doctorToken + '&uuid=' + doctorId).then(function (response) {
+        vm.deleteRequest = function () {
+            $http.get(apiIP + '/api/bloodrequest/delete?token=' + vm.doctorToken + '&uuid=' + vm.doctorToken).then(function (response) {
                 vm.refreshRequestList();
             }, function (reason) {
 
             });
         };
 
-        vm.refreshRequestList = function (doctorId) {
-            $http.get(apiIP + '/api/bloodrequest/getfrom?token=' + vm.doctorToken + '&uuid=' + doctorId).then(function (response) {
+        vm.refreshRequestList = function () {
+            $http.get(apiIP + '/api/bloodrequest/getfrom?token=' + vm.doctorToken + '&uuid=' + vm.doctorToken).then(function (response) {
                 vm.requests = response.data;
             }, function (reason) {});
         };
+
         vm.refreshRequestList(vm.doctorToken);
 
     }]);

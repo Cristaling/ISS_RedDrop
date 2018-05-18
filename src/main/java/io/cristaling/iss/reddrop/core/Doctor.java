@@ -1,6 +1,7 @@
 package io.cristaling.iss.reddrop.core;
 
 import javax.persistence.*;
+import javax.print.Doc;
 import java.util.UUID;
 
 @Entity
@@ -18,6 +19,13 @@ public class Doctor {
     String fullName;
     @Column
     String password;
+
+    public Doctor() { }
+
+    public Doctor(String uuid) {
+        //TODO investigate vulnerability of invalid uuids
+        this.uuid = UUID.fromString(uuid);
+    }
 
     public UUID getUuid() {
         return uuid;
