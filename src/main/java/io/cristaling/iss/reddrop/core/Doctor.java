@@ -10,9 +10,8 @@ public class Doctor {
 
     @Id
     UUID uuid;
-    @ManyToOne
-    @JoinColumn(name = "hospital_id")
-    Hospital hospital;
+    @Column
+    UUID hospital;
     @Column(unique = true)
     String cnp;
     @Column
@@ -35,11 +34,11 @@ public class Doctor {
         this.uuid = uuid;
     }
 
-    public Hospital getHospital() {
+    public UUID getHospital() {
         return hospital;
     }
 
-    public void setHospital(Hospital hospital) {
+    public void setHospital(UUID hospital) {
         this.hospital = hospital;
     }
 

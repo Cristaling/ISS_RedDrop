@@ -12,9 +12,8 @@ public class Donation {
 
     @Id
     UUID uuid;
-    @ManyToOne
-    @JoinColumn(name="donator_uuid")
-    Donator donator;
+    @Column
+    UUID donator;
     @Column
     String diseases;
     @Column
@@ -26,13 +25,14 @@ public class Donation {
         return uuid;
     }
 
-    public Donator getDonator() {
+    public UUID getDonator() {
         return donator;
     }
 
-    public void setDonator(Donator donator) {
+    public void setDonator(UUID donator) {
         this.donator = donator;
     }
+
     public String getDiseases() {
         return diseases;
     }

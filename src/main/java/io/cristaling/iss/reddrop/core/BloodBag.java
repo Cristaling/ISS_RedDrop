@@ -12,9 +12,8 @@ public class BloodBag {
 
     @Id
     UUID uuid;
-    @ManyToOne
-    @JoinColumn(name = "donation_uuid")
-    Donation donation;
+    @Column
+    UUID donation;
     @Column
     boolean tested;
     @Column
@@ -30,11 +29,11 @@ public class BloodBag {
         this.uuid = uuid;
     }
 
-    public Donation getDonation() {
+    public UUID getDonation() {
         return donation;
     }
 
-    public void setDonation(Donation donation) {
+    public void setDonation(UUID donation) {
         this.donation = donation;
     }
 

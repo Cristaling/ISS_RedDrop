@@ -9,9 +9,8 @@ public class AnalysisResult {
 
     @Id
     UUID uuid;
-    @OneToOne
-    @JoinColumn(name = "donation_uuid")
-    Donation donation;
+    @Column
+    UUID donation;
 
     public UUID getUuid() {
         return uuid;
@@ -21,11 +20,11 @@ public class AnalysisResult {
         this.uuid = uuid;
     }
 
-    public Donation getDonation() {
+    public UUID getDonation() {
         return donation;
     }
 
-    public void setDonation(Donation donation) {
+    public void setDonation(UUID donation) {
         this.donation = donation;
     }
 }

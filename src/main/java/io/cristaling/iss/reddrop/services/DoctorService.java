@@ -28,7 +28,7 @@ public class DoctorService {
         hospitalRepository.save(hospital);
         Doctor doctor = new Doctor();
         doctor.setUuid(UUID.randomUUID());
-        doctor.setHospital(hospital);
+        doctor.setHospital(hospital.getUuid());
         doctor.setCnp("1971211055085");
         doctor.setPassword("1971211055085");
         doctor.setFullName("Dr. Susan Dofenjmirtz");
@@ -42,7 +42,6 @@ public class DoctorService {
     public void registerDoctor(Doctor doctor) {
         //TODO Validate Doctor
         doctor.setUuid(UUID.randomUUID());
-        doctor.setHospital(hospitalRepository.getOne(doctor.getHospital().getUuid()));
         doctorRepository.save(doctor);
     }
 
