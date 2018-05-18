@@ -3,10 +3,10 @@
     <div class="col-md-6 col-md-offset-3">
         <div class="panel panel-reddrop">
             <div class="panel-heading">
-            <span>
-                Hospitals
-            </span>
-                <div ng-click="ctrl.openAddHospitalDialog()">
+                <span>
+                    Hospitals
+                </span>
+                <div style="float: right;" ng-click="ctrl.openAddHospitalDialog()">
                     <i class="material-icons">add</i>
                 </div>
             </div>
@@ -17,10 +17,10 @@
                         <!--<md-checkbox class="md-secondary" ng-model="person.selected"></md-checkbox>
                         <md-icon md-svg-icon="communication:email"  ng-click="doSecondaryAction($event)" aria-label="Send Email" class="md-secondary md-hue-3" ></md-icon>
                         <md-icon class="md-secondary" ng-click="doSecondaryAction($event)" aria-label="Chat" md-svg-icon="communication:message"></md-icon>-->
-                        <div ng-click="ctrl.openRegisterDoctorDialog(hospital.uuid)">
+                        <div class="md-secondary" ng-click="ctrl.openRegisterDoctorDialog(hospital.uuid)">
                             <i class="material-icons">person_add</i>
                         </div>
-                        <div ng-click="ctrl.deleteHospital(hospital.uuid)">
+                        <div class="md-secondary" ng-click="ctrl.deleteHospital(hospital.uuid)">
                             <i class="material-icons">delete</i>
                         </div>
                     </md-list-item>

@@ -18,8 +18,8 @@
 
         vm.openRegisterDoctorDialog = function (hospitalToken) {
             $mdDialog.show({
-                controller : function ($mdDialog,$http,apiIP) {
-                    var vm=this;
+                controller: function ($mdDialog, $http, apiIP) {
+                    var vm = this;
 
                     vm.adminToken = $cookies.get("adminToken");
 
@@ -27,7 +27,7 @@
                         $location.path("/admin/login");
                     }
 
-                    vm.tryRegisterDoctor= function() {
+                    vm.tryRegisterDoctor = function () {
                         $http({
                             method: 'POST',
                             url: apiIP + '/api/doctor/add?token=' + vm.adminToken,
@@ -48,13 +48,13 @@
                 controllerAs: 'ctrl',
                 templateUrl: '/views/directives/DoctorRegistrationDirective.html',
                 parent: angular.element(document.body),
-                clickOutsideToClose:true
-            }).then(vm.refreshHospitalList,vm.refreshHospitalList);
+                clickOutsideToClose: true
+            }).then(vm.refreshHospitalList, vm.refreshHospitalList);
         };
 
         vm.openAddHospitalDialog = function () {
             $mdDialog.show({
-                controller : function($mdDialog,$http,apiIP){
+                controller: function ($mdDialog, $http, apiIP) {
                     var vm = this;
 
                     vm.adminToken = $cookies.get("adminToken");
@@ -83,8 +83,8 @@
                 controllerAs: 'ctrl',
                 templateUrl: '/views/directives/AddHospital.html',
                 parent: angular.element(document.body),
-                clickOutsideToClose:true
-            }).then(vm.refreshHospitalList,vm.refreshHospitalList);
+                clickOutsideToClose: true
+            }).then(vm.refreshHospitalList, vm.refreshHospitalList);
         };
 
         vm.deleteHospital = function (hospitalId) {
