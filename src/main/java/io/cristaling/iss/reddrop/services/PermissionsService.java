@@ -26,6 +26,18 @@ public class PermissionsService {
 		this.adminRepository = adminRepository;
 	}
 
+	public boolean hasPermission(String token, Permission permission) {
+		if (token == null) {
+			return false;
+		}
+		try {
+			UUID uuid = UUID.fromString(token);
+			return hasPermission(uuid, permission);
+		} catch (IllegalArgumentException ex) {
+			return false;
+		}
+	}
+
 	public boolean hasPermission(UUID token, Permission permission) {
 		if (permission == Permission.ADMIN) {
 			Admin admin = adminRepository.getOne(token);

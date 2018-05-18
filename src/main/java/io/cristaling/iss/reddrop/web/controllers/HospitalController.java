@@ -5,6 +5,7 @@ import io.cristaling.iss.reddrop.repositories.HospitalRepository;
 import io.cristaling.iss.reddrop.services.HospitalService;
 import io.cristaling.iss.reddrop.services.PermissionsService;
 import io.cristaling.iss.reddrop.utils.Permission;
+import io.cristaling.iss.reddrop.web.utils.UUIDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,7 @@ public class HospitalController {
 	}
 
 	@RequestMapping("/getall")
-	public List<Hospital> getAllHospitals(UUID token) {
+	public List<Hospital> getAllHospitals(String token) {
 		if (!permissionsService.hasPermission(token, Permission.ADMIN)) {
 			return null;
 		}
@@ -37,7 +38,7 @@ public class HospitalController {
 
 	@RequestMapping("/add")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	public void addHospital(UUID token, @RequestBody Hospital hospital) {
+	public void addHospital(String token, @RequestBody Hospital hospital) {
 		if (!permissionsService.hasPermission(token, Permission.ADMIN)) {
 			return;
 		}
@@ -46,8 +47,12 @@ public class HospitalController {
 
 	@RequestMapping("/delete")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	public void deleteHospital(UUID token, UUID uuid) {
+	public void deleteHospital(String token, String uuidString) {
 		if (!permissionsService.hasPermission(token, Permission.ADMIN)) {
+			return;
+		}
+		UUID uuid = UUIDUtils.getUUIDFromString(uuidString);
+		if (uuid == null) {
 			return;
 		}
 		hospitalService.deleteHospital(uuid);

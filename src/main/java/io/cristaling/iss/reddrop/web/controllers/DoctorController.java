@@ -9,6 +9,7 @@ import io.cristaling.iss.reddrop.utils.Permission;
 import io.cristaling.iss.reddrop.web.requests.LoginRequest;
 import io.cristaling.iss.reddrop.web.responses.LoginResponse;
 import io.cristaling.iss.reddrop.web.utils.LoginUtils;
+import io.cristaling.iss.reddrop.web.utils.UUIDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -37,8 +38,12 @@ public class DoctorController {
 	}
 
 	@RequestMapping("/getbyhospital")
-	public List<Doctor> getDoctorsByHospital(UUID token, UUID uuid) {
+	public List<Doctor> getDoctorsByHospital(String token, String uuidString) {
 		if (!permissionsService.hasPermission(token, Permission.ADMIN)) {
+			return null;
+		}
+		UUID uuid = UUIDUtils.getUUIDFromString(uuidString);
+		if (uuid == null) {
 			return null;
 		}
 		return doctorService.getDoctorsByHospital(uuid);
@@ -46,7 +51,7 @@ public class DoctorController {
 
 	@RequestMapping("/add")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	public void addDoctor(UUID token, @RequestBody Doctor doctor) {
+	public void addDoctor(String token, @RequestBody Doctor doctor) {
 		if (!permissionsService.hasPermission(token, Permission.ADMIN)) {
 			return;
 		}
@@ -55,8 +60,12 @@ public class DoctorController {
 
 	@RequestMapping("/delete")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	public void deleteDoctor(UUID token, UUID uuid) {
+	public void deleteDoctor(String token, String uuidString) {
 		if (!permissionsService.hasPermission(token, Permission.ADMIN)) {
+			return;
+		}
+		UUID uuid = UUIDUtils.getUUIDFromString(uuidString);
+		if (uuid == null) {
 			return;
 		}
 		doctorService.deleteDoctor(uuid);
