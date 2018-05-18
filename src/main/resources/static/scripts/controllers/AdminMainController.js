@@ -21,6 +21,12 @@
                 controller : function ($mdDialog,$http,apiIP) {
                     var vm=this;
 
+                    vm.adminToken = $cookies.get("adminToken");
+
+                    if (!vm.adminToken) {
+                        $location.path("/admin/login");
+                    }
+
                     vm.tryRegisterDoctor= function() {
                         $http({
                             method: 'POST',
@@ -50,6 +56,12 @@
             $mdDialog.show({
                 controller : function($mdDialog,$http,apiIP){
                     var vm = this;
+
+                    vm.adminToken = $cookies.get("adminToken");
+
+                    if (!vm.adminToken) {
+                        $location.path("/admin/login");
+                    }
 
                     vm.tryRegisterHospital = function () {
                         $http({
