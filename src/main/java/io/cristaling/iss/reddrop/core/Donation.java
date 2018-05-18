@@ -12,8 +12,6 @@ public class Donation {
 
     @Id
     UUID uuid;
-    @OneToMany(mappedBy = "donation", cascade = CascadeType.ALL)
-    List<BloodBag> bloodBag;
     @ManyToOne
     @JoinColumn(name="donator_uuid")
     Donator donator;
@@ -29,14 +27,6 @@ public class Donation {
 
     public UUID getUuid() {
         return uuid;
-    }
-
-    public List<BloodBag> getBloodBag() {
-        return bloodBag;
-    }
-
-    public void setBloodBag(List<BloodBag> bloodBag) {
-        this.bloodBag = bloodBag;
     }
 
     public AnalysisResult getAnalysisResult() {

@@ -53,9 +53,7 @@
         vm.refreshRequestList = function (doctorId) {
             $http.get(apiIP + '/api/bloodrequest/getfrom?token=' + vm.doctorToken + '&uuid=' + doctorId).then(function (response) {
                 vm.requests = response.data;
-            }, function (reason) {
-
-            });
+            }, function (reason) {});
         };
         vm.refreshRequestList(vm.doctorToken);
 
