@@ -20,7 +20,7 @@
                     vm.tryRegisterBloodRequest = function () {
                         $http({
                             method: 'POST',
-                            url: apiIP + '/api/bloodrequest/add',
+                            url: apiIP + '/api/bloodrequest/add?token=' + vm.doctorToken,
                             data: {
                                 uuid: "",
                                 patientCnp: vm.patientRegisterCnp,
@@ -43,7 +43,7 @@
         };
 
         vm.deleteRequest = function (doctorId) {
-            $http.get(apiIP + '/api/bloodrequest/delete?uuid=' + doctorId).then(function (response) {
+            $http.get(apiIP + '/api/bloodrequest/delete?token=' + vm.doctorToken + '&uuid=' + doctorId).then(function (response) {
                 vm.refreshRequestList();
             }, function (reason) {
 
@@ -51,7 +51,7 @@
         };
 
         vm.refreshRequestList = function (doctorId) {
-            $http.get(apiIP + '/api/bloodrequest/getfrom?uuid=' + doctorId).then(function (response) {
+            $http.get(apiIP + '/api/bloodrequest/getfrom?token=' + vm.doctorToken + '&uuid=' + doctorId).then(function (response) {
                 vm.hospitals = response.data;
             }, function (reason) {
 

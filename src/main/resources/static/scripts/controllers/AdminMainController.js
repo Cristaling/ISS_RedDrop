@@ -20,7 +20,7 @@
                     vm.tryRegisterDoctor= function() {
                         $http({
                             method: 'POST',
-                            url: apiIP + '/api/doctor/add',
+                            url: apiIP + '/api/doctor/add?token=' + vm.adminToken,
                             data: {
                                 uuid: "",
                                 password: vm.doctorPassword,
@@ -50,7 +50,7 @@
                     vm.tryRegisterHospital = function () {
                         $http({
                             method: 'POST',
-                            url: apiIP + '/api/hospital/add',
+                            url: apiIP + '/api/hospital/add?token=' + vm.adminToken,
                             data: {
                                 uuid: "",
                                 name: vm.hospitalName,
@@ -72,7 +72,7 @@
         };
 
         vm.deleteHospital = function (hospitalId) {
-            $http.get(apiIP + '/api/hospital/delete?uuid=' + hospitalId).then(function (response) {
+            $http.get(apiIP + '/api/hospital/delete?token=' + vm.adminToken + '&uuid=' + hospitalId).then(function (response) {
                 vm.refreshHospitalList();
             }, function (reason) {
 
@@ -80,7 +80,7 @@
         };
 
         vm.refreshHospitalList = function () {
-            $http.get(apiIP + '/api/hospital/getall').then(function (response) {
+            $http.get(apiIP + '/api/hospital/getall?token=' + vm.adminToken).then(function (response) {
                 vm.hospitals = response.data;
             }, function (reason) {
 
