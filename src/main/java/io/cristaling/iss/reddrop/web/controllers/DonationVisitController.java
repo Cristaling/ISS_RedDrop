@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @CrossOrigin
@@ -32,5 +33,10 @@ public class DonationVisitController {
             return;
         }
         donationVisitService.addDonationVisit(donationVisit);
+    }
+
+    @RequestMapping("/getall")
+    public List<DonationVisit> getAllDonationVisits(){
+        return donationVisitService.findAll();
     }
 }
