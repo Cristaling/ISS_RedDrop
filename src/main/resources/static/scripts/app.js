@@ -1,8 +1,8 @@
-(function(){
+(function () {
     'use strict'
     var app = angular.module('RedDrop', ['ngRoute', 'ngAnimate', 'ngCookies', 'ngAria', 'ngMaterial', 'ngMessages'])
 
-    app.value('apiIP',  'http://127.0.0.1');
+    app.value('apiIP', 'http://127.0.0.1');
     //app.value('apiIP',  'http://192.168.0.112');
 
     app.config(function ($routeProvider) {
@@ -52,6 +52,10 @@
                 controller: 'HospitalController',
                 controllerAs: 'ctrl'
             })
-            .otherwise({ redirectTo: "/landing" });
+            .otherwise({redirectTo: "/landing"});
+    });
+    app.config(function ($mdThemingProvider) {
+        $mdThemingProvider.theme('default')
+            .dark();
     });
 })();

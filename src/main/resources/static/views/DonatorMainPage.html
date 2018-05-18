@@ -10,11 +10,15 @@
             <div class="panel-body">
                 <form>
                     <div class="form-group">
-                        <label for="date">Date</label>
-                        <input ng-model="ctrl.visitDate" type="date" class="form-control" id="date"
-                               aria-describedby="cnpHelp" placeholder="Enter CNP">
-                        <small id="cnpHelp" class="form-text text-muted">Set your desired date for the visit
-                        </small>
+                        <md-input-container>
+                            <label>Enter date</label>
+                            <md-datepicker ng-model="ctrl.visitDate"></md-datepicker>
+                        </md-input-container>
+                        <!--<label for="date">Date</label>-->
+                        <!--<input ng-model="ctrl.visitDate" type="date" class="form-control" id="date"-->
+                               <!--aria-describedby="cnpHelp" placeholder="Enter CNP">-->
+                        <!--<small id="cnpHelp" class="form-text text-muted">Set your desired date for the visit-->
+                        <!--</small>-->
                     </div>
                     <div class="btn-lg btn-reddrop form-group" style="text-align: center; float: right"
                          ng-click="ctrl.setVisit()">
