@@ -46,11 +46,10 @@ public class DoctorService {
     }
 
     public List<Doctor> getDoctorsByHospital(UUID hospitalID) {
-        Hospital hospital = hospitalRepository.getOne(hospitalID);
-        if (hospital == null) {
+        if (hospitalID == null) {
             return new ArrayList<>();
         }
-        return doctorRepository.getDoctorsByHospital(hospital);
+        return doctorRepository.getDoctorsByHospital(hospitalID);
     }
 
     public UUID tryToLogin(String cnp, String password) {
