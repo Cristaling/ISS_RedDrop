@@ -12,24 +12,26 @@
         }
 
         vm.goToRegisterDonator = function () {
-            $http({
-                method: 'POST',
-                url: apiIP + '/api/donator/register',
-                data: {
-                    uuid : "",
-                    nume : vm.donatorSurname,
-                    prenume : vm.donatorFirstName,
-                    cnp : vm.donatorCNP,
-                    nrTel : vm.donatorTelephone,
-                    password : vm.donatorPassword,
-                    city : vm.donatorCity,
-                    county : vm.donatorCounty,
-                    address : vm.donatorAddress,
-                    bloodType : "UNKNOWN"
-                }
-            }).then(function (response) {
+            if(vm.donatorPassword === vm.donatorConfirmPassword){
+                $http({
+                    method: 'POST',
+                    url: apiIP + '/api/donator/register',
+                    data: {
+                        uuid : "",
+                        nume : vm.donatorSurname,
+                        prenume : vm.donatorFirstName,
+                        cnp : vm.donatorCNP,
+                        nrTel : vm.donatorTelephone,
+                        password : vm.donatorPassword,
+                        city : vm.donatorCity,
+                        county : vm.donatorCounty,
+                        address : vm.donatorAddress,
+                        bloodType : "UNKNOWN"
+                    }
+                }).then(function (response) {
                     $location.path("/donator/login");
-            }, function (error) { });
+                }, function (error) { });
+            }
         }
     }]);
 })();
