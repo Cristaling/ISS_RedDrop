@@ -31,7 +31,7 @@ public class BloodRequestController {
 
     @RequestMapping("/add")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void addRequest(UUID token, @RequestBody BloodRequest bloodRequest) {
+    public void addRequest(String token, @RequestBody BloodRequest bloodRequest) {
         if (!permissionsService.hasPermission(token, Permission.ADMIN)) {
             return;
         }
@@ -40,7 +40,7 @@ public class BloodRequestController {
 
     @RequestMapping("/delete")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void deleteRequest(UUID token, String uuid) {
+    public void deleteRequest(String token, String uuid) {
         if (!permissionsService.hasPermission(token, Permission.ADMIN)) {
             return;
         }
@@ -48,7 +48,7 @@ public class BloodRequestController {
     }
 
     @RequestMapping("/getall")
-    public List<BloodRequest> getAllRequests(UUID token) {
+    public List<BloodRequest> getAllRequests(String token) {
         if (!permissionsService.hasPermission(token, Permission.ADMIN)) {
             return null;
         }
@@ -56,7 +56,7 @@ public class BloodRequestController {
     }
 
     @RequestMapping("/getfrom")
-    public List<BloodRequest> getSpecificRequests(UUID token, String uuid) {
+    public List<BloodRequest> getSpecificRequests(String token, String uuid) {
         if (!permissionsService.hasPermission(token, Permission.ADMIN)) {
             return null;
         }
