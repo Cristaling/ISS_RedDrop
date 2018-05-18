@@ -13,7 +13,9 @@
             <div class="panel-body">
                 <md-list>
                     <md-list-item ng-repeat="request in ctrl.requests">
-                        <p>{{ request.name }}</p>
+                        <p>{{ request.patientCnp }}</p>
+                        <p>{{ request.patientFullName }}</p>
+                        <p>{{ request.importance }}</p>
                         <!--<div ng-click="ctrl.openRegisterDoctorDialog(hospital.uuid)">
                             <i class="material-icons">person_add</i>
                         </div>
