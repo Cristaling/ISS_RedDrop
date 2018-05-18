@@ -5,10 +5,10 @@
     {
         var vm = this;
 
-        vm.doctorToken = $cookies.get("doctorToken");
+        vm.donatorToken = $cookies.get("donatorToken");
 
-        if (vm.doctorToken) {
-            $location.path("/doctor/main");
+        if (vm.donatorToken) {
+            $location.path("/donator/main");
         }
 
         vm.goToRegisterDonator = function () {
