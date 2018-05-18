@@ -13,9 +13,8 @@ public class BloodRequest {
     String patientCnp;
     @Column
     String patientFullName;
-    @ManyToOne
-    @JoinColumn(name = "doctor_id")
-    Doctor doctor;
+    @Column
+    UUID doctor;
     @Column
     String importance;
 
@@ -43,11 +42,11 @@ public class BloodRequest {
         this.patientFullName = patientFullName;
     }
 
-    public Doctor getDoctor() {
+    public UUID getDoctor() {
         return doctor;
     }
 
-    public void setDoctor(Doctor doctor) {
+    public void setDoctor(UUID doctor) {
         this.doctor = doctor;
     }
 

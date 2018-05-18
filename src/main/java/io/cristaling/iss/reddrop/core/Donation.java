@@ -12,48 +12,27 @@ public class Donation {
 
     @Id
     UUID uuid;
-    @OneToMany(mappedBy = "donation", cascade = CascadeType.ALL)
-    List<BloodBag> bloodBag;
-    @ManyToOne
-    @JoinColumn(name="donator_uuid")
-    Donator donator;
+    @Column
+    UUID donator;
     @Column
     String diseases;
     @Column
     boolean result;
     @Column
     Date donationDate;
-    @OneToOne
-    @JoinColumn(name = "analysis_uuid")
-    AnalysisResult analysisResult;
 
     public UUID getUuid() {
         return uuid;
     }
 
-    public List<BloodBag> getBloodBag() {
-        return bloodBag;
-    }
-
-    public void setBloodBag(List<BloodBag> bloodBag) {
-        this.bloodBag = bloodBag;
-    }
-
-    public AnalysisResult getAnalysisResult() {
-        return analysisResult;
-    }
-
-    public void setAnalysisResult(AnalysisResult analysisResult) {
-        this.analysisResult = analysisResult;
-    }
-
-    public Donator getDonator() {
+    public UUID getDonator() {
         return donator;
     }
 
-    public void setDonator(Donator donator) {
+    public void setDonator(UUID donator) {
         this.donator = donator;
     }
+
     public String getDiseases() {
         return diseases;
     }

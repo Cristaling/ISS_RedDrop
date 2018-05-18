@@ -1,8 +1,9 @@
-(function(){
+(function () {
     'use strict'
     var app = angular.module('RedDrop', ['ngRoute', 'ngAnimate', 'ngCookies', 'ngAria', 'ngMaterial', 'ngMessages'])
 
-    app.value('apiIP',  'http://127.0.0.1:8080');
+    app.value('apiIP', 'http://127.0.0.1');
+    //app.value('apiIP',  'http://192.168.0.112');
 
     app.config(function ($routeProvider) {
         $routeProvider
@@ -12,7 +13,7 @@
                 controllerAs: 'ctrl'
             })
             .when("/donator/login", {
-                templateUrl: "views/DonatorLoginPage.html",
+                templateUrl: "views/login/DonatorLoginPage.html",
                 controller: 'DonatorLoginController',
                 controllerAs: 'ctrl'
             })
@@ -26,16 +27,35 @@
                 controller: 'DonatorMainController',
                 controllerAs: 'ctrl'
             })
-            .when("/medic/login", {
-                templateUrl: "views/MedicLoginPage.html",
-                controller: 'MedicLoginController',
+            .when("/admin/login", {
+                templateUrl: "views/login/AdminLoginPage.html",
+                controller: 'AdminLoginController',
                 controllerAs: 'ctrl'
             })
-            .when("/user/:userToken", {
-                templateUrl: "views/FriendsPage.html",
-                controller: 'FriendsController',
+            .when("/admin/main", {
+                templateUrl: "views/admin/AdminMainPage.html",
+                controller: 'AdminMainController',
                 controllerAs: 'ctrl'
             })
-            .otherwise({ redirectTo: "/landing" });
+            .when("/doctor/login", {
+                templateUrl: "views/login/DoctorLoginPage.html",
+                controller: 'DoctorLoginController',
+                controllerAs: 'ctrl'
+            })
+            .when("/doctor/main", {
+                templateUrl: "views/DoctorMainPage.html",
+                controller: 'DoctorMainController',
+                controllerAs: 'ctrl'
+            })
+            .when("/hospital/:hospitalToken", {
+                templateUrl: "views/HospitalPage.html",
+                controller: 'HospitalController',
+                controllerAs: 'ctrl'
+            })
+            .otherwise({redirectTo: "/landing"});
+    });
+    app.config(function ($mdThemingProvider) {
+        $mdThemingProvider.theme('default')
+            .dark();
     });
 })();

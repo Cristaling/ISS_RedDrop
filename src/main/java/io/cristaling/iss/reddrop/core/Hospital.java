@@ -9,8 +9,6 @@ import java.util.UUID;
 public class Hospital {
     @Id
     UUID uuid;
-    @OneToMany(mappedBy = "hospital", cascade = CascadeType.ALL)
-    List<Doctor> doctors;
     @Column
     String name;
     @Column
@@ -18,20 +16,19 @@ public class Hospital {
     @Column
     String county;
 
+    public Hospital() {
+    }
+
+    public Hospital(String uuid) {
+        this.uuid = UUID.fromString(uuid);
+    }
+
     public UUID getUuid() {
         return uuid;
     }
 
     public void setUuid(UUID uuid) {
         this.uuid = uuid;
-    }
-
-    public List<Doctor> getDoctors() {
-        return doctors;
-    }
-
-    public void setDoctors(List<Doctor> doctors) {
-        this.doctors = doctors;
     }
 
     public String getName() {

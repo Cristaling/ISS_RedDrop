@@ -1,19 +1,30 @@
 (function(){
     'use strict'
     var app = angular.module('RedDrop');
-    app.controller('DonatorMainController', ['$location', '$cookies', function($location, $cookies)
+    app.controller('DonatorMainController', ['$location', '$cookies','$http','apiIP', function($location, $cookies,$http,apiIP)
     {
         var vm = this;
 
-        vm.userToken = $cookies.get("userToken");
+        vm.donatorToken = $cookies.get("donatorToken");
 
-        if (!vm.userToken) {
-            $location.path("/landing");
+        if (!vm.donatorToken) {
+            $location.path("/donator/login");
         }
 
-        vm.logout = function() {
-            $cookies.remove("userToken");
-            $location.path("/landing");
+        vm.setVisit=function(){
+            $http({
+                method: 'POST',
+                url: apiIP + '/api/donationvisit/add?token=' + vm.donatorToken,
+                data: {
+                    uuid: "",
+                    donator: vm.donatorToken,
+                    date: vm.visitDate
+                }
+            }).then(function () {
+                $mdDialog.hide();
+            }, function (error) {
+                $mdDialog.hide();
+            });
         }
 
     }]);

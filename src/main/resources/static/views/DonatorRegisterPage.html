@@ -1,0 +1,89 @@
+<div class="col-md-12">
+    <div class="col-md-4 col-md-offset-4 button-wrapper" style="padding-top: 5vh;">
+
+        <div class="panel panel-reddrop">
+            <div class="panel-heading form-register">
+                Registration form
+            </div>
+            <div class="panel-body">
+                <form>
+                    <div class="rounded-border">
+                        <div class="form-title">
+                            Personal Data
+                        </div>
+                        <div class="form-group">
+                            <!--<label for="surname">Surname</label>-->
+                            <input ng-model="ctrl.donatorSurname" type="text" minlength="1" class="form-control" id="surname"
+                                   aria-describedby="surnameHelp" placeholder="Surname">
+                        </div>
+
+                        <div class="form-group">
+                            <!--<label for="firstName">First name</label>-->
+                            <input ng-model="ctrl.donatorFirstName" type="text" minlength="1" class="form-control" id="firstName"
+                                   aria-describedby="firstNameHelp" placeholder="First name">
+                        </div>
+
+                        <div class="form-group">
+                            <!--<label for="cnpLogin">C.N.P.</label>-->
+                            <input ng-model="ctrl.donatorCNP" type="text" required size="13" class="form-control" id="cnpLogin"
+                                   aria-describedby="cnpHelp" placeholder="CNP">
+                            <small id="cnpHelp" class="form-text text-muted">We'll never share your CNP with anyone else.
+                            </small>
+                        </div>
+
+
+                    </div>
+                    <br>
+                    <div class="rounded-border">
+                        <div class="form-title">
+                            Contact Info
+                        </div>
+                        <div class="form-group">
+                            <!--<label for="telephone">Telephone</label>-->
+                            <input ng-model="ctrl.donatorTelephone" type="text" required size="10" class="form-control" id="telephone"
+                                   aria-describedby="surnameHelp" placeholder="Telephone">
+                        </div>
+
+                        <div class="form-group">
+                            <!--<label for="city">City</label>-->
+                            <input ng-model="ctrl.donatorCity" type="text" minlength="1" class="form-control" id="city"
+                                   aria-describedby="cityHelp" placeholder="City">
+                        </div>
+
+                        <div class="form-group">
+                            <!--<label for="county">County</label>-->
+                            <input ng-model="ctrl.donatorCounty" type="text" minlength="1" class="form-control" id="county"
+                                   aria-describedby="countyHelp" placeholder="County">
+                        </div>
+
+                        <div class="form-group">
+                            <!--<label for="address">Address</label>-->
+                            <input ng-model="ctrl.donatorAddress" type="text" minlength="5" class="form-control" id="address"
+                                   aria-describedby="addressHelp" placeholder="Address">
+                            <small id="addressHelp" class="form-text text-muted">Please enter your address from your actual ID.
+                            </small>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="rounded-border">
+                        <div class="form-title">
+                            Login credentials
+                        </div>
+                        <div class="form-group">
+                            <!--<label for="passwordLogin">Password</label>-->
+                            <input ng-model="ctrl.donatorPassword" type="password" minlength="6" class="form-control" id="passwordLogin"
+                                   placeholder="Password"><br>
+                            <input ng-model="ctrl.donatorConfirmPassword" type="password" minlength="6" class="form-control" id="passwordConfirmLogin"
+                                   placeholder="Confirm password">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="btn-lg btn-reddrop form-group" style="  text-align: center"
+                         ng-click="ctrl.goToRegisterDonator()">
+                        Register
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

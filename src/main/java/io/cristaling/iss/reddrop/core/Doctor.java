@@ -1,6 +1,7 @@
 package io.cristaling.iss.reddrop.core;
 
 import javax.persistence.*;
+import javax.print.Doc;
 import java.util.UUID;
 
 @Entity
@@ -9,15 +10,21 @@ public class Doctor {
 
     @Id
     UUID uuid;
-    @ManyToOne
-    @JoinColumn(name = "hospital_id")
-    Hospital hospital;
     @Column
+    UUID hospital;
+    @Column(unique = true)
     String cnp;
     @Column
     String fullName;
     @Column
     String password;
+
+    public Doctor() { }
+
+    public Doctor(String uuid) {
+        //TODO investigate vulnerability of invalid uuids
+        this.uuid = UUID.fromString(uuid);
+    }
 
     public UUID getUuid() {
         return uuid;
@@ -27,11 +34,11 @@ public class Doctor {
         this.uuid = uuid;
     }
 
-    public Hospital getHospital() {
+    public UUID getHospital() {
         return hospital;
     }
 
-    public void setHospital(Hospital hospital) {
+    public void setHospital(UUID hospital) {
         this.hospital = hospital;
     }
 

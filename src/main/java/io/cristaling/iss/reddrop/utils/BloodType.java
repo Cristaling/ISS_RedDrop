@@ -8,7 +8,8 @@ public enum BloodType{
     BP("B+"),
     BN("B-"),
     OP("O+"),
-    ON("O-");
+    ON("O-"),
+    UNKNOWN("Unknown");
     String name;
 
     public String getName() {

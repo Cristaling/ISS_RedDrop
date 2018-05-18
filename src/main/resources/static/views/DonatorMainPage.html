@@ -1,5 +1,33 @@
-Donator Main Page
+<br>
+<div logout-btn></div>
+<div class="col-md-12">
+    <div class="col-md-4 col-md-offset-4 button-wrapper" style="padding-top: 25vh;">
 
-<div class="btn btn-primary" ng-click="ctrl.logout()">
-    Logout
+        <div class="panel panel-reddrop">
+            <div class="panel-heading">
+                Set up a visit to the Clinic
+            </div>
+            <div class="panel-body">
+                <form>
+                    <div class="form-group">
+                        <md-input-container>
+                            <label>Enter date</label>
+                            <md-datepicker ng-model="ctrl.visitDate"></md-datepicker>
+                        </md-input-container>
+                        <!--<label for="date">Date</label>-->
+                        <!--<input ng-model="ctrl.visitDate" type="date" class="form-control" id="date"-->
+                               <!--aria-describedby="cnpHelp" placeholder="Enter CNP">-->
+                        <!--<small id="cnpHelp" class="form-text text-muted">Set your desired date for the visit-->
+                        <!--</small>-->
+                    </div>
+                    <div class="btn-lg btn-reddrop form-group" style="text-align: center; float: right"
+                         ng-click="ctrl.setVisit()">
+                        Add Visit
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
+

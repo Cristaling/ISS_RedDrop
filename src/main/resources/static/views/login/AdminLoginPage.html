@@ -1,0 +1,32 @@
+<div class="col-md-12">
+    <div class="col-md-4 col-md-offset-4 button-wrapper" style="padding-top: 25vh;">
+
+        <div class="panel panel-reddrop">
+            <div class="panel-heading">
+                Login as Admin
+            </div>
+            <div class="panel-body">
+                <form>
+                    <div class="form-group">
+                        <label for="cnpLogin">C.N.P.</label>
+                        <input ng-model="ctrl.adminCNP" type="text" class="form-control" id="cnpLogin"
+                               aria-describedby="cnpHelp" placeholder="Enter CNP">
+                        <small id="cnpHelp" class="form-text text-muted">We'll never share your CNP with anyone else.
+                        </small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="passwordLogin">Password</label>
+                        <input ng-model="ctrl.adminPassword" type="password" class="form-control" id="passwordLogin"
+                               placeholder="Password">
+                    </div>
+
+                    <div class="btn-lg btn-reddrop form-group" style="text-align: center"
+                         ng-click="ctrl.tryLoginAdmin()">
+                        Login
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

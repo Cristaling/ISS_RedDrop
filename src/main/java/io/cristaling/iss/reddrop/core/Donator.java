@@ -17,7 +17,7 @@ public class Donator {
     private String nume;
     @Column
     private String prenume;
-    @Column
+    @Column(unique = true)
     private String cnp;
     @Column
     private String nrTel;
@@ -33,9 +33,6 @@ public class Donator {
 
     @Column
     private BloodType bloodType;
-
-    @OneToMany(mappedBy = "donator", cascade = CascadeType.ALL)
-    private List<Donation> donations;
 
     public UUID getUuid() {
         return uuid;
@@ -112,14 +109,6 @@ public class Donator {
 
     public void setAddress(String adresa) {
         address = adresa;
-    }
-
-    public List<Donation> getDonations() {
-        return donations;
-    }
-
-    public void setDonations(List<Donation> donations) {
-        this.donations = donations;
     }
 
     public void setUuid(UUID uuid) {

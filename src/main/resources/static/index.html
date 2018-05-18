@@ -3,6 +3,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/angular-material.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="styles/appStyle.css">
 </head>
 <body>
@@ -20,11 +22,28 @@
     <script src="scripts/core/angular-aria.js"></script>
     <script src="scripts/core/angular-material.min.js"></script>
 
+
     <script src="scripts/core/Chart.bundle.min.js"></script>
 
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/LandingController.js"></script>
-    <script src="scripts/controllers/DonatorLoginController.js"></script>
+
+    <script src="scripts/controllers/login/DonatorLoginController.js"></script>
+    <script src="scripts/controllers/DonatorRegisterController.js"></script>
     <script src="scripts/controllers/DonatorMainController.js"></script>
+
+    <script src="scripts/controllers/login/AdminLoginController.js"></script>
+    <script src="scripts/controllers/AdminMainController.js"></script>
+
+    <script src="scripts/controllers/login/DoctorLoginController.js"></script>
+    <script src="scripts/controllers/DoctorMainController.js"></script>
+
+    <script src="scripts/controllers/HospitalController.js"></script>
+
+    <script src="scripts/directives/LogoutDirective.js"></script>
+    <script src="scripts/directives/CookieConsentDirective.js"></script>
+    <script src="scripts/directives/DoctorRegisterDirective.js"></script>
+    <div consent></div>
+
 </footer>
 </html>

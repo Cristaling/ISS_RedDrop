@@ -1,0 +1,32 @@
+<div class="panel panel-reddrop" style="margin-bottom: 0px">
+    <div class="panel-heading">
+        Register a Doctor
+    </div>
+    <div class="panel-body">
+        <form>
+            <div class="form-group">
+                <label for="cnpRegister">C.N.P.</label>
+                <input ng-model="ctrl.doctorCNP" type="text" class="form-control" id="cnpRegister"
+                       placeholder="Enter CNP">
+            </div>
+
+            <div class="form-group">
+                <label for="nameRegister">Name</label>
+                <input ng-model="ctrl.nameRegister" type="text" class="form-control" id="nameRegister"
+                       placeholder="Name">
+            </div>
+
+            <div class="form-group">
+                <label for="passwordRegister">Password</label>
+                <input ng-model="ctrl.doctorPassword" type="password" class="form-control" id="passwordRegister"
+                       placeholder="Password">
+            </div>
+
+
+            <div class="btn-lg btn-reddrop form-group" style="text-align: center"
+                 ng-click="ctrl.tryRegisterDoctor()">
+                Register
+            </div>
+        </form>
+    </div>
+</div>
