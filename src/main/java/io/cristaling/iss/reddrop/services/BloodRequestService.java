@@ -7,6 +7,7 @@ import io.cristaling.iss.reddrop.repositories.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,20 +22,23 @@ public class BloodRequestService {
         this.doctorRepository=doctorRepository;
     }
 
-    public void save(BloodRequest bloodRequest){
+    public void deleteBloodRequest(UUID uuid) {
+        requestRepository.deleteById(uuid);
+    }
+
+    public void registerBloodRequest(BloodRequest bloodRequest) {
+        //TODO Validate Requst
+        bloodRequest.setUuid(UUID.randomUUID());
+        bloodRequest.setDoctor(doctorRepository.getOne(bloodRequest.getDoctor().getUuid()));
         requestRepository.save(bloodRequest);
     }
 
-    public void deleteById(String uuid){
-        requestRepository.deleteById(UUID.fromString(uuid));
+    public List<BloodRequest> getBloodRequestByDoctor(UUID doctorID) {
+        Doctor doctor = doctorRepository.getDoctorByUuid(doctorID);
+        if (doctor == null) {
+            return new ArrayList<>();
+        }
+        return requestRepository.getBloodRequestsByDoctor(doctor);
     }
 
-    public List<BloodRequest> findAll(){
-        return requestRepository.findAll();
-    }
-
-    public List<BloodRequest> findSpecific(String uuid){
-        Doctor doctor=doctorRepository.getOne(UUID.fromString(uuid));
-        return requestRepository.getBloodRequestsByDoctorEquals(doctor);
-    }
 }

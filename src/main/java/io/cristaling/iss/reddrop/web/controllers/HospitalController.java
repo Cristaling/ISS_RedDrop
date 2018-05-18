@@ -47,15 +47,15 @@ public class HospitalController {
 
 	@RequestMapping("/delete")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	public void deleteHospital(String token, String uuidString) {
+	public void deleteHospital(String token, String uuid) {
 		if (!permissionsService.hasPermission(token, Permission.ADMIN)) {
 			return;
 		}
-		UUID uuid = UUIDUtils.getUUIDFromString(uuidString);
-		if (uuid == null) {
+		UUID actualUuid = UUIDUtils.getUUIDFromString(uuid);
+		if (actualUuid == null) {
 			return;
 		}
-		hospitalService.deleteHospital(uuid);
+		hospitalService.deleteHospital(actualUuid);
 	}
 
 }

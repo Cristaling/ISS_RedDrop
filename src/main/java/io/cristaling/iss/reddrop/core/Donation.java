@@ -21,20 +21,9 @@ public class Donation {
     boolean result;
     @Column
     Date donationDate;
-    @OneToOne
-    @JoinColumn(name = "analysis_uuid")
-    AnalysisResult analysisResult;
 
     public UUID getUuid() {
         return uuid;
-    }
-
-    public AnalysisResult getAnalysisResult() {
-        return analysisResult;
-    }
-
-    public void setAnalysisResult(AnalysisResult analysisResult) {
-        this.analysisResult = analysisResult;
     }
 
     public Donator getDonator() {

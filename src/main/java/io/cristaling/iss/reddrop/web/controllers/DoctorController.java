@@ -38,15 +38,15 @@ public class DoctorController {
 	}
 
 	@RequestMapping("/getbyhospital")
-	public List<Doctor> getDoctorsByHospital(String token, String uuidString) {
+	public List<Doctor> getDoctorsByHospital(String token, String uuid) {
 		if (!permissionsService.hasPermission(token, Permission.ADMIN)) {
 			return null;
 		}
-		UUID uuid = UUIDUtils.getUUIDFromString(uuidString);
-		if (uuid == null) {
+		UUID actualUuid = UUIDUtils.getUUIDFromString(uuid);
+		if (actualUuid == null) {
 			return null;
 		}
-		return doctorService.getDoctorsByHospital(uuid);
+		return doctorService.getDoctorsByHospital(actualUuid);
 	}
 
 	@RequestMapping("/add")
@@ -60,15 +60,15 @@ public class DoctorController {
 
 	@RequestMapping("/delete")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	public void deleteDoctor(String token, String uuidString) {
+	public void deleteDoctor(String token, String uuid) {
 		if (!permissionsService.hasPermission(token, Permission.ADMIN)) {
 			return;
 		}
-		UUID uuid = UUIDUtils.getUUIDFromString(uuidString);
-		if (uuid == null) {
+		UUID actualUuid = UUIDUtils.getUUIDFromString(uuid);
+		if (actualUuid == null) {
 			return;
 		}
-		doctorService.deleteDoctor(uuid);
+		doctorService.deleteDoctor(actualUuid);
 	}
 
 }

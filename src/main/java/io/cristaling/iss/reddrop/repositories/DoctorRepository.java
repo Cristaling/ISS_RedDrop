@@ -11,6 +11,7 @@ import java.util.UUID;
 @Repository
 public interface DoctorRepository extends JpaRepository<Doctor,UUID>{
 
+	Doctor getDoctorByUuid(UUID uuid);
 	Doctor getDoctorByCnp(String cnp);
 	List<Doctor> getDoctorsByHospital(Hospital hospital);
 

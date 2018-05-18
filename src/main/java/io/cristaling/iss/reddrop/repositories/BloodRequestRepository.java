@@ -11,5 +11,5 @@ import java.util.UUID;
 @Repository
 public interface BloodRequestRepository extends JpaRepository<BloodRequest,UUID>{
 
-    List<BloodRequest> getBloodRequestsByDoctorEquals(Doctor doctor);
+    List<BloodRequest> getBloodRequestsByDoctor(Doctor doctor);
 }

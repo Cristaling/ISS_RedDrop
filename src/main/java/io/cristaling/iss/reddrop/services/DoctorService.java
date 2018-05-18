@@ -22,8 +22,13 @@ public class DoctorService {
     public DoctorService(DoctorRepository doctorRepository, HospitalRepository hospitalRepository) {
         this.doctorRepository = doctorRepository;
         this.hospitalRepository = hospitalRepository;
+        Hospital hospital = new Hospital();
+        hospital.setUuid(UUID.fromString("6aa537ca-e706-47b3-8640-54ae85692dcf"));
+        hospital.setName("Hospital 1");
+        hospitalRepository.save(hospital);
         Doctor doctor = new Doctor();
         doctor.setUuid(UUID.randomUUID());
+        doctor.setHospital(hospital);
         doctor.setCnp("1971211055085");
         doctor.setPassword("1971211055085");
         doctor.setFullName("Dr. Susan Dofenjmirtz");
