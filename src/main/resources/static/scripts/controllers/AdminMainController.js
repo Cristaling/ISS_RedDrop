@@ -10,6 +10,10 @@
             $location.path("/admin/login");
         }
 
+        vm.goToHospitalPage = function (hospitalToken) {
+            $location.path("/hospital/" + hospitalToken);
+        }
+
         vm.hospitals = [];
 
         vm.openRegisterDoctorDialog = function (hospitalToken) {

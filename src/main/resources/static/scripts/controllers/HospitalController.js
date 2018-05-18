@@ -33,7 +33,7 @@
         };
 
         vm.refreshDoctorList = function () {
-            $http.get(apiIP + '/api/doctor/getbyhospital?token=' + vm.adminToken + '&uuid=' + hospitalID).then(function (response) {
+            $http.get(apiIP + '/api/doctor/getbyhospital?token=' + vm.adminToken + '&uuid=' + vm.hospitalID).then(function (response) {
                 vm.doctors = response.data;
             }, function (reason) {
 

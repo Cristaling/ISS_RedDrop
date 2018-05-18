@@ -12,7 +12,7 @@
             </div>
             <div class="panel-body">
                 <md-list>
-                    <md-list-item ng-repeat="hospital in ctrl.hospitals">
+                    <md-list-item ng-repeat="hospital in ctrl.hospitals" ng-click="ctrl.goToHospitalPage(hospital.uuid)">
                         <p>{{ hospital.name }}</p>
                         <!--<md-checkbox class="md-secondary" ng-model="person.selected"></md-checkbox>
                         <md-icon md-svg-icon="communication:email"  ng-click="doSecondaryAction($event)" aria-label="Send Email" class="md-secondary md-hue-3" ></md-icon>

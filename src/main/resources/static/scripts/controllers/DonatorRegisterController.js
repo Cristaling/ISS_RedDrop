@@ -1,6 +1,7 @@
-$("#donatorCNP").keyup(function(){
+/*$("#donatorCNP").keyup(function(){
     $("#cnpLoginCredential").val(this.value);
-});
+});*/
+//TODO Remove/fix acordingly
 
 (function(){
     'use strict'
