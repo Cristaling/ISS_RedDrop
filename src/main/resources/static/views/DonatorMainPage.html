@@ -1,3 +1,33 @@
-Donator Main Page
+<div class="col-md-12">
+    <div class="col-md-4 col-md-offset-4 button-wrapper" style="padding-top: 25vh;">
 
-<div logout-btn></div>
+        <div class="panel panel-reddrop">
+            <div class="panel-heading">
+                Logged in as Donator
+            </div>
+            <div class="panel-body">
+                <form>
+                    <div class="btn-lg btn-reddrop form-group" style="text-align: center"
+                         ng-click="ctrl.showEligibilityForm()">
+                        Complete Eligibility Form
+                    </div>
+
+                    <div class="btn-lg btn-reddrop form-group" style="text-align: center"
+                         ng-click="ctrl.viewAnalysisResults()">
+                        View Analysis Results
+                    </div>
+
+                    <div class="btn-lg btn-reddrop form-group" style="text-align: center"
+                         ng-click="ctrl.makeAppointment()">
+                        Make appointment
+                    </div>
+
+                    <div class="btn-lg btn-reddrop form-group" style="text-align: center"
+                         ng-click="ctrl.goToLandingPage()">
+                        Logout
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

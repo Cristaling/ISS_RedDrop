@@ -11,5 +11,10 @@
             $location.path("/donator/login");
         }
 
+        vm.goToLandingPage=function(){
+            $cookies.remove("donatorToken");
+            $location.path("/landing");
+        }
+
     }]);
 })();
