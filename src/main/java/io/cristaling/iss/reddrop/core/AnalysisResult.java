@@ -35,4 +35,28 @@ public class AnalysisResult {
     public void setDonationVisit(UUID donationVisit) {
         this.donationVisit = donationVisit;
     }
+
+    public int getPulse() {
+        return pulse;
+    }
+
+    public void setPulse(int pulse) {
+        this.pulse = pulse;
+    }
+
+    public int getTension() {
+        return tension;
+    }
+
+    public void setTension(int tension) {
+        this.tension = tension;
+    }
+
+    public Diseases getDiseases() {
+        return diseases;
+    }
+
+    public void setDiseases(Diseases diseases) {
+        this.diseases = diseases;
+    }
 }

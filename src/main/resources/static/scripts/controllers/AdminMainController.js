@@ -88,7 +88,7 @@
             }).then(vm.refreshHospitalList, vm.refreshHospitalList);
         };
 
-        vm.openFillAnalysisDialog = function () {
+        vm.openFillAnalysisDialog = function (donationVisitToken) {
             $mdDialog.show({
                 controller: function ($mdDialog, $http, apiIP) {
                     var vm = this;
@@ -102,13 +102,13 @@
                     vm.tryRegisterDoctor = function () {
                         $http({
                             method: 'POST',
-                            url: apiIP + '/api/doctor/add?token=' + vm.adminToken,
+                            url: apiIP + '/api/analysisresult/add?token=' + vm.adminToken,
                             data: {
                                 uuid: "",
-                                password: vm.doctorPassword,
-                                fullName: vm.nameRegister,
-                                hospital: hospitalToken,
-                                cnp: vm.doctorCNP
+                                donationVisit: donationVisitToken,
+                                pulse: vm.donatorPulse,
+                                tension: vm.donatorTension,
+                                diseases: vm.donatorDiseases
                             }
                         }).then(function (response) {
                             $mdDialog.hide();
@@ -118,10 +118,10 @@
                     };
                 },
                 controllerAs: 'ctrl',
-                templateUrl: '/views/directives/DoctorRegistrationDirective.html',
+                templateUrl: '/views/directives/FillAnalysisResultDirective.html',
                 parent: angular.element(document.body),
                 clickOutsideToClose: true
-            }).then(vm.refreshHospitalList, vm.refreshHospitalList);
+            });
         };
 
         vm.deleteHospital = function (hospitalId) {
