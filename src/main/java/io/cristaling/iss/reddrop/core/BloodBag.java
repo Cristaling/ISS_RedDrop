@@ -13,7 +13,7 @@ public class BloodBag {
     @Id
     UUID uuid;
     @Column
-    UUID donation;
+    UUID donationVisit;
     @Column
     boolean tested;
     @Column
@@ -29,12 +29,12 @@ public class BloodBag {
         this.uuid = uuid;
     }
 
-    public UUID getDonation() {
-        return donation;
+    public UUID getDonationVisit() {
+        return donationVisit;
     }
 
-    public void setDonation(UUID donation) {
-        this.donation = donation;
+    public void setDonationVisit(UUID donationVisit) {
+        this.donationVisit = donationVisit;
     }
 
     public boolean isTested() {

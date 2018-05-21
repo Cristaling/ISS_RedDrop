@@ -10,7 +10,7 @@ public class AnalysisResult {
     @Id
     UUID uuid;
     @Column
-    UUID donation;
+    UUID donationVisit;
 
     public UUID getUuid() {
         return uuid;
@@ -20,11 +20,11 @@ public class AnalysisResult {
         this.uuid = uuid;
     }
 
-    public UUID getDonation() {
-        return donation;
+    public UUID getDonationVisit() {
+        return donationVisit;
     }
 
-    public void setDonation(UUID donation) {
-        this.donation = donation;
+    public void setDonationVisit(UUID donationVisit) {
+        this.donationVisit = donationVisit;
     }
 }

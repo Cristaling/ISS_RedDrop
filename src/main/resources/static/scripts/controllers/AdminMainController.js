@@ -87,6 +87,42 @@
             }).then(vm.refreshHospitalList, vm.refreshHospitalList);
         };
 
+        vm.openFillAnalysisDialog = function () {
+            $mdDialog.show({
+                controller: function ($mdDialog, $http, apiIP) {
+                    var vm = this;
+
+                    vm.adminToken = $cookies.get("adminToken");
+
+                    if (!vm.adminToken) {
+                        $location.path("/admin/login");
+                    }
+
+                    vm.tryRegisterDoctor = function () {
+                        $http({
+                            method: 'POST',
+                            url: apiIP + '/api/doctor/add?token=' + vm.adminToken,
+                            data: {
+                                uuid: "",
+                                password: vm.doctorPassword,
+                                fullName: vm.nameRegister,
+                                hospital: hospitalToken,
+                                cnp: vm.doctorCNP
+                            }
+                        }).then(function (response) {
+                            $mdDialog.hide();
+                        }, function (error) {
+                            $mdDialog.hide();
+                        });
+                    };
+                },
+                controllerAs: 'ctrl',
+                templateUrl: '/views/directives/DoctorRegistrationDirective.html',
+                parent: angular.element(document.body),
+                clickOutsideToClose: true
+            }).then(vm.refreshHospitalList, vm.refreshHospitalList);
+        };
+
         vm.deleteHospital = function (hospitalId) {
             $http.get(apiIP + '/api/hospital/delete?token=' + vm.adminToken + '&uuid=' + hospitalId).then(function (response) {
                 vm.refreshHospitalList();
