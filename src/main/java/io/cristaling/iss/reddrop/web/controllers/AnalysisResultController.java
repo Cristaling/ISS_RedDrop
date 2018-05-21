@@ -35,7 +35,7 @@ public class AnalysisResultController {
         analysisResultService.addAnalysis(analysisResult);
     }
 
-    @RequestMapping("/getall")
+    @RequestMapping("/getbydonator")
     public List<AnalysisResult> getAllAnalysisForDonator(String token, String uuid){
         if (!permissionsService.hasPermission(token, Permission.DONATOR)) {
             return null;
