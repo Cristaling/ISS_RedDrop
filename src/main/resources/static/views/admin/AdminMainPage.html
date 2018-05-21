@@ -34,12 +34,12 @@
             <div class="panel-body">
                 <md-list>
                     <md-list-item ng-repeat="visit in ctrl.visits" ng-click="null">
-                        <p>{{ visit.date }} - {{ visit.donatorName }}</p>
+                        <p>{{ visit.date | date:"dd/MM/yyyy" }} - {{ visit.donatorName }}</p>
                         <div class="md-secondary" aria-label="Add Doctor" ng-click="null">
-                            <i class="material-icons">add</i>
+                            <i class="material-icons">assignment</i>
                         </div>
                         <div class="md-secondary" aria-label="Delete Hospital" ng-click="null">
-                            <i class="material-icons">remove</i>
+                            <i class="material-icons">delete</i>
                         </div>
                     </md-list-item>
                 </md-list>
