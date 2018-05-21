@@ -95,6 +95,7 @@
 
                     vm.adminToken = $cookies.get("adminToken");
                     vm.diseases = [];
+                    vm.analysis = {};
 
                     if (!vm.adminToken) {
                         $location.path("/admin/login");

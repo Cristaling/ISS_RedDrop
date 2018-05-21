@@ -1,30 +1,49 @@
-<div class="panel panel-reddrop" style="margin-bottom: 0px">
+<div class="panel panel-reddrop" style="margin-bottom: 0px; width: 50vw;">
     <div class="panel-heading">
         Fill the Analysis
     </div>
     <div class="panel-body">
-        <form>
-            <div class="form-group">
-                <label for="pulse">Enter Pulse</label>
-                <input ng-model="ctrl.donatorPulse" type="number" class="form-control" id="pulse"
-                       placeholder="Enter CNP">
+        <form class="col-md-12">
+            <div class="form-group col-md-12">
+                <div class="form-group col-md-6">
+                    <label for="pulse">Enter Pulse</label>
+                    <input ng-model="ctrl.donatorPulse" type="number" class="form-control" id="pulse"
+                           placeholder="Enter CNP">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="tension">Tension</label>
+                    <input ng-model="ctrl.donatorTension" type="number" class="form-control" id="tension"
+                           placeholder="Name">
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="tension">Tension</label>
-                <input ng-model="ctrl.donatorTension" type="number" class="form-control" id="tension"
-                       placeholder="Name">
+            <div class="form-group col-md-12">
+
+                <div class="col-md-3">
+                    <label for="sodium">Sodium</label>
+                    <input ng-model="ctrl.analysis.sodium" type="number" class="form-control" id="sodium">
+                </div>
+
+                <!--<div class="col-md-3" ng-repeat="disease in ctrl.diseases">
+                    <md-checkbox name="ctrl.analysis." ng-model="ctrl.diseaseResult[disease]">
+                        {{disease}}
+                    </md-checkbox>
+                </div>
+
+                <div class="col-md-3" ng-repeat="disease in ctrl.diseases">
+                    <div class="form-group">
+                        <label for="disease">{{disease}}</label>
+                        <input ng-model="ctrl.diseaseResult[disease]" type="checkbox" class="form-control" id="disease">
+                    </div>
+                </div>-->
             </div>
 
-            <md-list-item ng-repeat="disease in ctrl.diseases" ng-click="null">
-                <p>{{ disease }}</p>
-                <input ng-model="ctrl.diseases" type="checkbox" class="form-control">
-            </md-list-item>
-
-
-            <div class="btn-lg btn-reddrop form-group" style="text-align: center"
-                 ng-click="ctrl.tryRegisterAnalysis()">
-                Register
+            <div class="form-group col-md-12">
+                <div class="btn-lg btn-reddrop" style="text-align: center"
+                     ng-click="ctrl.tryRegisterAnalysis()">
+                    Register
+                </div>
             </div>
         </form>
     </div>
