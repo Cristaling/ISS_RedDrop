@@ -9,6 +9,7 @@
         if (!vm.donatorToken) {
             $location.path("/donator/login");
         }
+        vm.visits = [];
 
         vm.setVisit = function () {
             $http({
@@ -30,7 +31,16 @@
                 );
             }, function (error) {
             });
-        }
+        };
+        vm.refreshVisitsList = function () {
+            $http.get(apiIP + '/api/donationvisit/getvisitedvisits?token=' + vm.donatorToken + '&uuid=' + vm.donatorToken).then(function (response) {
+                vm.visits = response.data;
+            }, function (reason) {
+
+            });
+        };
+
+        vm.refreshVisitsList();
 
     }]);
 })();

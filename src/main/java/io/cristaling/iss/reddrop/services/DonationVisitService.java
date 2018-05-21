@@ -1,12 +1,15 @@
 package io.cristaling.iss.reddrop.services;
 
+import io.cristaling.iss.reddrop.core.AnalysisResult;
 import io.cristaling.iss.reddrop.core.DonationVisit;
 import io.cristaling.iss.reddrop.core.Donator;
+import io.cristaling.iss.reddrop.repositories.AnalysisResultRepository;
 import io.cristaling.iss.reddrop.repositories.DonationVisitRepository;
 import io.cristaling.iss.reddrop.repositories.DonatorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
@@ -16,11 +19,13 @@ public class DonationVisitService {
 
     DonationVisitRepository donationVisitRepository;
     DonatorRepository donatorRepository;
+    AnalysisResultRepository analysisResultRepository;
 
     @Autowired
-    public DonationVisitService(DonationVisitRepository donationVisitRepository,DonatorRepository donatorRepository) {
+    public DonationVisitService(DonationVisitRepository donationVisitRepository,DonatorRepository donatorRepository,AnalysisResultRepository analysisResultRepository) {
         this.donatorRepository=donatorRepository;
         this.donationVisitRepository = donationVisitRepository;
+        this.analysisResultRepository=analysisResultRepository;
     }
 
     public void addDonationVisit(DonationVisit donationVisit){
@@ -44,5 +49,16 @@ public class DonationVisitService {
             }
         });
         return result;
+    }
+
+    public List<DonationVisit> getVisitsVisited(UUID donatorUUID){
+        List<DonationVisit> visits= donationVisitRepository.getDonationVisitsByDonator(donatorUUID);
+        List<DonationVisit> visited=new ArrayList<>();
+        for(DonationVisit donationVisit: visits){
+            if(analysisResultRepository.getAnalysisResultByDonationVisit(donationVisit.getUuid())!=null){
+                visited.add(donationVisit);
+            }
+        }
+        return visited;
     }
 }

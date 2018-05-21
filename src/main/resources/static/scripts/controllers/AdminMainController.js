@@ -76,11 +76,7 @@
                                 city: vm.hospitalCity,
                                 county: vm.hospitalCounty
                             }
-                        }).then(function () {
-                            $mdDialog.hide();
-                        }, function (error) {
-                            $mdDialog.hide();
-                        });
+                        }).then($mdDialog.hide(),$mdDialog.hide());
                     }
                 },
                 controllerAs: 'ctrl',

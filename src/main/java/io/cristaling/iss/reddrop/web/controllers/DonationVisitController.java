@@ -5,6 +5,7 @@ import io.cristaling.iss.reddrop.core.DonationVisit;
 import io.cristaling.iss.reddrop.services.DonationVisitService;
 import io.cristaling.iss.reddrop.services.PermissionsService;
 import io.cristaling.iss.reddrop.utils.Permission;
+import io.cristaling.iss.reddrop.web.utils.UUIDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 @CrossOrigin
 @RestController
@@ -44,5 +46,17 @@ public class DonationVisitController {
 			return null;
 		}
 		return donationVisitService.getVisitsSorted();
+	}
+
+	@RequestMapping("/getvisitedvisits")
+	public List<DonationVisit> getVisitedVisits(String token,String uuid){
+		if (!permissionsService.hasPermission(token, Permission.ADMIN)) {
+			return null;
+		}
+		UUID actualUuid = UUIDUtils.getUUIDFromString(uuid);
+		if (actualUuid == null) {
+			return null;
+		}
+		return donationVisitService.getVisitsVisited(actualUuid);
 	}
 }
