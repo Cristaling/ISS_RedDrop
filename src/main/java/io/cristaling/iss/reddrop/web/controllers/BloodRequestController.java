@@ -58,7 +58,7 @@ public class BloodRequestController {
     }*/
 
     @RequestMapping("/getfrom")
-    public List<BloodRequest> getSpecificRequests(String token, String uuid) {
+    public List<BloodRequest> getRequestsByDoctor(String token, String uuid) {
         if (!permissionsService.hasPermission(token, Permission.DOCTOR)) {
             return null;
         }
