@@ -1,6 +1,11 @@
 package io.cristaling.iss.reddrop.utils;
 
-public enum BloodType{
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+@JsonSerialize(using = BloodTypeSerializer.class)
+public enum BloodType {
+
+    UNKNOWN("Unknown"),
     ABP("AB+"),
     ABN("AB-"),
     AP("A+"),
@@ -8,9 +13,9 @@ public enum BloodType{
     BP("B+"),
     BN("B-"),
     OP("O+"),
-    ON("O-"),
-    UNKNOWN("Unknown");
-    String name;
+    ON("O-");
+
+    public String name;
 
     public String getName() {
         return name;

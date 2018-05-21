@@ -22,6 +22,14 @@
                        placeholder="Importance">
             </div>
 
+            <div class="form-group">
+                <label for="patientType">Importance</label>
+                <select ng-model="ctrl.patientBloodType" ng-not-empty ng-options="bloodType.name for bloodType in ctrl.bloodTypes track by bloodType.type"
+                        class="form-control" id="patientType"
+                        placeholder="Importance">
+                </select>
+            </div>
+
 
             <div class="btn-lg btn-reddrop form-group" style="text-align: center"
                  ng-click="ctrl.tryRegisterBloodRequest()">

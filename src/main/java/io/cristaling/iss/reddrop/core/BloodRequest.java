@@ -1,6 +1,7 @@
 package io.cristaling.iss.reddrop.core;
 
 import io.cristaling.iss.reddrop.utils.BloodRequestStatus;
+import io.cristaling.iss.reddrop.utils.BloodType;
 import io.cristaling.iss.reddrop.utils.Importance;
 
 import javax.persistence.*;
@@ -22,6 +23,8 @@ public class BloodRequest {
     Importance importance;
     @Column
     BloodRequestStatus status;
+    @Column
+    BloodType type;
 
     public UUID getUuid() {
         return uuid;
@@ -69,5 +72,13 @@ public class BloodRequest {
 
     public void setStatus(BloodRequestStatus status) {
         this.status = status;
+    }
+
+    public BloodType getType() {
+        return type;
+    }
+
+    public void setType(BloodType type) {
+        this.type = type;
     }
 }
