@@ -45,9 +45,7 @@
                                 type : vm.patientBloodType.type
                             }
                         }).then(function () {
-                            $mdDialog.hide();
                         }, function (error) {
-                            $mdDialog.hide();
                         });
                     }
                 },
