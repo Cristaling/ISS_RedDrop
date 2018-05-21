@@ -14,11 +14,15 @@ public class AnalysisResult {
     @Column
     UUID donationVisit;
     @Column
-    int pulse;
+    Double sodium;
     @Column
-    int tension;
+    Double potassium;
     @Column
-    Diseases diseases;
+    Double urea;
+    @Column
+    Double creatinine;
+    @Column
+    Double glucose;
 
     public UUID getUuid() {
         return uuid;
@@ -36,27 +40,43 @@ public class AnalysisResult {
         this.donationVisit = donationVisit;
     }
 
-    public int getPulse() {
-        return pulse;
+    public Double getSodium() {
+        return sodium;
     }
 
-    public void setPulse(int pulse) {
-        this.pulse = pulse;
+    public void setSodium(Double sodium) {
+        this.sodium = sodium;
     }
 
-    public int getTension() {
-        return tension;
+    public Double getPotassium() {
+        return potassium;
     }
 
-    public void setTension(int tension) {
-        this.tension = tension;
+    public void setPotassium(Double potassium) {
+        this.potassium = potassium;
     }
 
-    public Diseases getDiseases() {
-        return diseases;
+    public Double getUrea() {
+        return urea;
     }
 
-    public void setDiseases(Diseases diseases) {
-        this.diseases = diseases;
+    public void setUrea(Double urea) {
+        this.urea = urea;
+    }
+
+    public Double getCreatinine() {
+        return creatinine;
+    }
+
+    public void setCreatinine(Double creatinine) {
+        this.creatinine = creatinine;
+    }
+
+    public Double getGlucose() {
+        return glucose;
+    }
+
+    public void setGlucose(Double glucose) {
+        this.glucose = glucose;
     }
 }

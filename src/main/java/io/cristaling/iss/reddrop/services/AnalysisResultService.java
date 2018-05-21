@@ -9,6 +9,7 @@ import io.cristaling.iss.reddrop.repositories.DonatorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -31,7 +32,11 @@ public class AnalysisResultService {
 
 	public List<AnalysisResult> getAllForDonator(UUID donatorUUID) {
         List<DonationVisit> visits = donationVisitRepository.getDonationVisitsByDonator(donatorUUID);
-        return analysisResultRepository.getAnalysisResultsByDonationVisitIn(visits);
+        List<UUID> visitsUuids=new ArrayList<>();
+        for(DonationVisit donationVisit : visits){
+            visitsUuids.add(donationVisit.getUuid());
+        }
+        return analysisResultRepository.getAnalysisResultsByDonationVisitIn(visitsUuids);
 
 	}
 }

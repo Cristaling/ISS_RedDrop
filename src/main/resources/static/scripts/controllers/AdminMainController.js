@@ -94,35 +94,21 @@
                     var vm = this;
 
                     vm.adminToken = $cookies.get("adminToken");
-                    vm.diseases = [];
+
                     vm.analysis = {};
+                    vm.analysis.uuid="";
+                    vm.analysis.donationVisit=donationVisitToken;
 
                     if (!vm.adminToken) {
                         $location.path("/admin/login");
                     }
 
-                    $http.get(apiIP + '/api/utils/getdiseases').then(function (response) {
-                        vm.diseases = response.data;
-                    }, function (reason) {
-
-                    });
-
                     vm.tryRegisterAnalysis = function () {
                         $http({
                             method: 'POST',
                             url: apiIP + '/api/analysisresult/add?token=' + vm.adminToken,
-                            data: {
-                                uuid: "",
-                                donationVisit: donationVisitToken,
-                                pulse: vm.donatorPulse,
-                                tension: vm.donatorTension,
-                                diseases: vm.donatorDiseases
-                            }
-                        }).then(function (response) {
-                            $mdDialog.hide();
-                        }, function (error) {
-                            $mdDialog.hide();
-                        });
+                            data: vm.analysis
+                        }).then($mdDialog.hide(),$mdDialog.hide());
                     };
                 },
                 controllerAs: 'ctrl',

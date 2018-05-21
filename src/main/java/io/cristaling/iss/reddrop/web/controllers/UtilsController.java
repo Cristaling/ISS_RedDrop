@@ -15,12 +15,6 @@ import java.util.List;
 @RequestMapping("/api/utils")
 public class UtilsController {
 
-
-    @RequestMapping("/getdiseases")
-    public Diseases[] getDiseases(){
-        return Diseases.values();
-    }
-
     @RequestMapping("/getbloodtypes")
     public List<BloodType> getBloodTypes(){
         return Arrays.asList(BloodType.values());

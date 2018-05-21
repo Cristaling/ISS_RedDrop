@@ -12,6 +12,6 @@ import java.util.UUID;
 public interface AnalysisResultRepository extends JpaRepository<AnalysisResult,UUID> {
 
 	AnalysisResult getAnalysisResultByDonationVisit(UUID uuid);
-	List<AnalysisResult> getAnalysisResultsByDonationVisitIn(List<DonationVisit> donationVisitList);
+	List<AnalysisResult> getAnalysisResultsByDonationVisitIn(List<UUID> donationVisitList);
 
 }

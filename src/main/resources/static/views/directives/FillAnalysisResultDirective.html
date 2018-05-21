@@ -6,37 +6,34 @@
         <form class="col-md-12">
             <div class="form-group col-md-12">
                 <div class="form-group col-md-6">
-                    <label for="pulse">Enter Pulse</label>
-                    <input ng-model="ctrl.donatorPulse" type="number" class="form-control" id="pulse"
-                           placeholder="Enter CNP">
+                    <label for="pulse">Sodium (mmol/L)</label>
+                    <input ng-model="ctrl.analysis.sodium" type="number" class="form-control" id="pulse"
+                           placeholder="Sodium">
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label for="tension">Tension</label>
-                    <input ng-model="ctrl.donatorTension" type="number" class="form-control" id="tension"
-                           placeholder="Name">
-                </div>
-            </div>
-
-            <div class="form-group col-md-12">
-
-                <div class="col-md-3">
-                    <label for="sodium">Sodium</label>
-                    <input ng-model="ctrl.analysis.sodium" type="number" class="form-control" id="sodium">
+                    <label for="potassium">Potassium (mmol/L)</label>
+                    <input ng-model="ctrl.analysis.potassium" type="number" class="form-control" id="potassium"
+                           placeholder="Potassium">
                 </div>
 
-                <!--<div class="col-md-3" ng-repeat="disease in ctrl.diseases">
-                    <md-checkbox name="ctrl.analysis." ng-model="ctrl.diseaseResult[disease]">
-                        {{disease}}
-                    </md-checkbox>
+                <div class="form-group col-md-6">
+                    <label for="urea">Urea (mmol/L)</label>
+                    <input ng-model="ctrl.analysis.urea" type="number" class="form-control" id="urea"
+                           placeholder="Urea">
                 </div>
 
-                <div class="col-md-3" ng-repeat="disease in ctrl.diseases">
-                    <div class="form-group">
-                        <label for="disease">{{disease}}</label>
-                        <input ng-model="ctrl.diseaseResult[disease]" type="checkbox" class="form-control" id="disease">
-                    </div>
-                </div>-->
+                <div class="form-group col-md-6">
+                    <label for="creatinine">Creatinine (μmol/L)</label>
+                    <input ng-model="ctrl.analysis.creatinine" type="number" class="form-control" id="creatinine"
+                           placeholder="Creatinine">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="glucose">Glucose (mmol/L)</label>
+                    <input ng-model="ctrl.analysis.glucose" type="number" class="form-control" id="glucose"
+                           placeholder="Glucose">
+                </div>
             </div>
 
             <div class="form-group col-md-12">
