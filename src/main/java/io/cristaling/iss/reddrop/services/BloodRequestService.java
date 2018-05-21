@@ -30,7 +30,9 @@ public class BloodRequestService {
 
     public void registerBloodRequest(BloodRequest bloodRequest) {
         //TODO Validate Requst
-        bloodRequest.setUuid(UUID.randomUUID());
+        if (bloodRequest.getUuid() == null) {
+            bloodRequest.setUuid(UUID.randomUUID());
+        }
         requestRepository.save(bloodRequest);
     }
 

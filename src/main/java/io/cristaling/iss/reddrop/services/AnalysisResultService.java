@@ -26,7 +26,9 @@ public class AnalysisResultService {
     }
 
     public void addAnalysis(AnalysisResult analysisResult){
-        analysisResult.setUuid(UUID.randomUUID());
+        if (analysisResult.getUuid() == null) {
+            analysisResult.setUuid(UUID.randomUUID());
+        }
         analysisResultRepository.save(analysisResult);
     }
 

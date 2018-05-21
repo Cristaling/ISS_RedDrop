@@ -30,7 +30,9 @@ public class DonationVisitService {
 
     public void addDonationVisit(DonationVisit donationVisit){
         donationVisit.getDate().setTime(donationVisit.getDate().getTime()+10800001);
-        donationVisit.setUuid(UUID.randomUUID());
+        if (donationVisit.getUuid() == null) {
+            donationVisit.setUuid(UUID.randomUUID());
+        }
         Donator donator=donatorRepository.getOne(donationVisit.getDonator());
         donationVisit.setDonatorName(donator.getNume()+" "+donator.getPrenume());
         donationVisitRepository.save(donationVisit);

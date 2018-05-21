@@ -27,7 +27,9 @@ public class HospitalService {
 
     public void registerHospital(Hospital hospital) {
         //TODO Validate Doctor
-        hospital.setUuid(UUID.randomUUID());
+        if (hospital.getUuid() == null) {
+            hospital.setUuid(UUID.randomUUID());
+        }
         hospitalRepository.save(hospital);
     }
 
