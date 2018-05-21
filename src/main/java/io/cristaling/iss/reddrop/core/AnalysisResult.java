@@ -1,5 +1,7 @@
 package io.cristaling.iss.reddrop.core;
 
+import io.cristaling.iss.reddrop.utils.Diseases;
+
 import javax.persistence.*;
 import java.util.UUID;
 
@@ -11,6 +13,12 @@ public class AnalysisResult {
     UUID uuid;
     @Column
     UUID donationVisit;
+    @Column
+    int pulse;
+    @Column
+    int tension;
+    @Column
+    Diseases diseases;
 
     public UUID getUuid() {
         return uuid;

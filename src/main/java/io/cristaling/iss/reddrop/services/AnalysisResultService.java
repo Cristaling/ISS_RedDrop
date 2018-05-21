@@ -1,5 +1,6 @@
 package io.cristaling.iss.reddrop.services;
 
+import io.cristaling.iss.reddrop.core.AnalysisResult;
 import io.cristaling.iss.reddrop.core.Donator;
 import io.cristaling.iss.reddrop.repositories.AnalysisResultRepository;
 import io.cristaling.iss.reddrop.repositories.DonatorRepository;
@@ -24,5 +25,9 @@ public class AnalysisResultService {
         return donatorRepository.getOne(donUUID);
     }
 
+    public void addAnalysis(AnalysisResult analysisResult){
+        analysisResult.setUuid(UUID.randomUUID());
+        analysisResultRepository.save(analysisResult);
+    }
 
 }
