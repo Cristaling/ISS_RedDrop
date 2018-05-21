@@ -16,6 +16,8 @@
 
         vm.hospitals = [];
         vm.visits = [];
+        vm.bloodStocks = [];
+        vm.bloodTypes = [];
 
         vm.openRegisterDoctorDialog = function (hospitalToken) {
             $mdDialog.show({
@@ -130,7 +132,6 @@
             $http.get(apiIP + '/api/hospital/getall?token=' + vm.adminToken).then(function (response) {
                 vm.hospitals = response.data;
             }, function (reason) {
-
             });
         };
 
@@ -138,10 +139,25 @@
             $http.get(apiIP + '/api/donationvisit/getall?token=' + vm.adminToken).then(function (response) {
                 vm.visits = response.data;
             }, function (reason) {
-
             });
         };
 
+        vm.refreshBloodBagStocks = function () {
+            $http.get(apiIP + '/api/bloodbag/stock?token=' + vm.adminToken).then(function (response) {
+                vm.bloodStocks = response.data;
+            }, function (reason) {
+            });
+        };
+
+        vm.getBloodTypes = function () {
+            $http.get(apiIP + '/api/utils/getbloodtypes?token=' + vm.adminToken).then(function (response) {
+                vm.bloodTypes = response.data;
+            }, function (reason) {
+            });
+        };
+
+        vm.getBloodTypes();
+        vm.refreshBloodBagStocks();
         vm.refreshVisitList();
         vm.refreshHospitalList();
 
