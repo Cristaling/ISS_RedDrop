@@ -94,12 +94,19 @@
                     var vm = this;
 
                     vm.adminToken = $cookies.get("adminToken");
+                    vm.diseases = [];
 
                     if (!vm.adminToken) {
                         $location.path("/admin/login");
                     }
 
-                    vm.tryRegisterDoctor = function () {
+                    $http.get(apiIP + '/api/utils/getdiseases').then(function (response) {
+                        vm.diseases = response.data;
+                    }, function (reason) {
+
+                    });
+
+                    vm.tryRegisterAnalysis = function () {
                         $http({
                             method: 'POST',
                             url: apiIP + '/api/analysisresult/add?token=' + vm.adminToken,
@@ -121,7 +128,7 @@
                 templateUrl: '/views/directives/FillAnalysisResultDirective.html',
                 parent: angular.element(document.body),
                 clickOutsideToClose: true
-            });
+            }).then();
         };
 
         vm.deleteHospital = function (hospitalId) {

@@ -16,11 +16,10 @@
                        placeholder="Name">
             </div>
 
-            <div class="form-group">
-                <label for="passwordRegister">Password</label>
-                <input ng-model="ctrl.diseases" type="checkbox" class="form-control" id="passwordRegister"
-                       placeholder="Password">
-            </div>
+            <md-list-item ng-repeat="disease in ctrl.diseases" ng-click="null">
+                <p>{{ disease }}</p>
+                <input ng-model="ctrl.diseases" type="checkbox" class="form-control">
+            </md-list-item>
 
 
             <div class="btn-lg btn-reddrop form-group" style="text-align: center"
