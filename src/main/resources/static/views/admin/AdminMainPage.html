@@ -24,6 +24,27 @@
                 </md-list>
             </div>
         </div>
+
+        <div class="panel panel-reddrop">
+            <div class="panel-heading">
+                <span>
+                    Scheduled Visits
+                </span>
+            </div>
+            <div class="panel-body">
+                <md-list>
+                    <md-list-item ng-repeat="visit in ctrl.visits" ng-click="null">
+                        <p>{{ visit.date }} - {{ visit.donatorName }}</p>
+                        <div class="md-secondary" aria-label="Add Doctor" ng-click="null">
+                            <i class="material-icons">add</i>
+                        </div>
+                        <div class="md-secondary" aria-label="Delete Hospital" ng-click="null">
+                            <i class="material-icons">remove</i>
+                        </div>
+                    </md-list-item>
+                </md-list>
+            </div>
+        </div>
     </div>
 
     <div class="col-md-12" style="text-align: center">

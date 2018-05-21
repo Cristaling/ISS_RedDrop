@@ -15,6 +15,7 @@
         }
 
         vm.hospitals = [];
+        vm.visits = [];
 
         vm.openRegisterDoctorDialog = function (hospitalToken) {
             $mdDialog.show({
@@ -139,6 +140,15 @@
             });
         };
 
+        vm.refreshVisitList = function () {
+            $http.get(apiIP + '/api/donationvisit/getall?token=' + vm.adminToken).then(function (response) {
+                vm.visits = response.data;
+            }, function (reason) {
+
+            });
+        };
+
+        vm.refreshVisitList();
         vm.refreshHospitalList();
 
     }]);
