@@ -43,6 +43,6 @@ public class DonationVisitController {
 		if (!permissionsService.hasPermission(token, Permission.ADMIN)) {
 			return null;
 		}
-		return donationVisitService.findAll();
+		return donationVisitService.getVisitsSorted();
 	}
 }

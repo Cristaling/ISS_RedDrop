@@ -54,7 +54,7 @@ public class BloodRequestController {
         if (!permissionsService.hasPermission(token, Permission.ADMIN)) {
             return null;
         }
-        return bloodRequestService.findAll();
+        return bloodRequestService.getVisitsSorted();
     }*/
 
     @RequestMapping("/getfrom")

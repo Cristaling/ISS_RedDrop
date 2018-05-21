@@ -7,6 +7,7 @@ import io.cristaling.iss.reddrop.repositories.DonatorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
@@ -34,7 +35,14 @@ public class DonationVisitService {
         donationVisitRepository.deleteById(donationVisit);
     }
 
-    public List<DonationVisit> findAll(){
-        return donationVisitRepository.findAll();
+    public List<DonationVisit> getVisitsSorted(){
+        List<DonationVisit> result = donationVisitRepository.findAll();
+        result.sort(new Comparator<DonationVisit>() {
+            @Override
+            public int compare(DonationVisit o1, DonationVisit o2) {
+                return (int) (o1.getDate().getTime() - o2.getDate().getTime());
+            }
+        });
+        return result;
     }
 }
