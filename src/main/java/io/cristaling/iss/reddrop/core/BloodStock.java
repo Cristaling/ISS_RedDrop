@@ -8,22 +8,22 @@ import java.util.Map;
 
 public class BloodStock {
 
-	BloodBagType bloodBagType;
-	Map<BloodType, Integer> stock = new HashMap<>();
+	BloodType bloodType;
+	Map<BloodBagType, Integer> stock = new HashMap<>();
 
-	public BloodStock(BloodBagType bloodBagType) {
-		this.bloodBagType = bloodBagType;
+	public BloodStock(BloodType bloodType) {
+		this.bloodType = bloodType;
 	}
 
-	public void setBloodTypeNumber(BloodType bloodType, int value) {
-		stock.put(bloodType, value);
+	public void setBloodTypeNumber(BloodBagType bloodBagType, int value) {
+		stock.put(bloodBagType, value);
 	}
 
-	public BloodBagType getBloodBagType() {
-		return bloodBagType;
+	public BloodType getBloodType() {
+		return bloodType;
 	}
 
-	public Map<BloodType, Integer> getStock() {
+	public Map<BloodBagType, Integer> getStock() {
 		return stock;
 	}
 }

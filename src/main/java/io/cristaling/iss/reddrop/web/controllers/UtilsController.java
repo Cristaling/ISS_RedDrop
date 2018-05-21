@@ -1,6 +1,7 @@
 package io.cristaling.iss.reddrop.web.controllers;
 
 
+import io.cristaling.iss.reddrop.utils.BloodBagType;
 import io.cristaling.iss.reddrop.utils.BloodType;
 import io.cristaling.iss.reddrop.utils.Diseases;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,5 +19,10 @@ public class UtilsController {
     @RequestMapping("/getbloodtypes")
     public List<BloodType> getBloodTypes(){
         return Arrays.asList(BloodType.values());
+    }
+
+    @RequestMapping("/getbagtypes")
+    public List<BloodBagType> getBloodBagTypes(){
+        return Arrays.asList(BloodBagType.values());
     }
 }

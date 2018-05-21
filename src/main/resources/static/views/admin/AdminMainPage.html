@@ -1,8 +1,7 @@
 <div style="padding-top: 5vh;">
 
     <div class="col-md-10 col-md-offset-1">
-        <div class="col-md-7">
-
+        <div class="col-md-5">
 
             <div class="panel panel-reddrop">
                 <div class="panel-heading">
@@ -16,15 +15,15 @@
                 <div class="panel-body">
                     <md-list>
                         <md-list-item ng-click="null">
-                            <div class="col-md-3">Bag Type</div>
-                            <div class="col-md-1" ng-repeat="bloodType in ctrl.bloodTypes" style="text-align: center">{{
-                                bloodType.name }}
+                            <div class="col-md-3">Blood Type</div>
+                            <div class="col-md-3" ng-repeat="bagType in ctrl.bagTypes" style="text-align: center">
+                                {{bagType.name }}
                             </div>
                         </md-list-item>
                         <md-list-item ng-repeat="bloodStock in ctrl.bloodStocks" ng-click="null">
-                            <div class="col-md-3">{{bloodStock.bloodBagType}}</div>
-                            <div class="col-md-1" ng-repeat="bloodType in bloodStock.stock" style="text-align: center">
-                                {{ bloodType }}
+                            <div class="col-md-3">{{bloodStock.bloodType.name}}</div>
+                            <div class="col-md-3" ng-repeat="bloodBagType in bloodStock.stock" style="text-align: center">
+                                {{ bloodBagType }}
                             </div>
                         </md-list-item>
                     </md-list>
@@ -59,7 +58,7 @@
             </div>
         </div>
 
-        <div class="col-md-2">
+        <div class="col-md-3">
 
             <div class="panel panel-reddrop">
                 <div class="panel-heading">
@@ -85,7 +84,7 @@
 
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-4">
 
             <div class="panel panel-reddrop">
                 <div class="panel-heading">
