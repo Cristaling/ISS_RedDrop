@@ -23,6 +23,14 @@
                         $location.path("/doctor/login");
                     }
 
+                    vm.bloodTypes=[];
+
+                    $http.get(apiIP + '/api/utils/getbloodtypes').then(function (response) {
+                        vm.bloodTypes = response.data;
+                        vm.patientBloodType=vm.bloodTypes[0];
+                    }, function (reason) {
+
+                    });
 
                     vm.tryRegisterBloodRequest = function () {
                         $http({
@@ -33,12 +41,11 @@
                                 patientCnp: vm.patientRegisterCnp,
                                 patientFullName: vm.patientRegisterFullName,
                                 doctor : vm.doctorToken,
-                                importance: vm.patientRegisterImportance
+                                importance: vm.patientRegisterImportance,
+                                type : vm.patientBloodType.type
                             }
                         }).then(function () {
-                            $mdDialog.hide();
                         }, function (error) {
-                            $mdDialog.hide();
                         });
                     }
                 },

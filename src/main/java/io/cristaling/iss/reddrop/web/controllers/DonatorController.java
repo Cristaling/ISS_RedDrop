@@ -32,7 +32,9 @@ public class DonatorController {
 	@RequestMapping("/register")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	public void registerDonator(@RequestBody Donator donator){
-		donator.setUuid(UUID.randomUUID());
+		if (donator.getUuid() == null) {
+			donator.setUuid(UUID.randomUUID());
+		}
 		donatorService.registerDonator(donator);
 	}
 

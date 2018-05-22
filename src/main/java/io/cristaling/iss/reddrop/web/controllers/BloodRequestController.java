@@ -54,11 +54,11 @@ public class BloodRequestController {
         if (!permissionsService.hasPermission(token, Permission.ADMIN)) {
             return null;
         }
-        return bloodRequestService.findAll();
+        return bloodRequestService.getVisitsSorted();
     }*/
 
     @RequestMapping("/getfrom")
-    public List<BloodRequest> getSpecificRequests(String token, String uuid) {
+    public List<BloodRequest> getRequestsByDoctor(String token, String uuid) {
         if (!permissionsService.hasPermission(token, Permission.DOCTOR)) {
             return null;
         }

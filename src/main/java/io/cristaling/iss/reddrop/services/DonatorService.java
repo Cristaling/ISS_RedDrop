@@ -19,6 +19,9 @@ public class DonatorService {
         donator.setUuid(UUID.randomUUID());
         donator.setCnp("1971211055084");
         donator.setPassword("1971211055084");
+        donator.setNume("DONATOR");
+        donator.setPrenume("PRIME");
+        donator.setNrTel("0751080998");
         donatorRepository.save(donator);
     }
 

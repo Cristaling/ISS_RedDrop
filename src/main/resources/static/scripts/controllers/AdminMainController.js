@@ -15,6 +15,9 @@
         }
 
         vm.hospitals = [];
+        vm.visits = [];
+        vm.bloodStocks = [];
+        vm.bagTypes = [];
 
         vm.openRegisterDoctorDialog = function (hospitalToken) {
             $mdDialog.show({
@@ -73,11 +76,7 @@
                                 city: vm.hospitalCity,
                                 county: vm.hospitalCounty
                             }
-                        }).then(function () {
-                            $mdDialog.hide();
-                        }, function (error) {
-                            $mdDialog.hide();
-                        });
+                        }).then($mdDialog.hide(),$mdDialog.hide());
                     }
                 },
                 controllerAs: 'ctrl',
@@ -85,6 +84,36 @@
                 parent: angular.element(document.body),
                 clickOutsideToClose: true
             }).then(vm.refreshHospitalList, vm.refreshHospitalList);
+        };
+
+        vm.openFillAnalysisDialog = function (donationVisitToken) {
+            $mdDialog.show({
+                controller: function ($mdDialog, $http, apiIP) {
+                    var vm = this;
+
+                    vm.adminToken = $cookies.get("adminToken");
+
+                    vm.analysis = {};
+                    vm.analysis.uuid="";
+                    vm.analysis.donationVisit=donationVisitToken;
+
+                    if (!vm.adminToken) {
+                        $location.path("/admin/login");
+                    }
+
+                    vm.tryRegisterAnalysis = function () {
+                        $http({
+                            method: 'POST',
+                            url: apiIP + '/api/analysisresult/add?token=' + vm.adminToken,
+                            data: vm.analysis
+                        }).then($mdDialog.hide(),$mdDialog.hide());
+                    };
+                },
+                controllerAs: 'ctrl',
+                templateUrl: '/views/directives/FillAnalysisResultDirective.html',
+                parent: angular.element(document.body),
+                clickOutsideToClose: true
+            }).then();
         };
 
         vm.deleteHospital = function (hospitalId) {
@@ -99,10 +128,33 @@
             $http.get(apiIP + '/api/hospital/getall?token=' + vm.adminToken).then(function (response) {
                 vm.hospitals = response.data;
             }, function (reason) {
-
             });
         };
 
+        vm.refreshVisitList = function () {
+            $http.get(apiIP + '/api/donationvisit/getall?token=' + vm.adminToken).then(function (response) {
+                vm.visits = response.data;
+            }, function (reason) {
+            });
+        };
+
+        vm.refreshBloodBagStocks = function () {
+            $http.get(apiIP + '/api/bloodbag/stock?token=' + vm.adminToken).then(function (response) {
+                vm.bloodStocks = response.data;
+            }, function (reason) {
+            });
+        };
+
+        vm.getBagTypes = function () {
+            $http.get(apiIP + '/api/utils/getbagtypes?token=' + vm.adminToken).then(function (response) {
+                vm.bagTypes = response.data;
+            }, function (reason) {
+            });
+        };
+
+        vm.getBagTypes();
+        vm.refreshBloodBagStocks();
+        vm.refreshVisitList();
         vm.refreshHospitalList();
 
     }]);

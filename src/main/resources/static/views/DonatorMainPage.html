@@ -1,7 +1,25 @@
 <br>
 <div logout-btn></div>
 <div class="col-md-12">
+
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-reddrop">
+            <div class="panel-heading">
+                Past Visits With Analysis Results, Click one To get to see Analysis
+            </div>
+            <div class="panel-body">
+                <md-list>
+                    <md-list-item ng-repeat="visit in ctrl.visits" ng-click="ctrl.goToAnalysisPage(visit.uuid)">
+                        <p>{{ visit.date }}</p>
+                    </md-list-item>
+                </md-list>
+            </div>
+        </div>
+    </div>
     <div class="col-md-4 col-md-offset-4 button-wrapper" style="padding-top: 25vh;">
+
+
+
 
         <div class="panel panel-reddrop">
             <div class="panel-heading">
@@ -10,15 +28,11 @@
             <div class="panel-body">
                 <form>
                     <div class="form-group">
+
                         <md-input-container>
                             <label>Enter date</label>
                             <md-datepicker ng-model="ctrl.visitDate"></md-datepicker>
                         </md-input-container>
-                        <!--<label for="date">Date</label>-->
-                        <!--<input ng-model="ctrl.visitDate" type="date" class="form-control" id="date"-->
-                               <!--aria-describedby="cnpHelp" placeholder="Enter CNP">-->
-                        <!--<small id="cnpHelp" class="form-text text-muted">Set your desired date for the visit-->
-                        <!--</small>-->
                     </div>
                     <div class="btn-lg btn-reddrop form-group" style="text-align: center; float: right"
                          ng-click="ctrl.setVisit()">

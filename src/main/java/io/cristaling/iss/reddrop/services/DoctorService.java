@@ -41,7 +41,9 @@ public class DoctorService {
 
     public void registerDoctor(Doctor doctor) {
         //TODO Validate Doctor
-        doctor.setUuid(UUID.randomUUID());
+        if (doctor.getUuid() == null) {
+            doctor.setUuid(UUID.randomUUID());
+        }
         doctorRepository.save(doctor);
     }
 
