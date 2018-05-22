@@ -67,4 +67,11 @@ public class DoctorService {
         }
         return null;
     }
+
+    public void updateDoctor(Doctor doctor){
+        Doctor doctor1=doctorRepository.getOne(doctor.getUuid());
+        doctorRepository.deleteById(doctor.getUuid());
+        doctorRepository.save(doctor1);
+    }
+
 }
