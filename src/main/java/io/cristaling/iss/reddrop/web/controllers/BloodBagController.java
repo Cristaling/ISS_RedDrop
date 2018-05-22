@@ -40,6 +40,7 @@ public class BloodBagController {
         if (!permissionsService.hasPermission(token, Permission.ADMIN)) {
             return;
         }
+        bloodBagService.addBloodBag(bloodBag);
     }
 
     @RequestMapping("/stock")
@@ -48,6 +49,28 @@ public class BloodBagController {
             return null;
         }
         return bloodBagService.getBloodStocks();
+    }
+
+    @RequestMapping("/delete")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void deleteBloodBag(String token, String uuid){
+        if (!permissionsService.hasPermission(token, Permission.ADMIN)) {
+            return;
+        }
+        UUID actualUuid = UUIDUtils.getUUIDFromString(uuid);
+        if (actualUuid == null) {
+            return;
+        }
+        bloodBagService.deleteBloodBagById(actualUuid);
+    }
+
+    @RequestMapping("/update")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void updateBloodBag(String token, @RequestBody BloodBag bloodBag){
+        if (!permissionsService.hasPermission(token, Permission.ADMIN)) {
+            return;
+        }
+        bloodBagService.updateBloodBag(bloodBag);
     }
 
 }
