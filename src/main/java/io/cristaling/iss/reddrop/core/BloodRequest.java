@@ -1,7 +1,6 @@
 package io.cristaling.iss.reddrop.core;
 
 import io.cristaling.iss.reddrop.utils.BloodRequestStatus;
-import io.cristaling.iss.reddrop.utils.BloodType;
 import io.cristaling.iss.reddrop.utils.Importance;
 
 import javax.persistence.*;

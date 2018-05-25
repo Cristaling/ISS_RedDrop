@@ -146,7 +146,7 @@
         };
 
         vm.getBagTypes = function () {
-            $http.get(apiIP + '/api/utils/getbagtypes?token=' + vm.adminToken).then(function (response) {
+            $http.get(apiIP + '/api/bloodtype/getall?token=' + vm.adminToken).then(function (response) {
                 vm.bagTypes = response.data;
             }, function (reason) {
             });

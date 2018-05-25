@@ -1,7 +1,6 @@
 package io.cristaling.iss.reddrop.core;
 
 import io.cristaling.iss.reddrop.utils.BloodBagType;
-import io.cristaling.iss.reddrop.utils.BloodType;
 
 import javax.persistence.*;
 import java.util.Date;

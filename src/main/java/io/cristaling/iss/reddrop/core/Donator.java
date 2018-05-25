@@ -1,9 +1,6 @@
 package io.cristaling.iss.reddrop.core;
 
-import io.cristaling.iss.reddrop.utils.BloodType;
-
 import javax.persistence.*;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -32,7 +29,7 @@ public class Donator {
     private String address;
 
     @Column
-    private BloodType bloodType;
+    private UUID bloodType;
 
     public UUID getUuid() {
         return uuid;
@@ -63,11 +60,11 @@ public class Donator {
         this.cnp = cnp;
     }
 
-    public BloodType getBloodType() {
+    public UUID getBloodType() {
         return bloodType;
     }
 
-    public void setBloodType(BloodType bloodType) {
+    public void setBloodType(UUID bloodType) {
         this.bloodType = bloodType;
     }
 

@@ -3,9 +3,11 @@ package io.cristaling.iss.reddrop.core;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.UUID;
 
 @Entity
+@Table(name = "blood_type")
 public class BloodType {
 
     @Id
