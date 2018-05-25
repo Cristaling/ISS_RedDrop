@@ -23,7 +23,7 @@
                         <md-list-item ng-repeat="bloodStock in ctrl.bloodStocks" ng-click="null">
                             <div class="col-md-3">{{bloodStock.bloodType.type}}</div>
                             <div class="col-md-3" ng-repeat="bloodBagType in bloodStock.stock" style="text-align: center">
-                                {{ bloodBagType.name }}
+                                {{ bloodBagType }}
                             </div>
                         </md-list-item>
                     </md-list>
