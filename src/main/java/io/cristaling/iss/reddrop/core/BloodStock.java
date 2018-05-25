@@ -1,9 +1,8 @@
 package io.cristaling.iss.reddrop.core;
 
-import io.cristaling.iss.reddrop.utils.BloodBagType;
-
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class BloodStock {
 
@@ -18,11 +17,15 @@ public class BloodStock {
 		stock.put(bloodBagType, value);
 	}
 
+	public Map<BloodBagType, Integer> getStock() {
+		return stock;
+	}
+
 	public BloodType getBloodType() {
 		return bloodType;
 	}
 
-	public Map<BloodBagType, Integer> getStock() {
-		return stock;
+	public void setBloodType(BloodType bloodType) {
+		this.bloodType = bloodType;
 	}
 }

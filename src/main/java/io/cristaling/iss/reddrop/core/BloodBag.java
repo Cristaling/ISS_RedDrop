@@ -1,7 +1,5 @@
 package io.cristaling.iss.reddrop.core;
 
-import io.cristaling.iss.reddrop.utils.BloodBagType;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.UUID;
@@ -19,7 +17,7 @@ public class BloodBag {
     @Column
     Date expireDate;
     @Column
-    BloodBagType bloodBagType;
+    UUID bloodBagType;
     @Column
     UUID bloodType;
 
@@ -55,11 +53,11 @@ public class BloodBag {
         this.expireDate = expireDate;
     }
 
-    public BloodBagType getBloodBagType() {
+    public UUID getBloodBagType() {
         return bloodBagType;
     }
 
-    public void setBloodBagType(BloodBagType bloodBagType) {
+    public void setBloodBagType(UUID bloodBagType) {
         this.bloodBagType = bloodBagType;
     }
 
