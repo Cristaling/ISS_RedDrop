@@ -11,7 +11,7 @@
         }
 
         vm.goToHospitalPage = function (hospitalToken) {
-            $location.path("/hospital/" + hospitalToken);
+            $location.path("/crud/doctor/" + hospitalToken);
         }
 
         vm.hospitals = [];
@@ -30,7 +30,7 @@
                         $location.path("/admin/login");
                     }
 
-                    vm.tryRegisterDoctor = function () {
+                    vm.addDoctor = function () {
                         $http({
                             method: 'POST',
                             url: apiIP + '/api/doctor/add?token=' + vm.adminToken,
@@ -49,7 +49,7 @@
                     };
                 },
                 controllerAs: 'ctrl',
-                templateUrl: '/views/directives/DoctorRegistrationDirective.html',
+                templateUrl: '/views/dialogs/DoctorAddDialog.html',
                 parent: angular.element(document.body),
                 clickOutsideToClose: true
             }).then(vm.refreshHospitalList, vm.refreshHospitalList);

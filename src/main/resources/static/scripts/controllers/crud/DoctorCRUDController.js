@@ -1,7 +1,7 @@
 (function () {
     'use strict'
     var app = angular.module('RedDrop');
-    app.controller('HospitalController', ['$location',
+    app.controller('DoctorCRUDController', ['$location',
         '$cookies',
         '$http',
         '$mdDialog',
@@ -22,36 +22,9 @@
 
             vm.addDoctor = function () {
                 $mdDialog.show({
-                    controller: function ($mdDialog, $http, $routeParams, apiIP) {
-                        var vm = this;
-
-                        vm.adminToken = $cookies.get("adminToken");
-                        vm.hospitalID = $routeParams["hospitalToken"];
-
-                        if (!vm.adminToken) {
-                            $location.path("/admin/login");
-                        }
-
-                        vm.tryRegisterDoctor = function () {
-                            $http({
-                                method: 'POST',
-                                url: apiIP + '/api/doctor/add?token=' + vm.adminToken,
-                                data: {
-                                    uuid: "",
-                                    password: vm.doctorPassword,
-                                    fullName: vm.nameRegister,
-                                    hospital: vm.hospitalID,
-                                    cnp: vm.doctorCNP
-                                }
-                            }).then(function (response) {
-                                $mdDialog.hide();
-                            }, function (error) {
-                                $mdDialog.hide();
-                            });
-                        };
-                    },
+                    controller: 'DoctorAddController',
                     controllerAs: 'ctrl',
-                    templateUrl: '/views/directives/DoctorRegistrationDirective.html',
+                    templateUrl: '/views/dialogs/DoctorAddDialog.html',
                     parent: angular.element(document.body),
                     clickOutsideToClose: true
                 }).then(vm.refreshDoctorList, vm.refreshDoctorList);
