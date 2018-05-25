@@ -25,7 +25,7 @@
 
                     vm.bloodTypes=[];
 
-                    $http.get(apiIP + '/api/utils/getbloodtypes').then(function (response) {
+                    $http.get(apiIP + '/api/bloodtype/getall?token='+vm.doctorToken).then(function (response) {
                         vm.bloodTypes = response.data;
                         vm.patientBloodType=vm.bloodTypes[0];
                     }, function (reason) {
@@ -42,7 +42,7 @@
                                 patientFullName: vm.patientRegisterFullName,
                                 doctor : vm.doctorToken,
                                 importance: vm.patientRegisterImportance,
-                                type : vm.patientBloodType.type
+                                type : vm.patientBloodType.uuid
                             }
                         }).then(function () {
                         }, function (error) {
