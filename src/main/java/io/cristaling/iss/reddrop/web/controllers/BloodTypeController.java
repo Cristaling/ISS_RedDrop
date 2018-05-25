@@ -24,6 +24,7 @@ public class BloodTypeController {
     @RequestMapping("/add")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void addBloodType(@RequestBody BloodType bloodType){
+        bloodType.setUuid(UUID.randomUUID());
         bloodTypeService.addBloodType(bloodType);
     }
 

@@ -22,7 +22,7 @@ public class BloodBag {
     @Column
     BloodBagType bloodBagType;
     @Column
-    BloodType bloodType;
+    UUID bloodType;
 
     public UUID getUuid() {
         return uuid;
@@ -64,11 +64,11 @@ public class BloodBag {
         this.bloodBagType = bloodBagType;
     }
 
-    public BloodType getBloodType() {
+    public UUID getBloodType() {
         return bloodType;
     }
 
-    public void setBloodType(BloodType bloodType) {
+    public void setBloodType(UUID bloodType) {
         this.bloodType = bloodType;
     }
 }
