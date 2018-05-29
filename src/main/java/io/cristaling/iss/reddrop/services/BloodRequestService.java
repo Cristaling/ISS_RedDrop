@@ -44,4 +44,8 @@ public class BloodRequestService {
         return requestRepository.getBloodRequestsByDoctor(doctorID);
     }
 
+    public List<BloodRequest> getAllBloodRequest() {
+        return requestRepository.findAll();
+    }
+
 }
