@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,18 +30,17 @@ public class BloodRequestService {
     }
 
     public void registerBloodRequest(BloodRequest bloodRequest) {
-        //TODO Validate Requst
+        //TODO Validate Request
         if (bloodRequest.getUuid() == null) {
             bloodRequest.setUuid(UUID.randomUUID());
+        }
+        if (bloodRequest.getDate() == null) {
+            bloodRequest.setDate(new Date());
         }
         requestRepository.save(bloodRequest);
     }
 
     public List<BloodRequest> getBloodRequestByDoctor(UUID doctorID) {
-        Doctor doctor = doctorRepository.getDoctorByUuid(doctorID);
-        if (doctor == null) {
-            return new ArrayList<>();
-        }
         return requestRepository.getBloodRequestsByDoctor(doctorID);
     }
 
