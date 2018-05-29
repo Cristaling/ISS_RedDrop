@@ -1,7 +1,9 @@
 package io.cristaling.iss.reddrop.services;
 
 import io.cristaling.iss.reddrop.core.BloodRequest;
+import io.cristaling.iss.reddrop.core.BloodStock;
 import io.cristaling.iss.reddrop.core.Doctor;
+import io.cristaling.iss.reddrop.repositories.BloodBagRepository;
 import io.cristaling.iss.reddrop.repositories.BloodRequestRepository;
 import io.cristaling.iss.reddrop.repositories.DoctorRepository;
 import io.cristaling.iss.reddrop.utils.BloodRequestStatus;
@@ -20,11 +22,12 @@ import java.util.UUID;
 public class BloodRequestService {
 
     BloodRequestRepository requestRepository;
-    DoctorRepository doctorRepository;
+    BloodBagService bloodBagService;
+
     @Autowired
-    public BloodRequestService(BloodRequestRepository repository,DoctorRepository doctorRepository) {
-        this.requestRepository = repository;
-        this.doctorRepository=doctorRepository;
+    public BloodRequestService(BloodRequestRepository requestRepository, BloodBagService bloodBagService) {
+        this.requestRepository = requestRepository;
+        this.bloodBagService = bloodBagService;
     }
 
     public void deleteBloodRequest(UUID uuid) {
@@ -61,6 +64,9 @@ public class BloodRequestService {
                 return o2.getImportance().compareTo(o1.getImportance());
             }
         });
+
+        List<BloodStock> stock = bloodBagService.getBloodStocks();
+
         return result;
     }
 

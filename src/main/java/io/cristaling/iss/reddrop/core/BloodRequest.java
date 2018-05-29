@@ -26,6 +26,8 @@ public class BloodRequest {
     @Column
     UUID bloodType;
     @Column
+    UUID bloodBagType;
+    @Column
     Date date;
 
     public UUID getUuid() {
@@ -82,6 +84,14 @@ public class BloodRequest {
 
     public void setBloodType(UUID bloodType) {
         this.bloodType = bloodType;
+    }
+
+    public UUID getBloodBagType() {
+        return bloodBagType;
+    }
+
+    public void setBloodBagType(UUID bloodBagType) {
+        this.bloodBagType = bloodBagType;
     }
 
     public Date getDate() {
