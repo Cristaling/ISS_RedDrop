@@ -94,15 +94,15 @@
                 </div>
                 <div class="panel-body">
                     <md-list>
-                        <md-list-item ng-repeat="visit in ctrl.visits" ng-click="null">
-                            <p>{{ visit.date | date:"dd/MM/yyyy" }} - {{ visit.donatorName }}</p>
-                            <div class="md-secondary" aria-label="Fill Analysis"
+                        <md-list-item ng-repeat="request in ctrl.requests | orderBy:'importance'" ng-click="null">
+                            <p>{{ request.date | date:"dd/MM/yyyy" }} - {{ request.patientFullName }}</p>
+                            <!--<div class="md-secondary" aria-label="Fill Analysis"
                                  ng-click="ctrl.openFillAnalysisDialog(visit.uuid)">
                                 <i class="material-icons">assignment</i>
                             </div>
                             <div class="md-secondary" aria-label="Delete Hospital" ng-click="null">
                                 <i class="material-icons">delete</i>
-                            </div>
+                            </div>-->
                         </md-list-item>
                     </md-list>
                 </div>

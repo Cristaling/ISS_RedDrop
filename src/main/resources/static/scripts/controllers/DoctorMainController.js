@@ -50,7 +50,7 @@
             }, function (reason) {});
         };
 
-        vm.refreshRequestList(vm.doctorToken);
+        vm.refreshRequestList();
 
     }]);
 })();

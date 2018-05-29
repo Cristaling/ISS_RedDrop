@@ -16,6 +16,7 @@
 
         vm.hospitals = [];
         vm.visits = [];
+        vm.requests = [];
         vm.bloodStocks = [];
         vm.bagTypes = [];
 
@@ -111,7 +112,7 @@
                     });
 
                     vm.tryRegisterAnalysis = function () {
-                        vm.analysis.bloodtype=vm.patientBloodType.uuid;
+                        vm.analysis.bloodtype = vm.patientBloodType.uuid;
                         $http({
                             method: 'POST',
                             url: apiIP + '/api/analysisresult/add?token=' + vm.adminToken,
@@ -162,9 +163,17 @@
             });
         };
 
+        vm.refreshRequestList = function () {
+            $http.get(apiIP + '/api/bloodrequest/getall?token=' + vm.adminToken).then(function (response) {
+                vm.requests = response.data;
+            }, function (reason) {
+            });
+        };
+
         vm.getBagTypes();
         vm.refreshBloodBagStocks();
         vm.refreshVisitList();
+        vm.refreshRequestList();
         vm.refreshHospitalList();
 
     }]);
