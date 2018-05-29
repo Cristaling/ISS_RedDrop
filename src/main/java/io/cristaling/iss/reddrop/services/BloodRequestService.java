@@ -4,6 +4,7 @@ import io.cristaling.iss.reddrop.core.BloodRequest;
 import io.cristaling.iss.reddrop.core.Doctor;
 import io.cristaling.iss.reddrop.repositories.BloodRequestRepository;
 import io.cristaling.iss.reddrop.repositories.DoctorRepository;
+import io.cristaling.iss.reddrop.utils.BloodRequestStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,6 +39,9 @@ public class BloodRequestService {
         if (bloodRequest.getDate() == null) {
             bloodRequest.setDate(new Date());
         }
+        if (bloodRequest.getStatus() == null) {
+            bloodRequest.setStatus(BloodRequestStatus.UNRESOLVED);
+        }
         requestRepository.save(bloodRequest);
     }
 
@@ -45,6 +49,7 @@ public class BloodRequestService {
         return requestRepository.getBloodRequestsByDoctor(doctorID);
     }
 
+    //TODO Check stocks and mark status
     public List<BloodRequest> getAllBloodRequest() {
         List<BloodRequest> result = requestRepository.findAll();
         result.sort(new Comparator<BloodRequest>() {
