@@ -25,20 +25,37 @@ public class AnalysisResultService {
         this.donationVisitRepository = donationVisitRepository;
     }
 
-    public void addAnalysis(AnalysisResult analysisResult){
+    public boolean addAnalysis(AnalysisResult analysisResult) {
+        boolean goodValues = true;
         if (analysisResult.getUuid() == null) {
             analysisResult.setUuid(UUID.randomUUID());
         }
+        if (analysisResult.getSodium() < 135 || analysisResult.getSodium() > 145) {
+            goodValues = false;
+        }
+        if (analysisResult.getCreatinine() < 53 || analysisResult.getCreatinine() > 114.9) {
+            goodValues = false;
+        }
+        if (analysisResult.getGlucose() < 3.9 || analysisResult.getGlucose() > 5.6) {
+            goodValues = false;
+        }
+        if (analysisResult.getPotassium() < 3.70 || analysisResult.getPotassium() > 5.20) {
+            goodValues = false;
+        }
+        if (analysisResult.getUrea() < 2.14 || analysisResult.getUrea() > 7.14) {
+            goodValues = false;
+        }
         analysisResultRepository.save(analysisResult);
+        return goodValues;
     }
 
-	public List<AnalysisResult> getAllForDonator(UUID donatorUUID) {
+    public List<AnalysisResult> getAllForDonator(UUID donatorUUID) {
         List<DonationVisit> visits = donationVisitRepository.getDonationVisitsByDonator(donatorUUID);
-        List<UUID> visitsUuids=new ArrayList<>();
-        for(DonationVisit donationVisit : visits){
+        List<UUID> visitsUuids = new ArrayList<>();
+        for (DonationVisit donationVisit : visits) {
             visitsUuids.add(donationVisit.getUuid());
         }
         return analysisResultRepository.getAnalysisResultsByDonationVisitIn(visitsUuids);
 
-	}
+    }
 }
