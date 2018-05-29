@@ -96,6 +96,7 @@
                     <md-list>
                         <md-list-item ng-repeat="request in ctrl.requests" ng-click="null">
                             <p>{{ request.date | date:"dd/MM/yyyy" }} - {{ request.patientFullName }}</p>
+                            <span class="badge badge-light">{{ request.status }}</span>
                             <!--<div class="md-secondary" aria-label="Fill Analysis"
                                  ng-click="ctrl.openFillAnalysisDialog(visit.uuid)">
                                 <i class="material-icons">assignment</i>

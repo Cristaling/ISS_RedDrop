@@ -20,6 +20,7 @@
                             ({{ ctrl.getBloodTypeByUUID(request.bloodType) }})
                              - {{ request.date | date:"dd/MM/yyyy" }} -
                             {{ request.patientFullName }}</p>
+                        <span class="badge badge-light">{{ request.status }}</span>
                         <div class="md-secondary" aria-label="Delete Request" ng-click="ctrl.deleteRequest(request.uuid)">
                             <i class="material-icons">delete</i>
                         </div>
