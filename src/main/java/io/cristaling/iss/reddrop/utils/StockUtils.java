@@ -10,7 +10,7 @@ public class StockUtils {
 
 	public static int getInStock(HashMap<BloodType, BloodStock> stock, BloodType bloodType, BloodBagType bloodBagType) {
 		BloodStock toCheck = stock.get(bloodType);
-		return toCheck.getStock().get(bloodBagType);
+		return toCheck.getStock().get(bloodBagType.getUuid());
 	}
 
 	public static boolean hasInStock(HashMap<BloodType, BloodStock> stock, BloodType bloodType, BloodBagType bloodBagType) {
@@ -19,7 +19,7 @@ public class StockUtils {
 
 	public static void removeFromStock(HashMap<BloodType, BloodStock> stock, BloodType bloodType, BloodBagType bloodBagType, int value) {
 		BloodStock toCheck = stock.get(bloodType);
-		int number = toCheck.getStock().get(bloodBagType);
+		int number = toCheck.getStock().get(bloodBagType.getUuid());
 		toCheck.setBloodTypeNumber(bloodBagType, number - value);
 	}
 

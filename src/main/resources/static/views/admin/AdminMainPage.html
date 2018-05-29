@@ -16,7 +16,7 @@
                     <md-list>
                         <md-list-item ng-click="null">
                             <div class="col-md-3">Blood Type</div>
-                            <div class="col-md-3" ng-repeat="bagType in ctrl.bagTypes" style="text-align: center">
+                            <div class="col-md-3" ng-repeat="bagType in ctrl.bloodBagTypes" style="text-align: center">
                                 {{bagType.name }}
                             </div>
                         </md-list-item>
@@ -96,6 +96,8 @@
                     <md-list>
                         <md-list-item ng-repeat="request in ctrl.requests" ng-click="null">
                             <p>{{ request.date | date:"dd/MM/yyyy" }} - {{ request.patientFullName }}</p>
+                            <span class="badge badge-light">{{ ctrl.getBloodTypeByUUID(request.bloodType) }}</span>
+                            <span class="badge badge-light">{{ ctrl.getBloodBagTypeByUUID(request.bloodBagType) }}</span>
                             <span class="badge badge-light">{{ request.status }}</span>
                             <!--<div class="md-secondary" aria-label="Fill Analysis"
                                  ng-click="ctrl.openFillAnalysisDialog(visit.uuid)">

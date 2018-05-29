@@ -18,8 +18,36 @@
         vm.visits = [];
         vm.requests = [];
         vm.bloodStocks = [];
-        vm.bagTypes = [];
+        vm.bloodBagTypes = [];
+        vm.bloodTypes = [];
 
+        $http.get(apiIP + '/api/bloodbagtype/getall?token=' + vm.adminToken).then(function (response) {
+            vm.bloodBagTypes = response.data;
+        }, function (reason) {
+        });
+
+        $http.get(apiIP + '/api/bloodtype/getall?token=' + vm.adminToken).then(function (response) {
+            vm.bloodTypes = response.data;
+        }, function (reason) {
+        });
+
+        vm.getBloodTypeByUUID = function (uuid) {
+            for (var i in vm.bloodTypes) {
+                if (vm.bloodTypes[i].uuid === uuid) {
+                    return vm.bloodTypes[i].type;
+                }
+            }
+            return "";
+        };
+
+        vm.getBloodBagTypeByUUID = function (uuid) {
+            for (var i in vm.bloodBagTypes) {
+                if (vm.bloodBagTypes[i].uuid === uuid) {
+                    return vm.bloodBagTypes[i].name;
+                }
+            }
+            return "";
+        };
 
         vm.openRegisterDoctorDialog = function (hospitalToken) {
             $mdDialog.show({
@@ -166,13 +194,6 @@
             });
         };
 
-        vm.getBagTypes = function () {
-            $http.get(apiIP + '/api/bloodbagtype/getall?token=' + vm.adminToken).then(function (response) {
-                vm.bagTypes = response.data;
-            }, function (reason) {
-            });
-        };
-
         vm.refreshRequestList = function () {
             $http.get(apiIP + '/api/bloodrequest/getall?token=' + vm.adminToken).then(function (response) {
                 vm.requests = response.data;
@@ -180,7 +201,6 @@
             });
         };
 
-        vm.getBagTypes();
         vm.refreshBloodBagStocks();
         vm.refreshVisitList();
         vm.refreshRequestList();
