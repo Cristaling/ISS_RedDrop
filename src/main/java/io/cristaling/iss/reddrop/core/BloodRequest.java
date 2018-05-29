@@ -24,7 +24,7 @@ public class BloodRequest {
     @Column
     BloodRequestStatus status;
     @Column
-    UUID type;
+    UUID bloodType;
     @Column
     Date date;
 
@@ -76,12 +76,12 @@ public class BloodRequest {
         this.status = status;
     }
 
-    public UUID getType() {
-        return type;
+    public UUID getBloodType() {
+        return bloodType;
     }
 
-    public void setType(UUID type) {
-        this.type = type;
+    public void setBloodType(UUID bloodType) {
+        this.bloodType = bloodType;
     }
 
     public Date getDate() {
