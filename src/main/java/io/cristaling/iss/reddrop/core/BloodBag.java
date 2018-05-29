@@ -13,8 +13,6 @@ public class BloodBag {
     @Column
     UUID donationVisit;
     @Column
-    boolean tested;
-    @Column
     Date expireDate;
     @Column
     UUID bloodBagType;
@@ -35,14 +33,6 @@ public class BloodBag {
 
     public void setDonationVisit(UUID donationVisit) {
         this.donationVisit = donationVisit;
-    }
-
-    public boolean isTested() {
-        return tested;
-    }
-
-    public void setTested(boolean tested) {
-        this.tested = tested;
     }
 
     public Date getExpireDate() {
