@@ -18,7 +18,7 @@ public class BloodBagTypeService {
     @Autowired
     public BloodBagTypeService(BloodBagTypeRepository bloodBagTypeRepository) {
         this.bloodBagTypeRepository = bloodBagTypeRepository;
-        List<String> temp = new ArrayList<String>(Arrays.asList("THROMBOCYTE", "PLASMA","HEMOGLOBINE"));
+        List<String> temp = new ArrayList<String>(Arrays.asList("Whole","Thrombocyte", "Plasma","Hemoglobine"));
         for(String s :temp){
             BloodBagType bloodType=new BloodBagType();
             bloodType.setUuid(UUID.randomUUID());

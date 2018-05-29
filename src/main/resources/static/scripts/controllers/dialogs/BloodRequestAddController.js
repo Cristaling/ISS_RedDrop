@@ -19,6 +19,7 @@
 
             vm.bloodTypes = [];
             vm.importances = [];
+            vm.bagTypes = [];
 
             $http.get(apiIP + '/api/bloodtype/getall?token=' + vm.doctorToken).then(function (response) {
                 vm.bloodTypes = response.data;
@@ -26,9 +27,15 @@
             }, function (reason) {
             });
 
+            $http.get(apiIP + '/api/bloodbagtype/getall?token=' + vm.doctorToken).then(function (response) {
+                vm.bagTypes = response.data;
+                vm.bagType = vm.bagTypes[0];
+            }, function (reason) {
+            });
+
             $http.get(apiIP + '/api/utils/getimportances').then(function (response) {
                 vm.importances = response.data;
-                vm.patientRegisterImportance=vm.importances[0];
+                vm.patientRegisterImportance = vm.importances[0];
             }, function (reason) {
             });
 
@@ -43,7 +50,8 @@
                         patientFullName: vm.patientRegisterFullName,
                         doctor: vm.doctorToken,
                         importance: vm.patientRegisterImportance,
-                        bloodType: vm.patientBloodType.uuid
+                        bloodType: vm.patientBloodType.uuid,
+                        bloodBagType: vm.bagType.uuid
                     }
                 }).then(function () {
                     $mdDialog.hide();
