@@ -1,11 +1,9 @@
 package io.cristaling.iss.reddrop.web.controllers;
 
 import io.cristaling.iss.reddrop.core.Doctor;
-import io.cristaling.iss.reddrop.repositories.DoctorRepository;
-import io.cristaling.iss.reddrop.repositories.HospitalRepository;
 import io.cristaling.iss.reddrop.services.DoctorService;
 import io.cristaling.iss.reddrop.services.PermissionsService;
-import io.cristaling.iss.reddrop.utils.Permission;
+import io.cristaling.iss.reddrop.utils.enums.Permission;
 import io.cristaling.iss.reddrop.web.requests.LoginRequest;
 import io.cristaling.iss.reddrop.web.responses.LoginResponse;
 import io.cristaling.iss.reddrop.web.utils.LoginUtils;

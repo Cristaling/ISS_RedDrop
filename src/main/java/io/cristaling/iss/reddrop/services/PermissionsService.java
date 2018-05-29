@@ -6,7 +6,7 @@ import io.cristaling.iss.reddrop.core.Donator;
 import io.cristaling.iss.reddrop.repositories.AdminRepository;
 import io.cristaling.iss.reddrop.repositories.DoctorRepository;
 import io.cristaling.iss.reddrop.repositories.DonatorRepository;
-import io.cristaling.iss.reddrop.utils.Permission;
+import io.cristaling.iss.reddrop.utils.enums.Permission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

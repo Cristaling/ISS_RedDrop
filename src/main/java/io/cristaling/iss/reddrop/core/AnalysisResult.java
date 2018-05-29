@@ -1,7 +1,5 @@
 package io.cristaling.iss.reddrop.core;
 
-import io.cristaling.iss.reddrop.utils.Diseases;
-
 import javax.persistence.*;
 import java.util.UUID;
 

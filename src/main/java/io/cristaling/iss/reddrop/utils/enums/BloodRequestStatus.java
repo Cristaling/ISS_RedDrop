@@ -1,4 +1,4 @@
-package io.cristaling.iss.reddrop.utils;
+package io.cristaling.iss.reddrop.utils.enums;
 
 public enum BloodRequestStatus {
 

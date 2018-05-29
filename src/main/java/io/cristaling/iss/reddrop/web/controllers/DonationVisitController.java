@@ -4,7 +4,7 @@ package io.cristaling.iss.reddrop.web.controllers;
 import io.cristaling.iss.reddrop.core.DonationVisit;
 import io.cristaling.iss.reddrop.services.DonationVisitService;
 import io.cristaling.iss.reddrop.services.PermissionsService;
-import io.cristaling.iss.reddrop.utils.Permission;
+import io.cristaling.iss.reddrop.utils.enums.Permission;
 import io.cristaling.iss.reddrop.web.utils.UUIDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
