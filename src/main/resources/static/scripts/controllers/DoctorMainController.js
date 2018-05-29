@@ -14,43 +14,9 @@
 
         vm.openAddRequestDialog = function () {
             $mdDialog.show({
-                controller : function($mdDialog,$http,$cookies,$location,apiIP){
-                    var vm = this;
-
-                    vm.doctorToken = $cookies.get("doctorToken");
-
-                    if (!vm.doctorToken) {
-                        $location.path("/doctor/login");
-                    }
-
-                    vm.bloodTypes=[];
-
-                    $http.get(apiIP + '/api/bloodtype/getall?token='+vm.doctorToken).then(function (response) {
-                        vm.bloodTypes = response.data;
-                        vm.patientBloodType=vm.bloodTypes[0];
-                    }, function (reason) {
-
-                    });
-
-                    vm.tryRegisterBloodRequest = function () {
-                        $http({
-                            method: 'POST',
-                            url: apiIP + '/api/bloodrequest/add?token=' + vm.doctorToken,
-                            data: {
-                                uuid: "",
-                                patientCnp: vm.patientRegisterCnp,
-                                patientFullName: vm.patientRegisterFullName,
-                                doctor : vm.doctorToken,
-                                importance: vm.patientRegisterImportance,
-                                type : vm.patientBloodType.uuid
-                            }
-                        }).then(function () {
-                        }, function (error) {
-                        });
-                    }
-                },
+                controller : 'BloodRequestAddController',
                 controllerAs: 'ctrl',
-                templateUrl: '/views/directives/BloodRequestDirective.html',
+                templateUrl: '/views/dialogs/BloodRequestAddDialog.html',
                 parent: angular.element(document.body),
                 clickOutsideToClose:true
             }).then(vm.refreshRequestList,vm.refreshRequestList);
