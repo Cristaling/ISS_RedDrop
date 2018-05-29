@@ -54,7 +54,7 @@ public class BloodRequestController {
         if (!permissionsService.hasPermission(token, Permission.ADMIN)) {
             return null;
         }
-        return bloodRequestService.getAllBloodRequest();
+        return bloodRequestService.getAllUncompletedBloodRequest();
     }
 
     @RequestMapping("/getfrom")

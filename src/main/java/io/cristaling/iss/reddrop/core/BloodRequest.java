@@ -101,12 +101,4 @@ public class BloodRequest {
     public void setDate(Date date) {
         this.date = date;
     }
-
-    public UUID getBloodBagType() {
-        return bloodBagType;
-    }
-
-    public void setBloodBagType(UUID bloodBagType) {
-        this.bloodBagType = bloodBagType;
-    }
 }
