@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -45,7 +46,17 @@ public class BloodRequestService {
     }
 
     public List<BloodRequest> getAllBloodRequest() {
-        return requestRepository.findAll();
+        List<BloodRequest> result = requestRepository.findAll();
+        result.sort(new Comparator<BloodRequest>() {
+            @Override
+            public int compare(BloodRequest o1, BloodRequest o2) {
+                if (o1.getImportance() == o2.getImportance()) {
+                    return o1.getDate().compareTo(o2.getDate());
+                }
+                return o1.getImportance().compareTo(o2.getImportance());
+            }
+        });
+        return result;
     }
 
 }
