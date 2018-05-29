@@ -46,7 +46,7 @@ public class BloodBagTypeController {
 
     @RequestMapping("/getall")
     public List<BloodBagType> getAll(String token){
-        if (!permissionsService.hasPermission(token, Permission.ADMIN)) {
+        if (!permissionsService.hasPermission(token, Permission.DOCTOR)) {
             return new ArrayList<>();
         }
         return bagTypeService.getAll();
