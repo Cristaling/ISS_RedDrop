@@ -53,7 +53,7 @@ public class BloodRequestService {
                 if (o1.getImportance() == o2.getImportance()) {
                     return o1.getDate().compareTo(o2.getDate());
                 }
-                return o1.getImportance().compareTo(o2.getImportance());
+                return o2.getImportance().compareTo(o1.getImportance());
             }
         });
         return result;
