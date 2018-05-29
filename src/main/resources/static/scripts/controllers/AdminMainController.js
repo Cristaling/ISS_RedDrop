@@ -127,6 +127,16 @@
             }).then();
         };
 
+        vm.openAddBloodBagDialog=function(){
+            $mdDialog.show({
+                controller: 'BloodBagAddController',
+                controllerAs: 'ctrl',
+                templateUrl: '/views/dialogs/BloodBagAddDialog.html',
+                parent: angular.element(document.body),
+                clickOutsideToClose: true
+            }).then();
+        };
+
         vm.deleteHospital = function (hospitalId) {
             $http.get(apiIP + '/api/hospital/delete?token=' + vm.adminToken + '&uuid=' + hospitalId).then(function (response) {
                 vm.refreshHospitalList();

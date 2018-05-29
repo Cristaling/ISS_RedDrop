@@ -49,6 +49,7 @@ public class BloodBagService {
     }
 
     public void addBloodBag(BloodBag bloodBag){
+        bloodBag.setUuid(UUID.randomUUID());
         bloodBagRepository.save(bloodBag);
     }
 
