@@ -1,7 +1,7 @@
 (function () {
     'use strict'
     var app = angular.module('RedDrop');
-    app.controller('DoctorMainController', ['$location', '$cookies','$http','$mdDialog','apiIP', function ($location, $cookies,$http,$mdDialog,apiIP) {
+    app.controller('DoctorMainController', ['$location', '$cookies', '$http', '$mdDialog', 'apiIP', function ($location, $cookies, $http, $mdDialog, apiIP) {
         var vm = this;
 
         vm.doctorToken = $cookies.get("doctorToken");
@@ -15,7 +15,8 @@
 
         $http.get(apiIP + '/api/bloodtype/getall?token=' + vm.doctorToken).then(function (response) {
             vm.bloodTypes = response.data;
-        }, function (reason) { });
+        }, function (reason) {
+        });
 
         vm.getBloodTypeByUUID = function (uuid) {
             for (var i in vm.bloodTypes) {
@@ -28,12 +29,12 @@
 
         vm.openAddRequestDialog = function () {
             $mdDialog.show({
-                controller : 'BloodRequestAddController',
+                controller: 'BloodRequestAddController',
                 controllerAs: 'ctrl',
                 templateUrl: '/views/dialogs/BloodRequestAddDialog.html',
                 parent: angular.element(document.body),
-                clickOutsideToClose:true
-            }).then(vm.refreshRequestList,vm.refreshRequestList);
+                clickOutsideToClose: true
+            }).then(vm.refreshRequestList, vm.refreshRequestList);
         };
 
         vm.deleteRequest = function (requestID) {
@@ -47,7 +48,8 @@
         vm.refreshRequestList = function () {
             $http.get(apiIP + '/api/bloodrequest/getfrom?token=' + vm.doctorToken + '&uuid=' + vm.doctorToken).then(function (response) {
                 vm.requests = response.data;
-            }, function (reason) {});
+            }, function (reason) {
+            });
         };
 
         vm.refreshRequestList();

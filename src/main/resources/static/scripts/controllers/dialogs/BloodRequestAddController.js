@@ -18,13 +18,19 @@
             }
 
             vm.bloodTypes = [];
+            vm.importances = [];
 
             $http.get(apiIP + '/api/bloodtype/getall?token=' + vm.doctorToken).then(function (response) {
                 vm.bloodTypes = response.data;
                 vm.patientBloodType = vm.bloodTypes[0];
             }, function (reason) {
-
             });
+
+            $http.get(apiIP + '/api/utils/getimportances').then(function (response) {
+                vm.importances = response.data;
+            }, function (reason) {
+            });
+
 
             vm.addBloodRequest = function () {
                 $http({
