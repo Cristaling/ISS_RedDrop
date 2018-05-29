@@ -11,6 +11,20 @@
         }
 
         vm.requests = [];
+        vm.bloodTypes = [];
+
+        $http.get(apiIP + '/api/bloodtype/getall?token=' + vm.doctorToken).then(function (response) {
+            vm.bloodTypes = response.data;
+        }, function (reason) { });
+
+        vm.getBloodTypeByUUID = function (uuid) {
+            for (var i in vm.bloodTypes) {
+                if (vm.bloodTypes[i].uuid === uuid) {
+                    return vm.bloodTypes[i].type;
+                }
+            }
+            return "";
+        };
 
         vm.openAddRequestDialog = function () {
             $mdDialog.show({
@@ -22,8 +36,8 @@
             }).then(vm.refreshRequestList,vm.refreshRequestList);
         };
 
-        vm.deleteRequest = function () {
-            $http.get(apiIP + '/api/bloodrequest/delete?token=' + vm.doctorToken + '&uuid=' + vm.doctorToken).then(function (response) {
+        vm.deleteRequest = function (requestID) {
+            $http.get(apiIP + '/api/bloodrequest/delete?token=' + vm.doctorToken + '&uuid=' + requestID).then(function (response) {
                 vm.refreshRequestList();
             }, function (reason) {
 

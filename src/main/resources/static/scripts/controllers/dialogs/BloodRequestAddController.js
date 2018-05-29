@@ -36,7 +36,7 @@
                         patientFullName: vm.patientRegisterFullName,
                         doctor: vm.doctorToken,
                         importance: vm.patientRegisterImportance,
-                        type: vm.patientBloodType.uuid
+                        bloodType: vm.patientBloodType.uuid
                     }
                 }).then(function () {
                     $mdDialog.hide();
