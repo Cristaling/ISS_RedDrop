@@ -19,6 +19,7 @@
         vm.bloodStocks = [];
         vm.bagTypes = [];
 
+
         vm.openRegisterDoctorDialog = function (hospitalToken) {
             $mdDialog.show({
                 controller: function ($mdDialog, $http, apiIP) {
@@ -29,6 +30,7 @@
                     if (!vm.adminToken) {
                         $location.path("/admin/login");
                     }
+
 
                     vm.addDoctor = function () {
                         $http({
@@ -76,7 +78,7 @@
                                 city: vm.hospitalCity,
                                 county: vm.hospitalCounty
                             }
-                        }).then($mdDialog.hide(),$mdDialog.hide());
+                        }).then($mdDialog.hide(), $mdDialog.hide());
                     }
                 },
                 controllerAs: 'ctrl',
@@ -94,19 +96,27 @@
                     vm.adminToken = $cookies.get("adminToken");
 
                     vm.analysis = {};
-                    vm.analysis.uuid="";
-                    vm.analysis.donationVisit=donationVisitToken;
+                    vm.analysis.uuid = "";
+                    vm.analysis.donationVisit = donationVisitToken;
+                    vm.bloodTypes = [];
 
                     if (!vm.adminToken) {
                         $location.path("/admin/login");
                     }
+                    $http.get(apiIP + '/api/bloodtype/getall?token=' + vm.adminToken).then(function (response) {
+                        vm.bloodTypes = response.data;
+                        vm.patientBloodType = vm.bloodTypes[0];
+                    }, function (reason) {
+
+                    });
 
                     vm.tryRegisterAnalysis = function () {
+                        vm.analysis.bloodtype=vm.patientBloodType.uuid;
                         $http({
                             method: 'POST',
                             url: apiIP + '/api/analysisresult/add?token=' + vm.adminToken,
                             data: vm.analysis
-                        }).then($mdDialog.hide(),$mdDialog.hide());
+                        }).then($mdDialog.hide(), $mdDialog.hide());
                     };
                 },
                 controllerAs: 'ctrl',

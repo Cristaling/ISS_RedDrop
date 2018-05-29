@@ -23,6 +23,8 @@ public class AnalysisResult {
     Double creatinine;
     @Column
     Double glucose;
+    @Column
+    UUID bloodtype;
 
     public UUID getUuid() {
         return uuid;
@@ -78,5 +80,13 @@ public class AnalysisResult {
 
     public void setGlucose(Double glucose) {
         this.glucose = glucose;
+    }
+
+    public UUID getBloodtype() {
+        return bloodtype;
+    }
+
+    public void setBloodtype(UUID bloodtype) {
+        this.bloodtype = bloodtype;
     }
 }
