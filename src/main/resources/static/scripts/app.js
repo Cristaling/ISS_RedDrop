@@ -47,9 +47,9 @@
                 controller: 'DoctorMainController',
                 controllerAs: 'ctrl'
             })
-            .when("/hospital/:hospitalToken", {
-                templateUrl: "views/HospitalPage.html",
-                controller: 'HospitalController',
+            .when("/crud/doctor/:hospitalToken", {
+                templateUrl: "views/crud/DoctorCRUDPage.html",
+                controller: 'DoctorCRUDController',
                 controllerAs: 'ctrl'
             })
             .otherwise({redirectTo: "/landing"});

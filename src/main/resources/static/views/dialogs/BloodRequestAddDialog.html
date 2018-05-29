@@ -18,21 +18,23 @@
 
             <div class="form-group">
                 <label for="patientImportance">Importance</label>
-                <input ng-model="ctrl.patientRegisterImportance" type="text" class="form-control" id="patientImportance"
-                       placeholder="Importance">
+                <select ng-model="ctrl.patientRegisterImportance" ng-not-empty ng-options="importance for importance in ctrl.importances"
+                        class="form-control" id="patientImportance"
+                        placeholder="Importance">
+                </select>
             </div>
 
             <div class="form-group">
-                <label for="patientType">Importance</label>
-                <select ng-model="ctrl.patientBloodType" ng-not-empty ng-options="bloodType.name for bloodType in ctrl.bloodTypes track by bloodType.type"
+                <label for="patientType">Blood Type</label>
+                <select ng-model="ctrl.patientBloodType" ng-not-empty ng-options="bloodType.type for bloodType in ctrl.bloodTypes track by bloodType.uuid"
                         class="form-control" id="patientType"
-                        placeholder="Importance">
+                        placeholder="BloodType">
                 </select>
             </div>
 
 
             <div class="btn-lg btn-reddrop form-group" style="text-align: center"
-                 ng-click="ctrl.tryRegisterBloodRequest()">
+                 ng-click="ctrl.addBloodRequest()">
                 Request
             </div>
         </form>

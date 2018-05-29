@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,19 +31,32 @@ public class BloodRequestService {
     }
 
     public void registerBloodRequest(BloodRequest bloodRequest) {
-        //TODO Validate Requst
+        //TODO Validate Request
         if (bloodRequest.getUuid() == null) {
             bloodRequest.setUuid(UUID.randomUUID());
+        }
+        if (bloodRequest.getDate() == null) {
+            bloodRequest.setDate(new Date());
         }
         requestRepository.save(bloodRequest);
     }
 
     public List<BloodRequest> getBloodRequestByDoctor(UUID doctorID) {
-        Doctor doctor = doctorRepository.getDoctorByUuid(doctorID);
-        if (doctor == null) {
-            return new ArrayList<>();
-        }
         return requestRepository.getBloodRequestsByDoctor(doctorID);
+    }
+
+    public List<BloodRequest> getAllBloodRequest() {
+        List<BloodRequest> result = requestRepository.findAll();
+        result.sort(new Comparator<BloodRequest>() {
+            @Override
+            public int compare(BloodRequest o1, BloodRequest o2) {
+                if (o1.getImportance() == o2.getImportance()) {
+                    return o1.getDate().compareTo(o2.getDate());
+                }
+                return o2.getImportance().compareTo(o1.getImportance());
+            }
+        });
+        return result;
     }
 
 }

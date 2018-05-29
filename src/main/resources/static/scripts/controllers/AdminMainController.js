@@ -11,13 +11,15 @@
         }
 
         vm.goToHospitalPage = function (hospitalToken) {
-            $location.path("/hospital/" + hospitalToken);
+            $location.path("/crud/doctor/" + hospitalToken);
         }
 
         vm.hospitals = [];
         vm.visits = [];
+        vm.requests = [];
         vm.bloodStocks = [];
         vm.bagTypes = [];
+
 
         vm.openRegisterDoctorDialog = function (hospitalToken) {
             $mdDialog.show({
@@ -30,7 +32,8 @@
                         $location.path("/admin/login");
                     }
 
-                    vm.tryRegisterDoctor = function () {
+
+                    vm.addDoctor = function () {
                         $http({
                             method: 'POST',
                             url: apiIP + '/api/doctor/add?token=' + vm.adminToken,
@@ -49,7 +52,7 @@
                     };
                 },
                 controllerAs: 'ctrl',
-                templateUrl: '/views/directives/DoctorRegistrationDirective.html',
+                templateUrl: '/views/dialogs/DoctorAddDialog.html',
                 parent: angular.element(document.body),
                 clickOutsideToClose: true
             }).then(vm.refreshHospitalList, vm.refreshHospitalList);
@@ -76,7 +79,7 @@
                                 city: vm.hospitalCity,
                                 county: vm.hospitalCounty
                             }
-                        }).then($mdDialog.hide(),$mdDialog.hide());
+                        }).then($mdDialog.hide(), $mdDialog.hide());
                     }
                 },
                 controllerAs: 'ctrl',
@@ -94,19 +97,27 @@
                     vm.adminToken = $cookies.get("adminToken");
 
                     vm.analysis = {};
-                    vm.analysis.uuid="";
-                    vm.analysis.donationVisit=donationVisitToken;
+                    vm.analysis.uuid = "";
+                    vm.analysis.donationVisit = donationVisitToken;
+                    vm.bloodTypes = [];
 
                     if (!vm.adminToken) {
                         $location.path("/admin/login");
                     }
+                    $http.get(apiIP + '/api/bloodtype/getall?token=' + vm.adminToken).then(function (response) {
+                        vm.bloodTypes = response.data;
+                        vm.patientBloodType = vm.bloodTypes[0];
+                    }, function (reason) {
+
+                    });
 
                     vm.tryRegisterAnalysis = function () {
+                        vm.analysis.bloodtype = vm.patientBloodType.uuid;
                         $http({
                             method: 'POST',
                             url: apiIP + '/api/analysisresult/add?token=' + vm.adminToken,
                             data: vm.analysis
-                        }).then($mdDialog.hide(),$mdDialog.hide());
+                        }).then($mdDialog.hide(), $mdDialog.hide());
                     };
                 },
                 controllerAs: 'ctrl',
@@ -146,8 +157,15 @@
         };
 
         vm.getBagTypes = function () {
-            $http.get(apiIP + '/api/utils/getbagtypes?token=' + vm.adminToken).then(function (response) {
+            $http.get(apiIP + '/api/bloodbagtype/getall?token=' + vm.adminToken).then(function (response) {
                 vm.bagTypes = response.data;
+            }, function (reason) {
+            });
+        };
+
+        vm.refreshRequestList = function () {
+            $http.get(apiIP + '/api/bloodrequest/getall?token=' + vm.adminToken).then(function (response) {
+                vm.requests = response.data;
             }, function (reason) {
             });
         };
@@ -155,6 +173,7 @@
         vm.getBagTypes();
         vm.refreshBloodBagStocks();
         vm.refreshVisitList();
+        vm.refreshRequestList();
         vm.refreshHospitalList();
 
     }]);

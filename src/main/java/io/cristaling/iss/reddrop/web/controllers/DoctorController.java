@@ -58,6 +58,15 @@ public class DoctorController {
 		doctorService.registerDoctor(doctor);
 	}
 
+	@RequestMapping("/update")
+	@ResponseStatus(value = HttpStatus.NO_CONTENT)
+	public void updateDoctor(String token,@RequestBody Doctor doctor){
+		if (!permissionsService.hasPermission(token, Permission.ADMIN)) {
+			return;
+		}
+		doctorService.updateDoctor(doctor);
+	}
+
 	@RequestMapping("/delete")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	public void deleteDoctor(String token, String uuid) {

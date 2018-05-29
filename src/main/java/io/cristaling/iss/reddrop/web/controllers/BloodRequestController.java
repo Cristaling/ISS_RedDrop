@@ -49,13 +49,13 @@ public class BloodRequestController {
         bloodRequestService.deleteBloodRequest(actualUuid);
     }
 
-    /*@RequestMapping("/getall")
+    @RequestMapping("/getall")
     public List<BloodRequest> getAllRequests(String token) {
         if (!permissionsService.hasPermission(token, Permission.ADMIN)) {
             return null;
         }
-        return bloodRequestService.getVisitsSorted();
-    }*/
+        return bloodRequestService.getAllBloodRequest();
+    }
 
     @RequestMapping("/getfrom")
     public List<BloodRequest> getRequestsByDoctor(String token, String uuid) {

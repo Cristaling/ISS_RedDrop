@@ -1,10 +1,10 @@
 package io.cristaling.iss.reddrop.core;
 
 import io.cristaling.iss.reddrop.utils.BloodRequestStatus;
-import io.cristaling.iss.reddrop.utils.BloodType;
 import io.cristaling.iss.reddrop.utils.Importance;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.UUID;
 
 @Entity
@@ -24,7 +24,9 @@ public class BloodRequest {
     @Column
     BloodRequestStatus status;
     @Column
-    BloodType type;
+    UUID bloodType;
+    @Column
+    Date date;
 
     public UUID getUuid() {
         return uuid;
@@ -74,11 +76,19 @@ public class BloodRequest {
         this.status = status;
     }
 
-    public BloodType getType() {
-        return type;
+    public UUID getBloodType() {
+        return bloodType;
     }
 
-    public void setType(BloodType type) {
-        this.type = type;
+    public void setBloodType(UUID bloodType) {
+        this.bloodType = bloodType;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }
