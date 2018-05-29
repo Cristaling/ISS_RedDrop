@@ -28,6 +28,7 @@
 
             $http.get(apiIP + '/api/utils/getimportances').then(function (response) {
                 vm.importances = response.data;
+                vm.patientRegisterImportance=vm.importances[0];
             }, function (reason) {
             });
 
