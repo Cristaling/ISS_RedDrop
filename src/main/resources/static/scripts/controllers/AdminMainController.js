@@ -48,6 +48,18 @@
             }
             return "";
         };
+        
+        vm.convertStock = function (stock) {
+            var result = [];
+            for (var bagStock in stock) {
+                result.push({
+                    uuid: bagStock,
+                    name: vm.getBloodBagTypeByUUID(bagStock),
+                    value: stock[bagStock]
+                });
+            }
+            return result;
+        };
 
         vm.openRegisterDoctorDialog = function (hospitalToken) {
             $mdDialog.show({
@@ -190,6 +202,9 @@
         vm.refreshBloodBagStocks = function () {
             $http.get(apiIP + '/api/bloodbag/stock?token=' + vm.adminToken).then(function (response) {
                 vm.bloodStocks = response.data;
+                for (var key in vm.bloodStocks) {
+                    vm.bloodStocks[key].stock = vm.convertStock(response.data[key].stock);
+                }
             }, function (reason) {
             });
         };

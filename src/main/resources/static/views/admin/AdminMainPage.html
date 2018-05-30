@@ -16,14 +16,14 @@
                     <md-list>
                         <md-list-item ng-click="null">
                             <div class="col-md-3">Blood Type</div>
-                            <div class="col-md-3" ng-repeat="bagType in ctrl.bloodBagTypes" style="text-align: center">
+                            <div class="col-md-3" ng-repeat="bagType in ctrl.bloodBagTypes | orderBy:'name':true" style="text-align: center">
                                 {{bagType.name }}
                             </div>
                         </md-list-item>
-                        <md-list-item ng-repeat="bloodStock in ctrl.bloodStocks" ng-click="null">
+                        <md-list-item ng-repeat="bloodStock in ctrl.bloodStocks | orderBy:'bloodType.type'" ng-click="null">
                             <div class="col-md-3">{{bloodStock.bloodType.type}}</div>
-                            <div class="col-md-3" ng-repeat="bloodBagType in bloodStock.stock" style="text-align: center">
-                                {{ bloodBagType }}
+                            <div class="col-md-3" ng-repeat="bloodBagType in bloodStock.stock | orderBy:'name':true" style="text-align: center">
+                                {{ bloodBagType.value }}
                             </div>
                         </md-list-item>
                     </md-list>
@@ -96,8 +96,8 @@
                     <md-list>
                         <md-list-item ng-repeat="request in ctrl.requests" ng-click="null">
                             <p>{{ request.date | date:"dd/MM/yyyy" }} - {{ request.patientFullName }}</p>
-                            <span class="badge badge-light">{{ ctrl.getBloodTypeByUUID(request.bloodType) }}</span>
-                            <span class="badge badge-light">{{ ctrl.getBloodBagTypeByUUID(request.bloodBagType) }}</span>
+                            <span class="badge badge-danger">{{ ctrl.getBloodTypeByUUID(request.bloodType) }}</span>
+                            <span class="badge badge-primary">{{ ctrl.getBloodBagTypeByUUID(request.bloodBagType) }}</span>
                             <span class="badge badge-light">{{ request.status }}</span>
                             <!--<div class="md-secondary" aria-label="Fill Analysis"
                                  ng-click="ctrl.openFillAnalysisDialog(visit.uuid)">
