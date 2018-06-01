@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.UUID;
 
 @CrossOrigin
@@ -36,6 +37,11 @@ public class DonatorController {
 			donator.setUuid(UUID.randomUUID());
 		}
 		donatorService.registerDonator(donator);
+	}
+
+	@RequestMapping("/getnextvisit")
+	public Date getLastVisit(String token){
+		return donatorService.getNextAlvailableDate(UUID.fromString(token));
 	}
 
 }

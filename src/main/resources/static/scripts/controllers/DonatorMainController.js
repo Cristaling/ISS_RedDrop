@@ -10,6 +10,9 @@
             $location.path("/donator/login");
         }
         vm.visits = [];
+        vm.lastDate= "";
+        vm.minDate="";
+        vm.maxDate="";
 
         vm.setVisit = function () {
             $http({
@@ -39,7 +42,14 @@
 
             });
         };
+        vm.getLastDonationDate = function () {
+            $http.get(apiIP + '/api/donator/getnextvisit?token='+vm.donatorToken).then(function (response) {
+                vm.minDate = new Date(response.data);
+            }, function (reason) {
 
+            });
+        };
+        vm.getLastDonationDate();
         vm.refreshVisitsList();
 
     }]);
