@@ -4,9 +4,13 @@ import io.cristaling.iss.reddrop.core.BloodBag;
 import io.cristaling.iss.reddrop.core.BloodBagType;
 import io.cristaling.iss.reddrop.core.BloodStock;
 import io.cristaling.iss.reddrop.core.BloodType;
+import io.cristaling.iss.reddrop.core.DonationVisit;
+import io.cristaling.iss.reddrop.core.Donator;
 import io.cristaling.iss.reddrop.repositories.BloodBagRepository;
 import io.cristaling.iss.reddrop.repositories.BloodBagTypeRepository;
 import io.cristaling.iss.reddrop.repositories.BloodTypeRepository;
+import io.cristaling.iss.reddrop.repositories.DonationVisitRepository;
+import io.cristaling.iss.reddrop.repositories.DonatorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +26,9 @@ public class BloodBagService {
     BloodTypeRepository bloodTypeRepository;
     BloodBagTypeRepository bloodBagTypeRepository;
 
+    DonationVisitRepository donationVisitRepository;
+    DonatorRepository donatorRepository;
+
     @Autowired
     public BloodBagService(BloodBagRepository bloodBagRepository, BloodTypeRepository bloodTypeRepository,BloodBagTypeRepository bloodBagTypeRepository) {
         this.bloodTypeRepository=bloodTypeRepository;
@@ -35,11 +42,16 @@ public class BloodBagService {
 
     public HashMap<BloodType, BloodStock> getBloodStockAsMap() {
         HashMap<BloodType, BloodStock> result = new HashMap<>();
+
         List<BloodType> bloodTypes=bloodTypeRepository.findAll();
         List<BloodBagType> bagTypes=bloodBagTypeRepository.findAll();
+
         for (BloodType bloodType : bloodTypes) {
+
             BloodStock bloodStock = new BloodStock(bloodType);
+
             for (BloodBagType bloodBagType : bagTypes) {
+
                 int stock = bloodBagRepository.getBloodBagsByBloodBagTypeAndBloodType(bloodBagType.getUuid(), bloodType.getUuid()).size();
                 bloodStock.setBloodTypeNumber(bloodBagType, stock);
             }
@@ -49,6 +61,14 @@ public class BloodBagService {
     }
 
     public void addBloodBag(BloodBag bloodBag){
+        if (bloodBag.getDonationVisit() != null) {
+            DonationVisit donationVisit = donationVisitRepository.getOne(bloodBag.getDonationVisit());
+            Donator donator = donatorRepository.getOne(donationVisit.getDonator());
+            if (donator.getBloodType() == null) {
+                donator.setBloodType(bloodBag.getBloodType());
+                donatorRepository.save(donator);
+            }
+        }
         bloodBag.setUuid(UUID.randomUUID());
         bloodBagRepository.save(bloodBag);
     }
