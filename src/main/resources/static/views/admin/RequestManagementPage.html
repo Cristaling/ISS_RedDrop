@@ -6,7 +6,7 @@
             <div back-btn></div>
         </div>
 
-        <div class="col-md-5">
+        <div class="col-md-4">
 
             <div class="panel panel-reddrop">
                 <div class="panel-heading">
@@ -38,7 +38,7 @@
 
         </div>
 
-        <div class="col-md-7">
+        <div class="col-md-8">
 
             <div class="panel panel-reddrop">
                 <div class="panel-heading">
@@ -48,12 +48,44 @@
                 </div>
                 <div class="panel-body">
                     <md-list>
+                        <md-list-item>
+                            <div class="col-md-1">
+                                Date
+                            </div>
+                            <div class="col-md-4">
+                                Patient
+                            </div>
+                            <div class="col-md-1">
+                                Importance
+                            </div>
+                            <div class="col-md-2">
+                                Type
+                            </div>
+                            <div class="col-md-2">
+                                Status
+                            </div>
+                            <div class="col-md-1">
+                                Options
+                            </div>
+                        </md-list-item>
+                        <md-divider ></md-divider>
                         <md-list-item ng-repeat="request in ctrl.requests" ng-click="null">
-                            <p>{{ request.date | date:"dd/MM/yyyy" }} - {{ request.patientFullName }}</p>
-                            <span class="badge badge-danger">{{ ctrl.getBloodTypeByUUID(request.bloodType) }}</span>
-                            <span class="badge badge-primary">{{ ctrl.getBloodBagTypeByUUID(request.bloodBagType) }}</span>
-                            <span class="badge badge-light">{{ request.status }}</span>
-                            <span class="badge badge-success">{{ request.importance }}</span>
+                            <div class="col-md-1">
+                                {{ request.date | date:"dd/MM/yyyy" }}
+                            </div>
+                            <div class="col-md-4">
+                                {{ request.patientFullName }}
+                            </div>
+                            <div class="col-md-1">
+                                <span class="badge badge-success">{{ request.importance }}</span>
+                            </div>
+                            <div class="col-md-2">
+                                <span class="badge badge-danger">{{ ctrl.getBloodTypeByUUID(request.bloodType) }}</span>
+                                <span class="badge badge-primary">{{ ctrl.getBloodBagTypeByUUID(request.bloodBagType) }}</span>
+                            </div>
+                            <div class="col-md-2">
+                                <span class="badge badge-light">{{ request.status }}</span>
+                            </div>
                             <!--<div class="md-secondary" aria-label="Fill Analysis"
                                  ng-click="ctrl.openFillAnalysisDialog(visit.uuid)">
                                 <i class="material-icons">assignment</i>
