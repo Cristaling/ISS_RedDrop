@@ -173,6 +173,14 @@
             });
         };
 
+        vm.deleteDonationVisit= function (visitId) {
+            $http.get(apiIP + '/api/donationvisit/delete?token=' + vm.adminToken + '&uuid=' + visitId).then(function (response) {
+                vm.refreshVisitList();
+            }, function (reason) {
+                vm.refreshVisitList();
+            });
+        };
+
         vm.refreshRequestList = function () {
             $http.get(apiIP + '/api/bloodrequest/getall?token=' + vm.adminToken).then(function (response) {
                 vm.requests = response.data;

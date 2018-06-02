@@ -42,6 +42,19 @@ public class DonationVisitController {
         donationVisitService.addDonationVisit(donationVisit);
     }
 
+    @RequestMapping("/delete")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void deleteVisit(String token, String uuid) {
+        if (!permissionsService.hasPermission(token, Permission.DONATOR)) {
+            return;
+        }
+        UUID actualUuid = UUIDUtils.getUUIDFromString(uuid);
+        if (actualUuid == null) {
+            return;
+        }
+        donationVisitService.deleteDonationVisitById(actualUuid);
+    }
+
     @RequestMapping("/getall")
     public List<DonationVisit> getAllDonationVisits(String token) {
         if (!permissionsService.hasPermission(token, Permission.ADMIN)) {
