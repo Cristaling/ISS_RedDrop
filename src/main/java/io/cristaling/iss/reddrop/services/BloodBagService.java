@@ -11,6 +11,7 @@ import io.cristaling.iss.reddrop.repositories.BloodBagTypeRepository;
 import io.cristaling.iss.reddrop.repositories.BloodTypeRepository;
 import io.cristaling.iss.reddrop.repositories.DonationVisitRepository;
 import io.cristaling.iss.reddrop.repositories.DonatorRepository;
+import io.cristaling.iss.reddrop.utils.enums.BloodBagStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,7 +53,7 @@ public class BloodBagService {
 
             for (BloodBagType bloodBagType : bagTypes) {
 
-                int stock = bloodBagRepository.getBloodBagsByBloodBagTypeAndBloodType(bloodBagType.getUuid(), bloodType.getUuid()).size();
+                int stock = bloodBagRepository.getBloodBagsByBloodBagStatusAndBloodBagTypeAndBloodType(BloodBagStatus.DEPOSITED, bloodBagType.getUuid(), bloodType.getUuid()).size();
                 bloodStock.setBloodTypeNumber(bloodBagType, stock);
             }
             result.put(bloodType, bloodStock);
@@ -60,16 +61,20 @@ public class BloodBagService {
         return result;
     }
 
-    public void addBloodBag(BloodBag bloodBag){
+    public void addBloodBag(BloodBag bloodBag) {
         if (bloodBag.getDonationVisit() != null) {
+
             DonationVisit donationVisit = donationVisitRepository.getOne(bloodBag.getDonationVisit());
             Donator donator = donatorRepository.getOne(donationVisit.getDonator());
+
             if (donator.getBloodType() == null) {
                 donator.setBloodType(bloodBag.getBloodType());
                 donatorRepository.save(donator);
             }
         }
+
         bloodBag.setUuid(UUID.randomUUID());
+        bloodBag.setBloodBagStatus(BloodBagStatus.UNTESTED);
         bloodBagRepository.save(bloodBag);
     }
 

@@ -1,5 +1,7 @@
 package io.cristaling.iss.reddrop.core;
 
+import io.cristaling.iss.reddrop.utils.enums.BloodBagStatus;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.UUID;
@@ -18,6 +20,8 @@ public class BloodBag {
     UUID bloodBagType;
     @Column
     UUID bloodType;
+    @Column
+    BloodBagStatus bloodBagStatus;
 
     public UUID getUuid() {
         return uuid;
@@ -57,5 +61,13 @@ public class BloodBag {
 
     public void setBloodType(UUID bloodType) {
         this.bloodType = bloodType;
+    }
+
+    public BloodBagStatus getBloodBagStatus() {
+        return bloodBagStatus;
+    }
+
+    public void setBloodBagStatus(BloodBagStatus bloodBagStatus) {
+        this.bloodBagStatus = bloodBagStatus;
     }
 }
