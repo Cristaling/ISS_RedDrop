@@ -71,8 +71,7 @@ public class DonationVisitService {
             if (donator.getBloodType() == null) {
                 return false;
             }
-            donationVisit.setDone(true);
-            donationVisitRepository.save(donationVisit);
+
             bloodType = bloodTypeRepository.getOne(donator.getBloodType());
         }
         if (bloodType == null) {
@@ -82,6 +81,9 @@ public class DonationVisitService {
             }
             bloodType = bloodTypeRepository.getOne(bloodTypeUUID);
         }
+
+        donationVisit.setDone(true);
+        donationVisitRepository.save(donationVisit);
 
         donator.setBloodType(bloodType.getUuid());
         donatorRepository.save(donator);
