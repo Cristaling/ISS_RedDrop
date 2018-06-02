@@ -123,7 +123,7 @@
                     }
                 },
                 controllerAs: 'ctrl',
-                templateUrl: '/views/directives/AddHospital.html',
+                templateUrl: '/views/dialogs/HospitalAddDialog.html',
                 parent: angular.element(document.body),
                 clickOutsideToClose: true
             }).then(vm.refreshHospitalList, vm.refreshHospitalList);

@@ -1,0 +1,32 @@
+<div style="padding-top: 5vh;">
+
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-reddrop">
+            <div class="panel-heading">
+                <span>
+                    Hospitals
+                </span>
+                <div style="float: right;" ng-click="ctrl.addHospital()">
+                    <i class="material-icons">add</i>
+                </div>
+            </div>
+            <div class="panel-body">
+                <md-list>
+                    <md-list-item ng-repeat="hospital in ctrl.hospitals"
+                                  ng-click="ctrl.goToHospitalPage(hospital.uuid)">
+                        <p>{{ hospital.name }}</p>
+                        <div class="md-secondary" aria-label="Add Doctor"
+                             ng-click="ctrl.openRegisterDoctorDialog(hospital.uuid)">
+                            <i class="material-icons">person_add</i>
+                        </div>
+                        <div class="md-secondary" aria-label="Delete Hospital"
+                             ng-click="ctrl.deleteHospital(hospital.uuid)">
+                            <i class="material-icons">delete</i>
+                        </div>
+                    </md-list-item>
+                </md-list>
+            </div>
+        </div>
+    </div>
+
+</div>

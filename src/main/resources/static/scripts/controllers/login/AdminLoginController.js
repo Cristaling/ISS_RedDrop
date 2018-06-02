@@ -8,7 +8,7 @@
         vm.adminToken = $cookies.get("adminToken");
 
         if (vm.adminToken) {
-            $location.path("/admin/login");
+            $location.path("/admin/main");
         }
 
         vm.tryLoginAdmin = function () {
