@@ -10,10 +10,9 @@ import java.util.UUID;
 @Repository
 public interface DonationVisitRepository extends JpaRepository<DonationVisit,UUID>{
 
-	List<DonationVisit> getDonationVisitsByDonatorAndDone(UUID uuid);
-	List<DonationVisit> getDonationVisitsByDonatorAndDoneFalse(UUID uuid);
+	List<DonationVisit> getDonationVisitsByDonatorAndDone(UUID uuid, boolean done);
 
 	List<DonationVisit> getDonationVisitsByDonatorOrderByDate(UUID uuid);
-	List<DonationVisit> getDonationVisitsByDonatorOrderByDateAndDoneFalse(UUID uuid);
+	List<DonationVisit> getDonationVisitsByDonatorAndDoneOrderByDate(UUID uuid, boolean done);
 
 }

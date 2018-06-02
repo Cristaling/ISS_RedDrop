@@ -67,7 +67,7 @@ public class AnalysisResultService {
 	}
 
 	public List<AnalysisResult> getAllForDonator(UUID donatorUUID) {
-		List<DonationVisit> visits = donationVisitRepository.getDonationVisitsByDonatorAndDone(donatorUUID);
+		List<DonationVisit> visits = donationVisitRepository.getDonationVisitsByDonatorAndDone(donatorUUID, true);
 		List<UUID> visitsUuids = new ArrayList<>();
 		for (DonationVisit donationVisit : visits) {
 			visitsUuids.add(donationVisit.getUuid());

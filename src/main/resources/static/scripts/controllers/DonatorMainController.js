@@ -35,6 +35,7 @@
             }, function (error) {
             });
         };
+
         vm.refreshVisitsList = function () {
             $http.get(apiIP + '/api/donationvisit/getvisitedvisits?token=' + vm.donatorToken + '&uuid=' + vm.donatorToken).then(function (response) {
                 vm.visits = response.data;
@@ -42,6 +43,7 @@
 
             });
         };
+
         vm.getLastDonationDate = function () {
             $http.get(apiIP + '/api/donator/getnextvisit?token='+vm.donatorToken).then(function (response) {
                 vm.minDate = new Date(response.data);
@@ -49,6 +51,7 @@
 
             });
         };
+
         vm.getLastDonationDate();
         vm.refreshVisitsList();
 

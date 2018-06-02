@@ -1,6 +1,31 @@
 <div style="padding-top: 5vh;">
 
     <div class="col-md-6 col-md-offset-3">
+
+        <div class="panel panel-reddrop">
+            <div class="panel-heading">
+                <span>
+                    Blood Stock
+                </span>
+            </div>
+            <div class="panel-body">
+                <md-list>
+                    <md-list-item ng-click="null">
+                        <div class="col-md-3">Blood Type</div>
+                        <div class="col-md-3" ng-repeat="bagType in ctrl.bloodBagTypes | orderBy:'name':true" style="text-align: center">
+                            {{bagType.name }}
+                        </div>
+                    </md-list-item>
+                    <md-list-item ng-repeat="bloodStock in ctrl.bloodStocks | orderBy:'bloodType.type'" ng-click="null">
+                        <div class="col-md-3">{{bloodStock.bloodType.type}}</div>
+                        <div class="col-md-3" ng-repeat="bloodBagType in bloodStock.stock | orderBy:'name':true" style="text-align: center">
+                            {{ bloodBagType.value }}
+                        </div>
+                    </md-list-item>
+                </md-list>
+            </div>
+        </div>
+
         <div class="panel panel-reddrop">
             <div class="panel-heading">
             <span>

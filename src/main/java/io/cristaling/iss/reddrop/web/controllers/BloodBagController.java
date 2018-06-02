@@ -43,7 +43,7 @@ public class BloodBagController {
 
     @RequestMapping("/stock")
     public List<BloodStock> getBloodBagStock(String token){
-        if (!permissionsService.hasPermission(token, Permission.DONATOR)) {
+        if (!permissionsService.hasPermission(token, Permission.DOCTOR)) {
             return null;
         }
         return bloodBagService.getBloodStockAsList();

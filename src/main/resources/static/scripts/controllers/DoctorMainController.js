@@ -12,6 +12,12 @@
 
         vm.requests = [];
         vm.bloodTypes = [];
+        vm.bloodBagTypes = [];
+
+        $http.get(apiIP + '/api/bloodbagtype/getall?token=' + vm.doctorToken).then(function (response) {
+            vm.bloodBagTypes = response.data;
+        }, function (reason) {
+        });
 
         $http.get(apiIP + '/api/bloodtype/getall?token=' + vm.doctorToken).then(function (response) {
             vm.bloodTypes = response.data;
@@ -25,6 +31,27 @@
                 }
             }
             return "";
+        };
+
+        vm.getBloodBagTypeByUUID = function (uuid) {
+            for (var i in vm.bloodBagTypes) {
+                if (vm.bloodBagTypes[i].uuid === uuid) {
+                    return vm.bloodBagTypes[i].name;
+                }
+            }
+            return "";
+        };
+
+        vm.convertStock = function (stock) {
+            var result = [];
+            for (var bagStock in stock) {
+                result.push({
+                    uuid: bagStock,
+                    name: vm.getBloodBagTypeByUUID(bagStock),
+                    value: stock[bagStock]
+                });
+            }
+            return result;
         };
 
         vm.openAddRequestDialog = function () {
@@ -52,6 +79,17 @@
             });
         };
 
+        vm.refreshBloodBagStocks = function () {
+            $http.get(apiIP + '/api/bloodbag/stock?token=' + vm.doctorToken).then(function (response) {
+                vm.bloodStocks = response.data;
+                for (var key in vm.bloodStocks) {
+                    vm.bloodStocks[key].stock = vm.convertStock(response.data[key].stock);
+                }
+            }, function (reason) {
+            });
+        };
+
+        vm.refreshBloodBagStocks();
         vm.refreshRequestList();
 
     }]);

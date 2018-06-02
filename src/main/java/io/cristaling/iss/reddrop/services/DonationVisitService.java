@@ -54,13 +54,6 @@ public class DonationVisitService {
 	}
 
 	public List<DonationVisit> getVisitsVisited(UUID donatorUUID) {
-		List<DonationVisit> visits = donationVisitRepository.getDonationVisitsByDonatorAndDone(donatorUUID);
-		List<DonationVisit> visited = new ArrayList<>();
-		for (DonationVisit donationVisit : visits) {
-			if (analysisResultRepository.getAnalysisResultByDonationVisit(donationVisit.getUuid()) != null) {
-				visited.add(donationVisit);
-			}
-		}
-		return visited;
+		return donationVisitRepository.getDonationVisitsByDonatorAndDone(donatorUUID, true);
 	}
 }
