@@ -1,0 +1,27 @@
+<div class="panel panel-reddrop" style="margin-bottom: 0px">
+    <div class="panel-heading">
+        Confirm Eligibility Requirements
+    </div>
+    <div class="panel-body ">
+        <p>I declare that i am 18 years or older.</p>
+        <p>I weigh in between 50 kilograms and 130 kilograms.</p>
+        <p>I did not live with a person with clinical hepatitis B or hepatitis C, or do not suffer myself on hepatitis B
+            or hepatitis C.</p>
+        <p>I did not have malaria in the past or traveled to a malarial risk area in the past 12 months.</p>
+        <p>If woman, are not or have not been pregnant in the past 6 weeks.</p>
+        <p>I have not been treated for syphilis or gonorrhea in the past 12 months.</p>
+        <p>I am not at risk for exposure to HIV , the virus that causes AIDS.</p>
+        <p>I have not used a needle to inject drugs not prescribed (including steroids).</p>
+        <p>Currently not taking any prescribed medication for tension, headaches or the nervous system.</p>
+        <md-input-container class="md-block">
+            <md-checkbox name="tos" ng-model="ctrl.agreed" required>
+                I shall agree that I am in accordance to all the terms listed above on own responsibility.
+            </md-checkbox>
+        </md-input-container>
+
+        <div class="btn-lg btn-reddrop form-group" style="text-align: center"
+             ng-click="ctrl.tryConsent()">
+            Register
+        </div>
+    </div>
+</div>
