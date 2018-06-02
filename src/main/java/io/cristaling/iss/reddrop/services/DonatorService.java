@@ -59,7 +59,7 @@ public class DonatorService {
         if(donationvisit.isEmpty()){
             return new Date();
         }
-        Date lastVisit=donationvisit.get(0).getDate();
+        Date lastVisit=donationvisit.get(donationvisit.size()-1).getDate();
         lastVisit.setTime((long)((long)lastVisit.getTime()+(long)483890*10000));
         Date currentDate=new Date();
         if(currentDate.after(lastVisit)){

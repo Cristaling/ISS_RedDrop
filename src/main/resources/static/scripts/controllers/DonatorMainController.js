@@ -36,7 +36,7 @@
                         .textContent('You successfully scheduled a visit.')
                         .ariaLabel('Success Dialog')
                         .ok('Done')
-                );
+                ).then(vm.getLastDonationDate,vm.getLastDonationDate);
             }, function (error) {
             });
         };
