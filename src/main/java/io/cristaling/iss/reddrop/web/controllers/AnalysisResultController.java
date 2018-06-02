@@ -46,4 +46,16 @@ public class AnalysisResultController {
         return analysisResultService.getAllForDonator(actualUuid);
     }
 
+    @RequestMapping("/getbyvisit")
+    public AnalysisResult getAnalysisResultByVisit(String token, String uuid) {
+        if (!permissionsService.hasPermission(token, Permission.DONATOR)) {
+            return null;
+        }
+        UUID actualUuid = UUIDUtils.getUUIDFromString(uuid);
+        if (actualUuid == null) {
+            return null;
+        }
+        return analysisResultService.getByDonationVisit(actualUuid);
+    }
+
 }

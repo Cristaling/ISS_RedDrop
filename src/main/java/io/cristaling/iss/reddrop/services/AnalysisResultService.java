@@ -75,4 +75,8 @@ public class AnalysisResultService {
 		return analysisResultRepository.getAnalysisResultsByDonationVisitIn(visitsUuids);
 
 	}
+
+	public AnalysisResult getByDonationVisit(UUID actualUuid) {
+		return analysisResultRepository.getAnalysisResultByDonationVisit(actualUuid);
+	}
 }
