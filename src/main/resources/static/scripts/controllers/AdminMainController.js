@@ -104,7 +104,6 @@
         
         vm.confirmVisitDialog=function (donationVisitToken) {
             $http.get(apiIP + '/api/donationvisit/markdone?token=' + vm.adminToken+"&donationVisitUUID="+donationVisitToken).then(function (response) {
-                vm.refreshVisitList();
                 if(!response.data.successful) {
                     $mdDialog.show({
                         controller: function ($mdDialog, $http, apiIP) {
@@ -126,12 +125,9 @@
 
                             vm.markDone = function () {
                                 $http.get(apiIP + '/api/donationvisit/markdone?token=' + vm.adminToken + "&donationVisitUUID=" + donationVisitToken + "&bloodTypeUUID=" + vm.patientBloodType.uuid).then(function (response) {
-                                    vm.bloodTypes = response.data;
-                                    vm.patientBloodType = vm.bloodTypes[0];
-                                    vm.refreshVisitList();
                                     $mdDialog.hide();
                                 }, function (reason) {
-
+                                    $mdDialog.hide();
                                 });
                             };
                         },
@@ -139,7 +135,9 @@
                         templateUrl: '/views/dialogs/VisitConfirmationDialog.html',
                         parent: angular.element(document.body),
                         clickOutsideToClose: true
-                    }).then();
+                    }).then(vm.refreshVisitList, vm.refreshVisitList);
+                } else {
+                    vm.refreshVisitList();
                 }
             }, function (reason) {
 

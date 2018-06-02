@@ -89,14 +89,19 @@ public class DonationVisitService {
         donatorRepository.save(donator);
 
         BloodBagType bloodBagType = bloodBagTypeRepository.getBloodBagTypeByName("Whole");
+
         BloodBag bloodBag = new BloodBag();
+        bloodBag.setUuid(UUID.randomUUID());
         bloodBag.setBloodBagType(bloodBagType.getUuid());
         bloodBag.setBloodType(bloodType.getUuid());
+        bloodBag.setBloodBagStatus(BloodBagStatus.UNTESTED);
+
+        bloodBag.setDonationVisit(donationVisit.getUuid());
+
         Date date = new Date();
         date.setTime(date.getTime() + bloodBagType.getDaysToExpire() * 86400000);
         bloodBag.setExpireDate(date);
-        bloodBag.setBloodBagStatus(BloodBagStatus.UNTESTED);
-        bloodBag.setUuid(UUID.randomUUID());
+
         bloodBagRepository.save(bloodBag);
 
         return true;
