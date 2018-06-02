@@ -48,8 +48,28 @@
                 </div>
                 <div class="panel-body">
                     <md-list>
+                        <md-list-item>
+                            <div class="col-md-2">
+                                Date
+                            </div>
+                            <div class="col-md-3">
+                                Donator
+                            </div>
+                            <div class="col-md-6">
+
+                            </div>
+                            <div class="col-md-1">
+                                Options
+                            </div>
+                        </md-list-item>
+                        <md-divider ></md-divider>
                         <md-list-item ng-repeat="visit in ctrl.visits | orderBy:'date'" ng-click="null">
-                            <p>{{ visit.date | date:"dd/MM/yyyy" }} - {{ visit.donatorName }}</p>
+                            <div class="col-md-2">
+                                {{ visit.date | date:"dd/MM/yyyy" }}
+                            </div>
+                            <div class="col-md-3">
+                                {{ visit.donatorName }}
+                            </div>
                             <div class="md-secondary" aria-label="Confirm Visit"
                                  ng-click="ctrl.confirmVisitDialog(visit.uuid)">
                                 <i class="material-icons">assignment</i>
