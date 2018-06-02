@@ -22,19 +22,24 @@ public class AnalysisResultService {
     AnalysisResultRepository analysisResultRepository;
     DonationVisitRepository donationVisitRepository;
     BloodBagRepository bloodBagRepository;
+    DonatorRepository donatorRepository;
 
     @Autowired
-    public AnalysisResultService(AnalysisResultRepository analysisResultRepository, DonationVisitRepository donationVisitRepository, BloodBagRepository bloodBagRepository) {
+    public AnalysisResultService(AnalysisResultRepository analysisResultRepository,
+                                 DonationVisitRepository donationVisitRepository,
+                                 BloodBagRepository bloodBagRepository,
+                                 DonatorRepository donatorRepository) {
         this.analysisResultRepository = analysisResultRepository;
         this.donationVisitRepository = donationVisitRepository;
         this.bloodBagRepository = bloodBagRepository;
+        this.donatorRepository=donatorRepository;
     }
 
     public void addAnalysis(AnalysisResult analysisResult) {
         if (analysisResult.getUuid() == null) {
             analysisResult.setUuid(UUID.randomUUID());
         }
-
+        analysisResult.setBloodtype(donatorRepository.getOne(donationVisitRepository.getOne(analysisResult.getDonationVisit()).getDonator()).getBloodType());
         analysisResultRepository.save(analysisResult);
 
         BloodBag bloodBag = bloodBagRepository.getBloodBagByDonationVisit(analysisResult.getDonationVisit());

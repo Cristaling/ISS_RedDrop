@@ -65,7 +65,6 @@
                     });
 
                     vm.tryRegisterAnalysis = function () {
-                        vm.analysis.bloodtype = vm.patientBloodType.uuid;
                         $http({
                             method: 'POST',
                             url: apiIP + '/api/analysisresult/add?token=' + vm.adminToken,
@@ -93,7 +92,6 @@
         vm.refreshVisitList = function () {
             $http.get(apiIP + '/api/donationvisit/getpendingvisits?token=' + vm.adminToken).then(function (response) {
                 vm.visits = response.data;
-                vm.refreshVisitList();
             }, function (reason) {
             });
         };
