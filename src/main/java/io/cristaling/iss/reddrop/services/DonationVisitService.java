@@ -3,6 +3,7 @@ package io.cristaling.iss.reddrop.services;
 import io.cristaling.iss.reddrop.core.*;
 import io.cristaling.iss.reddrop.repositories.*;
 import io.cristaling.iss.reddrop.utils.enums.BloodBagStatus;
+import io.cristaling.iss.reddrop.web.responses.DonationVisitResponse;
 import io.cristaling.iss.reddrop.web.utils.UUIDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -98,4 +99,21 @@ public class DonationVisitService {
 
         return true;
     }
+
+	public List<DonationVisitResponse> getVisitsWithBagStatusByDonator(UUID donatorUUID) {
+        List<DonationVisit> donationVisits = donationVisitRepository.getDonationVisitsByDonatorAndDone(donatorUUID, true);
+        List<DonationVisitResponse> result = new ArrayList<>();
+
+        for (DonationVisit donationVisit : donationVisits) {
+            BloodBag bloodBag = bloodBagRepository.getBloodBagByDonationVisit(donationVisit.getUuid());
+
+            DonationVisitResponse donationVisitResponse = new DonationVisitResponse();
+            donationVisitResponse.setDonationVisit(donationVisit);
+            donationVisitResponse.setBloodBagStatus(bloodBag.getBloodBagStatus());
+
+            result.add(donationVisitResponse);
+        }
+
+        return result;
+	}
 }
