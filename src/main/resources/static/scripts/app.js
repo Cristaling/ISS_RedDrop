@@ -52,6 +52,11 @@
                 controller: 'DoctorCRUDController',
                 controllerAs: 'ctrl'
             })
+            .when("/admin/bloodanalysis/", {
+                templateUrl: "views/admin/BloodAnalysisPage.html",
+                controller: 'AdminBloodAnalysisController',
+                controllerAs: 'ctrl'
+            })
             .otherwise({redirectTo: "/landing"});
     });
     app.config(function ($mdThemingProvider) {
