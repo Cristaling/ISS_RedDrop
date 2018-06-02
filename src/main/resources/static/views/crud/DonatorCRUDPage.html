@@ -19,7 +19,7 @@
                 </div>
                 <div class="panel-body">
                     <md-list>
-                        <md-list-item ng-click="null">
+                        <md-list-item>
                             <div class="col-md-2">
                                 CNP
                             </div>
@@ -33,6 +33,7 @@
                                 Options
                             </div>
                         </md-list-item>
+                        <md-divider ></md-divider>
                         <md-list-item ng-repeat="donator in ctrl.donators" ng-click="null">
                             <div class="col-md-2">
                                 {{ donator.cnp }}

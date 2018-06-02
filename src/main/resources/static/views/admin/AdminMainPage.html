@@ -17,13 +17,14 @@
                 </div>
                 <div class="panel-body">
                     <md-list>
-                        <md-list-item ng-click="null">
+                        <md-list-item>
                             <div class="col-md-3">Blood Type</div>
                             <div class="col-md-3" ng-repeat="bagType in ctrl.bloodBagTypes | orderBy:'name':true"
                                  style="text-align: center">
                                 {{bagType.name }}
                             </div>
                         </md-list-item>
+                        <md-divider ></md-divider>
                         <md-list-item ng-repeat="bloodStock in ctrl.bloodStocks | orderBy:'bloodType.type'"
                                       ng-click="null">
                             <div class="col-md-3">{{bloodStock.bloodType.type}}</div>
