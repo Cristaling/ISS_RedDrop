@@ -19,8 +19,22 @@
                 </div>
                 <div class="panel-body">
                     <md-list>
+                        <md-list-item>
+                            <div class="col-md-3">
+                                Full Name
+                            </div>
+                            <div class="col-md-8">
+
+                            </div>
+                            <div class="col-md-1">
+                                Options
+                            </div>
+                        </md-list-item>
+                        <md-divider ></md-divider>
                         <md-list-item ng-repeat="doctor in ctrl.doctors" ng-click="null">
-                            <p>{{ doctor.fullName }}</p>
+                            <div class="col-md-3">
+                                {{ doctor.fullName }}
+                            </div>
                             <div class="md-secondary" aria-label="Delete Doctor" ng-click="ctrl.deleteDoctor(doctor.uuid)">
                                 <i class="material-icons">delete</i>
                             </div>

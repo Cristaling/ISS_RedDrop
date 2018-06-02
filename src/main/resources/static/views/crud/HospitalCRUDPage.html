@@ -19,9 +19,35 @@
                 </div>
                 <div class="panel-body">
                     <md-list>
+                        <md-list-item>
+                            <div class="col-md-3">
+                                Name
+                            </div>
+                            <div class="col-md-3">
+                                City
+                            </div>
+                            <div class="col-md-3">
+                                County
+                            </div>
+                            <div class="col-md-2">
+
+                            </div>
+                            <div class="col-md-1">
+                                Options
+                            </div>
+                        </md-list-item>
+                        <md-divider ></md-divider>
                         <md-list-item ng-repeat="hospital in ctrl.hospitals"
                                       ng-click="ctrl.goToHospitalPage(hospital.uuid)">
-                            <p>{{ hospital.name }}</p>
+                            <div class="col-md-3">
+                                {{ hospital.name }}
+                            </div>
+                            <div class="col-md-3">
+                                {{ hospital.city }}
+                            </div>
+                            <div class="col-md-3">
+                                {{ hospital.county }}
+                            </div>
                             <div class="md-secondary" aria-label="Add Doctor"
                                  ng-click="ctrl.openRegisterDoctorDialog(hospital.uuid)">
                                 <i class="material-icons">person_add</i>
