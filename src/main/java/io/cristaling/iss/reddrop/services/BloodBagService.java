@@ -26,7 +26,6 @@ public class BloodBagService {
     BloodBagRepository bloodBagRepository;
     BloodTypeRepository bloodTypeRepository;
     BloodBagTypeRepository bloodBagTypeRepository;
-
     DonationVisitRepository donationVisitRepository;
     DonatorRepository donatorRepository;
 
@@ -69,16 +68,7 @@ public class BloodBagService {
     }
 
     public void addBloodBag(BloodBag bloodBag) {
-        if (bloodBag.getDonationVisit() != null) {
 
-            DonationVisit donationVisit = donationVisitRepository.getOne(bloodBag.getDonationVisit());
-            Donator donator = donatorRepository.getOne(donationVisit.getDonator());
-
-            if (donator.getBloodType() == null) {
-                donator.setBloodType(bloodBag.getBloodType());
-                donatorRepository.save(donator);
-            }
-        }
 
         bloodBag.setUuid(UUID.randomUUID());
         bloodBag.setBloodBagStatus(BloodBagStatus.UNTESTED);

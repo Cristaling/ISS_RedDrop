@@ -12,7 +12,11 @@
 
         vm.goToHospitalsPage = function () {
             $location.path("/crud/hospital");
-        }
+        };
+
+        vm.goToFillAnalysisPage=function () {
+            $location.path("/admin/bloodanalysis")
+        };
 
         vm.visits = [];
         vm.requests = [];

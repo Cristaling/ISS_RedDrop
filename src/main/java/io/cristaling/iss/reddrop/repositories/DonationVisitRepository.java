@@ -11,6 +11,7 @@ import java.util.UUID;
 public interface DonationVisitRepository extends JpaRepository<DonationVisit,UUID>{
 
 	List<DonationVisit> getDonationVisitsByDonatorAndDone(UUID uuid, boolean done);
+	List<DonationVisit> getDonationVisitsByDone(boolean done);
 
 	List<DonationVisit> getDonationVisitsByDonatorOrderByDate(UUID uuid);
 	List<DonationVisit> getDonationVisitsByDonatorAndDoneOrderByDate(UUID uuid, boolean done);

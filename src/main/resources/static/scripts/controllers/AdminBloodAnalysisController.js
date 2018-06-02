@@ -91,7 +91,7 @@
         };
 
         vm.refreshVisitList = function () {
-            $http.get(apiIP + '/api/donationvisit/getall?token=' + vm.adminToken).then(function (response) {
+            $http.get(apiIP + '/api/donationvisit/getunvisitedvisits?token=' + vm.adminToken).then(function (response) {
                 vm.visits = response.data;
             }, function (reason) {
             });
