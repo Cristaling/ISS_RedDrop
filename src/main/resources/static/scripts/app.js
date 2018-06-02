@@ -27,6 +27,11 @@
                 controller: 'DonatorMainController',
                 controllerAs: 'ctrl'
             })
+            .when("/donator/analysis/:visitToken", {
+                templateUrl: "views/donator/AnalysisShowPage.html",
+                controller: 'AnalysisShowController',
+                controllerAs: 'ctrl'
+            })
             .when("/admin/login", {
                 templateUrl: "views/login/AdminLoginPage.html",
                 controller: 'AdminLoginController',

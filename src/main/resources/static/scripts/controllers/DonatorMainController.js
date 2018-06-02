@@ -9,10 +9,15 @@
         if (!vm.donatorToken) {
             $location.path("/donator/login");
         }
+
         vm.visits = [];
         vm.lastDate= "";
         vm.minDate="";
         vm.maxDate="";
+
+        vm.goToAnalysisPage = function (visitToken) {
+            $location.path("/donator/analysis/" + visitToken);
+        };
 
         vm.setVisit = function () {
             $http({
