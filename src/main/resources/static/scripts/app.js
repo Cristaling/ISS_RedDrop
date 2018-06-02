@@ -62,6 +62,11 @@
                 controller: 'HospitalCRUDController',
                 controllerAs: 'ctrl'
             })
+            .when("/crud/donator", {
+                templateUrl: "views/crud/DonatorCRUDPage.html",
+                controller: 'DonatorCRUDController',
+                controllerAs: 'ctrl'
+            })
             .when("/admin/bloodanalysis/", {
                 templateUrl: "views/admin/BloodAnalysisPage.html",
                 controller: 'AdminBloodAnalysisController',

@@ -14,6 +14,10 @@
             $location.path("/crud/hospital");
         };
 
+        vm.goToDonatorsPage = function () {
+            $location.path("/crud/donator");
+        };
+
         vm.goToFillAnalysisPage=function () {
             $location.path("/admin/bloodanalysis")
         };
