@@ -1,7 +1,7 @@
 (function () {
     'use strict'
     var app = angular.module('RedDrop');
-    app.controller('DonatorMainController', ['$location', '$cookies', '$http', '$mdDialog', 'apiIP', function ($location, $cookies, $http, $mdDialog, apiIP) {
+    app.controller('DonatorMainController', ['$location', '$cookies', '$http', '$mdDialog', '$mdToast', 'apiIP', function ($location, $cookies, $http, $mdDialog, $mdToast, apiIP) {
         var vm = this;
 
         vm.donatorToken = $cookies.get("donatorToken");
@@ -15,8 +15,21 @@
         vm.minDate="";
         vm.maxDate="";
 
-        vm.goToAnalysisPage = function (visitToken) {
-            $location.path("/donator/analysis/" + visitToken);
+        vm.goToAnalysisPage = function (visit) {
+
+            if (visit.bloodBagStatus.type == "UNTESTED") {
+
+                $mdToast.show(
+                    $mdToast.simple()
+                        .textContent('This blood bag was not tested yet!')
+                        .position('top right')
+                        .hideDelay(3000)
+                ).then(function (value) {  }, function (reason) {  });
+
+                return;
+            }
+
+            $location.path("/donator/analysis/" + visit.uuid);
         };
 
         vm.setVisit = function () {

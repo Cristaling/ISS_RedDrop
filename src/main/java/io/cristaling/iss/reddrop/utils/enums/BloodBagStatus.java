@@ -1,5 +1,9 @@
 package io.cristaling.iss.reddrop.utils.enums;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.cristaling.iss.reddrop.utils.BloodBagStatusSerializer;
+
+@JsonSerialize(using = BloodBagStatusSerializer.class)
 public enum BloodBagStatus {
 
 	UNTESTED("Untested"),

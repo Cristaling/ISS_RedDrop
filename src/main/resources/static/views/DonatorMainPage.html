@@ -9,8 +9,9 @@
             </div>
             <div class="panel-body">
                 <md-list>
-                    <md-list-item ng-repeat="visit in ctrl.visits" ng-click="ctrl.goToAnalysisPage(visit.uuid)">
-                        <p>{{ visit.date }} - {{ visit.bloodBagStatus }}</p>
+                    <md-list-item ng-repeat="visit in ctrl.visits" ng-click="ctrl.goToAnalysisPage(visit)">
+                        <p>{{ visit.date | date:"dd/MM/yyyy" }}</p>
+                        <span class="badge badge-light">{{ visit.bloodBagStatus.name }}</span>
                     </md-list-item>
                 </md-list>
             </div>
