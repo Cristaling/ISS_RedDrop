@@ -31,11 +31,18 @@ public class BloodBagService {
     DonatorRepository donatorRepository;
 
     @Autowired
-    public BloodBagService(BloodBagRepository bloodBagRepository, BloodTypeRepository bloodTypeRepository,BloodBagTypeRepository bloodBagTypeRepository) {
-        this.bloodTypeRepository=bloodTypeRepository;
+    public BloodBagService(BloodBagRepository bloodBagRepository,
+                           BloodTypeRepository bloodTypeRepository,
+                           BloodBagTypeRepository bloodBagTypeRepository,
+                           DonationVisitRepository donationVisitRepository,
+                           DonatorRepository donatorRepository) {
         this.bloodBagRepository = bloodBagRepository;
-        this.bloodBagTypeRepository=bloodBagTypeRepository;
+        this.bloodTypeRepository = bloodTypeRepository;
+        this.bloodBagTypeRepository = bloodBagTypeRepository;
+        this.donationVisitRepository = donationVisitRepository;
+        this.donatorRepository = donatorRepository;
     }
+
 
     public List<BloodStock> getBloodStockAsList() {
         return new ArrayList<>(getBloodStockAsMap().values());

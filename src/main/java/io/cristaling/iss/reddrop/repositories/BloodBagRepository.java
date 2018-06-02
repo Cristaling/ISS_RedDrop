@@ -14,4 +14,6 @@ public interface BloodBagRepository extends JpaRepository<BloodBag,UUID>{
 	List<BloodBag> getBloodBagsByBloodBagTypeAndBloodType(UUID bloodBagType, UUID bloodType);
 	List<BloodBag> getBloodBagsByBloodBagStatusAndBloodBagTypeAndBloodType(BloodBagStatus bloodBagStatus, UUID bloodBagType, UUID bloodType);
 
+	BloodBag getBloodBagByDonationVisit(UUID donationVisit);
+
 }
