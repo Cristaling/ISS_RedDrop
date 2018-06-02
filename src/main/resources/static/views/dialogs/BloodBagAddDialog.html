@@ -1,35 +1,33 @@
-<div class="panel panel-reddrop" style="margin-bottom: 0px; width: 50vw;">
+<div class="panel panel-reddrop" style="margin-bottom: 0px;">
     <div class="panel-heading">
         Fill the Form for a new Blood Bag
     </div>
     <div class="panel-body">
         <form class="col-md-12">
-            <div class="form-group col-md-12">
 
-                <div class="form-group col-md-6">
-                    <label for="bagBloodType">Blood Type</label>
-                    <select ng-model="ctrl.bagBloodType" ng-not-empty ng-options="bloodType.type for bloodType in ctrl.bloodTypes track by bloodType.uuid"
-                            class="form-control" id="bagBloodType"
-                            placeholder="BloodType">
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="bagType">Bag Type</label>
-                    <select ng-model="ctrl.bagType" ng-not-empty ng-options="bagType.name for bagType in ctrl.bagTypes track by bagType.uuid"
-                            class="form-control" id="bagType"
-                            placeholder="BagType">
-                    </select>
-                </div>
-
+            <div class="form-group">
+                <label for="bagBloodType">Blood Type</label>
+                <select ng-model="ctrl.bagBloodType" ng-options="bloodType.type for bloodType in ctrl.bloodTypes track by bloodType.uuid"
+                        class="form-control" id="bagBloodType"
+                        placeholder="BloodType">
+                </select>
             </div>
 
-            <div class="form-group col-md-12">
+            <div class="form-group">
+                <label for="bagType">Bag Type</label>
+                <select ng-model="ctrl.bagType" ng-options="bagType.name for bagType in ctrl.bagTypes track by bagType.uuid"
+                        class="form-control" id="bagType"
+                        placeholder="BagType">
+                </select>
+            </div>
+
+            <div class="form-group">
                 <div class="btn-lg btn-reddrop" style="text-align: center"
                      ng-click="ctrl.tryRegisterBag()">
                     Register
                 </div>
             </div>
+
         </form>
     </div>
 </div>

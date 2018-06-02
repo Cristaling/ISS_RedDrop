@@ -7,7 +7,7 @@
 
             <div class="form-group col-md-12">
                 <label for="patientType">Blood Type</label>
-                <select ng-model="ctrl.patientBloodType" ng-not-empty ng-options="bloodType.type for bloodType in ctrl.bloodTypes track by bloodType.uuid"
+                <select ng-model="ctrl.patientBloodType" ng-options="bloodType.type for bloodType in ctrl.bloodTypes track by bloodType.uuid"
                         class="form-control" id="patientType"
                         placeholder="BloodType">
                 </select>
