@@ -43,8 +43,13 @@
                 controllerAs: 'ctrl'
             })
             .when("/admin/requests", {
-                templateUrl: "views/RequestManagementPage.html",
+                templateUrl: "views/admin/RequestManagementPage.html",
                 controller: 'RequestManagementController',
+                controllerAs: 'ctrl'
+            })
+            .when("/admin/visits", {
+                templateUrl: "views/admin/VisitManagementPage.html",
+                controller: 'VisitManagementController',
                 controllerAs: 'ctrl'
             })
             .when("/doctor/login", {

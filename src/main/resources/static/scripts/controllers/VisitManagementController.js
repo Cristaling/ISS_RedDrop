@@ -1,7 +1,7 @@
 (function () {
     'use strict'
     var app = angular.module('RedDrop');
-    app.controller('AdminMainController', ['$location', '$cookies', '$http', '$mdDialog', 'apiIP', function ($location, $cookies, $http, $mdDialog, apiIP) {
+    app.controller('VisitManagementController', ['$location', '$cookies', '$http', '$mdDialog', 'apiIP', function ($location, $cookies, $http, $mdDialog, apiIP) {
         var vm = this;
 
         vm.adminToken = $cookies.get("adminToken");
@@ -9,26 +9,6 @@
         if (!vm.adminToken) {
             $location.path("/admin/login");
         }
-
-        vm.goToHospitalsPage = function () {
-            $location.path("/crud/hospital");
-        };
-
-        vm.goToDonatorsPage = function () {
-            $location.path("/crud/donator");
-        };
-
-        vm.goToRequestsPage = function () {
-            $location.path("/admin/requests");
-        };
-
-        vm.goToVisitsPage = function () {
-            $location.path("/admin/visits");
-        };
-
-        vm.goToFillAnalysisPage=function () {
-            $location.path("/admin/bloodanalysis")
-        };
 
         vm.visits = [];
         vm.bloodStocks = [];
@@ -62,7 +42,7 @@
             }
             return "";
         };
-        
+
         vm.convertStock = function (stock) {
             var result = [];
             for (var bagStock in stock) {
@@ -74,7 +54,7 @@
             }
             return result;
         };
-        
+
         vm.confirmVisitDialog=function (donationVisitToken) {
             $http.get(apiIP + '/api/donationvisit/markdone?token=' + vm.adminToken+"&donationVisitUUID="+donationVisitToken).then(function (response) {
                 if(!response.data.successful) {
@@ -115,24 +95,13 @@
             }, function (reason) {
 
             });
-
-            
-        }
-
-        vm.openAddBloodBagDialog=function(){
-            $mdDialog.show({
-                controller: 'BloodBagAddController',
-                controllerAs: 'ctrl',
-                templateUrl: '/views/dialogs/BloodBagAddDialog.html',
-                parent: angular.element(document.body),
-                clickOutsideToClose: true
-            }).then();
         };
 
-        vm.refreshVisitList = function () {
-            $http.get(apiIP + '/api/donationvisit/getunvisitedvisits?token=' + vm.adminToken).then(function (response) {
-                vm.visits = response.data;
+        vm.deleteDonationVisit= function (visitId) {
+            $http.get(apiIP + '/api/donationvisit/delete?token=' + vm.adminToken + '&uuid=' + visitId).then(function (response) {
+                vm.refreshVisitList();
             }, function (reason) {
+                vm.refreshVisitList();
             });
         };
 
@@ -146,24 +115,15 @@
             });
         };
 
-        vm.deleteDonationVisit= function (visitId) {
-            $http.get(apiIP + '/api/donationvisit/delete?token=' + vm.adminToken + '&uuid=' + visitId).then(function (response) {
-                vm.refreshVisitList();
-            }, function (reason) {
-                vm.refreshVisitList();
-            });
-        };
-
-        vm.refreshRequestList = function () {
-            $http.get(apiIP + '/api/bloodrequest/getall?token=' + vm.adminToken).then(function (response) {
-                vm.requests = response.data;
+        vm.refreshVisitList = function () {
+            $http.get(apiIP + '/api/donationvisit/getunvisitedvisits?token=' + vm.adminToken).then(function (response) {
+                vm.visits = response.data;
             }, function (reason) {
             });
         };
 
         vm.refreshBloodBagStocks();
         vm.refreshVisitList();
-        vm.refreshRequestList();
 
     }]);
 })();
