@@ -68,4 +68,7 @@ public class DonatorService {
         return lastVisit;
     }
 
+	public List<Donator> getAllDonators() {
+        return donatorRepository.findAll();
+	}
 }

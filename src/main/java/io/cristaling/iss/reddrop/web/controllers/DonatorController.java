@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @CrossOrigin
@@ -42,6 +43,14 @@ public class DonatorController {
 			donator.setUuid(UUID.randomUUID());
 		}
 		donatorService.registerDonator(donator);
+	}
+
+	@RequestMapping("/getall")
+	public List<Donator> getAllHospitals(String token) {
+		if (!permissionsService.hasPermission(token, Permission.ADMIN)) {
+			return null;
+		}
+		return donatorService.getAllDonators();
 	}
 
 	@RequestMapping("/getnextvisit")
