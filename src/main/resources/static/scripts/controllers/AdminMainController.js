@@ -10,8 +10,8 @@
             $location.path("/admin/login");
         }
 
-        vm.goToHospitalPage = function (hospitalToken) {
-            $location.path("/crud/doctor/" + hospitalToken);
+        vm.goToHospitalsPage = function () {
+            $location.path("/crud/hospital");
         }
 
         vm.hospitals = [];
