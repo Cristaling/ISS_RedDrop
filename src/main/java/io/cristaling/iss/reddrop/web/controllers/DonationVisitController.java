@@ -96,4 +96,13 @@ public class DonationVisitController {
         response.setSuccessful(donationVisitService.markDonationVisitDone(actualUuid, bloodTypeUUID));
         return response;
     }
+
+    @RequestMapping("/getpendingvisits")
+    public List<DonationVisit> getPendingVisits(String token){
+        if (!permissionsService.hasPermission(token, Permission.ADMIN)) {
+            return null;
+        }
+        return donationVisitService.getUnanalyzedVisitedVisits();
+
+    }
 }

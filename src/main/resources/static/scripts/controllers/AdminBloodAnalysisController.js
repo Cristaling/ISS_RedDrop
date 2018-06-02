@@ -77,7 +77,7 @@
                 templateUrl: '/views/directives/FillAnalysisResultDirective.html',
                 parent: angular.element(document.body),
                 clickOutsideToClose: true
-            }).then();
+            }).then(vm.refreshVisitList,vm.refreshVisitList);
         };
 
         vm.openAddBloodBagDialog=function(){
@@ -91,8 +91,9 @@
         };
 
         vm.refreshVisitList = function () {
-            $http.get(apiIP + '/api/donationvisit/getunvisitedvisits?token=' + vm.adminToken).then(function (response) {
+            $http.get(apiIP + '/api/donationvisit/getpendingvisits?token=' + vm.adminToken).then(function (response) {
                 vm.visits = response.data;
+                vm.refreshVisitList();
             }, function (reason) {
             });
         };

@@ -19,64 +19,67 @@ import java.util.UUID;
 @Service
 public class AnalysisResultService {
 
-	AnalysisResultRepository analysisResultRepository;
-	DonationVisitRepository donationVisitRepository;
-	BloodBagRepository bloodBagRepository;
+    AnalysisResultRepository analysisResultRepository;
+    DonationVisitRepository donationVisitRepository;
+    BloodBagRepository bloodBagRepository;
 
-	@Autowired
-	public AnalysisResultService(AnalysisResultRepository analysisResultRepository, DonationVisitRepository donationVisitRepository, BloodBagRepository bloodBagRepository) {
-		this.analysisResultRepository = analysisResultRepository;
-		this.donationVisitRepository = donationVisitRepository;
-		this.bloodBagRepository = bloodBagRepository;
-	}
+    @Autowired
+    public AnalysisResultService(AnalysisResultRepository analysisResultRepository, DonationVisitRepository donationVisitRepository, BloodBagRepository bloodBagRepository) {
+        this.analysisResultRepository = analysisResultRepository;
+        this.donationVisitRepository = donationVisitRepository;
+        this.bloodBagRepository = bloodBagRepository;
+    }
 
-	public boolean addAnalysis(AnalysisResult analysisResult) {
-		boolean goodValues = true;
-		if (analysisResult.getUuid() == null) {
-			analysisResult.setUuid(UUID.randomUUID());
-		}
-		if (analysisResult.getSodium() < 135 || analysisResult.getSodium() > 145) {
-			goodValues = false;
-		}
-		if (analysisResult.getCreatinine() < 53 || analysisResult.getCreatinine() > 114.9) {
-			goodValues = false;
-		}
-		if (analysisResult.getGlucose() < 3.9 || analysisResult.getGlucose() > 5.6) {
-			goodValues = false;
-		}
-		if (analysisResult.getPotassium() < 3.70 || analysisResult.getPotassium() > 5.20) {
-			goodValues = false;
-		}
-		if (analysisResult.getUrea() < 2.14 || analysisResult.getUrea() > 7.14) {
-			goodValues = false;
-		}
+    public void addAnalysis(AnalysisResult analysisResult) {
+        if (analysisResult.getUuid() == null) {
+            analysisResult.setUuid(UUID.randomUUID());
+        }
 
-		analysisResultRepository.save(analysisResult);
+        analysisResultRepository.save(analysisResult);
 
-		BloodBag bloodBag = bloodBagRepository.getBloodBagByDonationVisit(analysisResult.getDonationVisit());
+        BloodBag bloodBag = bloodBagRepository.getBloodBagByDonationVisit(analysisResult.getDonationVisit());
 
-		if (goodValues) {
-			bloodBag.setBloodBagStatus(BloodBagStatus.DEPOSITED);
-		} else {
-			bloodBag.setBloodBagStatus(BloodBagStatus.REFUSED);
-		}
+        if (checkAnalysisValues(analysisResult)) {
+            bloodBag.setBloodBagStatus(BloodBagStatus.DEPOSITED);
+        } else {
+            bloodBag.setBloodBagStatus(BloodBagStatus.REFUSED);
+        }
 
-		bloodBagRepository.save(bloodBag);
+        bloodBagRepository.save(bloodBag);
 
-		return goodValues;
-	}
 
-	public List<AnalysisResult> getAllForDonator(UUID donatorUUID) {
-		List<DonationVisit> visits = donationVisitRepository.getDonationVisitsByDonatorAndDone(donatorUUID, true);
-		List<UUID> visitsUuids = new ArrayList<>();
-		for (DonationVisit donationVisit : visits) {
-			visitsUuids.add(donationVisit.getUuid());
-		}
-		return analysisResultRepository.getAnalysisResultsByDonationVisitIn(visitsUuids);
+    }
 
-	}
+    public List<AnalysisResult> getAllForDonator(UUID donatorUUID) {
+        List<DonationVisit> visits = donationVisitRepository.getDonationVisitsByDonatorAndDone(donatorUUID, true);
+        List<UUID> visitsUuids = new ArrayList<>();
+        for (DonationVisit donationVisit : visits) {
+            visitsUuids.add(donationVisit.getUuid());
+        }
+        return analysisResultRepository.getAnalysisResultsByDonationVisitIn(visitsUuids);
 
-	public AnalysisResult getByDonationVisit(UUID actualUuid) {
-		return analysisResultRepository.getAnalysisResultByDonationVisit(actualUuid);
-	}
+    }
+
+    public AnalysisResult getByDonationVisit(UUID actualUuid) {
+        return analysisResultRepository.getAnalysisResultByDonationVisit(actualUuid);
+    }
+
+    private boolean checkAnalysisValues(AnalysisResult analysisResult) {
+        if (analysisResult.getSodium() < 135 || analysisResult.getSodium() > 145) {
+            return false;
+        }
+        if (analysisResult.getCreatinine() < 53 || analysisResult.getCreatinine() > 114.9) {
+            return false;
+        }
+        if (analysisResult.getGlucose() < 3.9 || analysisResult.getGlucose() > 5.6) {
+            return false;
+        }
+        if (analysisResult.getPotassium() < 3.70 || analysisResult.getPotassium() > 5.20) {
+            return false;
+        }
+        if (analysisResult.getUrea() < 2.14 || analysisResult.getUrea() > 7.14) {
+            return false;
+        }
+        return true;
+    }
 }

@@ -8,6 +8,7 @@ import io.cristaling.iss.reddrop.web.utils.UUIDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.*;
 
 @Service
@@ -107,7 +108,7 @@ public class DonationVisitService {
         return true;
     }
 
-	public List<DonationVisitResponse> getVisitsWithBagStatusByDonator(UUID donatorUUID) {
+    public List<DonationVisitResponse> getVisitsWithBagStatusByDonator(UUID donatorUUID) {
         List<DonationVisit> donationVisits = donationVisitRepository.getDonationVisitsByDonatorAndDone(donatorUUID, true);
         List<DonationVisitResponse> result = new ArrayList<>();
 
@@ -122,5 +123,17 @@ public class DonationVisitService {
         }
 
         return result;
-	}
+    }
+
+    public List<DonationVisit> getUnanalyzedVisitedVisits() {
+        List<DonationVisit> donationVisits = donationVisitRepository.getDonationVisitsByDone(true);
+        List<DonationVisit> pendings = new ArrayList<>();
+        for (DonationVisit donationVisit : donationVisits) {
+            BloodBag bloodBag = bloodBagRepository.getBloodBagByDonationVisit(donationVisit.getUuid());
+            if (bloodBag.getBloodBagStatus() == BloodBagStatus.UNTESTED) {
+                pendings.add(donationVisit);
+            }
+        }
+        return pendings;
+    }
 }

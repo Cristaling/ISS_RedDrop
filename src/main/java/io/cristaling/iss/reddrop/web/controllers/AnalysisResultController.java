@@ -27,11 +27,12 @@ public class AnalysisResultController {
     }
 
     @RequestMapping("/add")
-    public boolean addAnalysis(String token,@RequestBody AnalysisResult analysisResult){
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void addAnalysis(String token,@RequestBody AnalysisResult analysisResult){
         if (!permissionsService.hasPermission(token, Permission.ADMIN)) {
-            return false;
+            return;
         }
-        return analysisResultService.addAnalysis(analysisResult);
+        analysisResultService.addAnalysis(analysisResult);
     }
 
     @RequestMapping("/getbydonator")
