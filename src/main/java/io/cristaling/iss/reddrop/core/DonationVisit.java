@@ -19,6 +19,8 @@ public class DonationVisit {
     String donatorName;
     @Column
     Date date;
+    @Column
+    boolean done;
 
     public String getDonatorName() {
         return donatorName;
@@ -50,5 +52,13 @@ public class DonationVisit {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public boolean isDone() {
+        return done;
+    }
+
+    public void setDone(boolean done) {
+        this.done = done;
     }
 }

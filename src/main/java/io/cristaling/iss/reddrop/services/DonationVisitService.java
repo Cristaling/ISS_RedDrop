@@ -17,50 +17,50 @@ import java.util.UUID;
 @Service
 public class DonationVisitService {
 
-    DonationVisitRepository donationVisitRepository;
-    DonatorRepository donatorRepository;
-    AnalysisResultRepository analysisResultRepository;
+	DonationVisitRepository donationVisitRepository;
+	DonatorRepository donatorRepository;
+	AnalysisResultRepository analysisResultRepository;
 
-    @Autowired
-    public DonationVisitService(DonationVisitRepository donationVisitRepository,DonatorRepository donatorRepository,AnalysisResultRepository analysisResultRepository) {
-        this.donatorRepository=donatorRepository;
-        this.donationVisitRepository = donationVisitRepository;
-        this.analysisResultRepository=analysisResultRepository;
-    }
+	@Autowired
+	public DonationVisitService(DonationVisitRepository donationVisitRepository, DonatorRepository donatorRepository, AnalysisResultRepository analysisResultRepository) {
+		this.donatorRepository = donatorRepository;
+		this.donationVisitRepository = donationVisitRepository;
+		this.analysisResultRepository = analysisResultRepository;
+	}
 
-    public void addDonationVisit(DonationVisit donationVisit){
-        donationVisit.getDate().setTime(donationVisit.getDate().getTime()+10800001);
-        if (donationVisit.getUuid() == null) {
-            donationVisit.setUuid(UUID.randomUUID());
-        }
-        Donator donator=donatorRepository.getOne(donationVisit.getDonator());
-        donationVisit.setDonatorName(donator.getNume()+" "+donator.getPrenume());
-        donationVisitRepository.save(donationVisit);
-    }
+	public void addDonationVisit(DonationVisit donationVisit) {
+		donationVisit.getDate().setTime(donationVisit.getDate().getTime() + 10800001);
+		if (donationVisit.getUuid() == null) {
+			donationVisit.setUuid(UUID.randomUUID());
+		}
+		Donator donator = donatorRepository.getOne(donationVisit.getDonator());
+		donationVisit.setDonatorName(donator.getNume() + " " + donator.getPrenume());
+		donationVisitRepository.save(donationVisit);
+	}
 
-    public void deleteDonationVisitById(UUID donationVisit){
-        donationVisitRepository.deleteById(donationVisit);
-    }
+	public void deleteDonationVisitById(UUID donationVisit) {
+		donationVisitRepository.deleteById(donationVisit);
+	}
 
-    public List<DonationVisit> getVisitsSorted(){
-        List<DonationVisit> result = donationVisitRepository.findAll();
-        result.sort(new Comparator<DonationVisit>() {
-            @Override
-            public int compare(DonationVisit o1, DonationVisit o2) {
-                return (int) (o1.getDate().getTime() - o2.getDate().getTime());
-            }
-        });
-        return result;
-    }
+	public List<DonationVisit> getVisitsSorted() {
+		List<DonationVisit> result = donationVisitRepository.findAll();
+		result.sort(new Comparator<DonationVisit>() {
+			@Override
+			public int compare(DonationVisit o1, DonationVisit o2) {
+				return (int) (o1.getDate().getTime() - o2.getDate().getTime());
+			}
+		});
+		return result;
+	}
 
-    public List<DonationVisit> getVisitsVisited(UUID donatorUUID){
-        List<DonationVisit> visits= donationVisitRepository.getDonationVisitsByDonator(donatorUUID);
-        List<DonationVisit> visited=new ArrayList<>();
-        for(DonationVisit donationVisit: visits){
-            if(analysisResultRepository.getAnalysisResultByDonationVisit(donationVisit.getUuid())!=null){
-                visited.add(donationVisit);
-            }
-        }
-        return visited;
-    }
+	public List<DonationVisit> getVisitsVisited(UUID donatorUUID) {
+		List<DonationVisit> visits = donationVisitRepository.getDonationVisitsByDonatorAndDone(donatorUUID);
+		List<DonationVisit> visited = new ArrayList<>();
+		for (DonationVisit donationVisit : visits) {
+			if (analysisResultRepository.getAnalysisResultByDonationVisit(donationVisit.getUuid()) != null) {
+				visited.add(donationVisit);
+			}
+		}
+		return visited;
+	}
 }

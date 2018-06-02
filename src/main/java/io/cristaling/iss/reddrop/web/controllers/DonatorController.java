@@ -41,7 +41,7 @@ public class DonatorController {
 
 	@RequestMapping("/getnextvisit")
 	public Date getLastVisit(String token){
-		return donatorService.getNextAlvailableDate(UUID.fromString(token));
+		return donatorService.getNextAvailableDate(UUID.fromString(token));
 	}
 
 }

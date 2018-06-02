@@ -54,8 +54,8 @@ public class DonatorService {
         donatorRepository.save(donator);
     }
 
-    public Date getNextAlvailableDate(UUID uuid){
-        List<DonationVisit> donationvisit=donationVisitRepository.getDonationVisitsByDonatorOrderByDate(uuid);
+    public Date getNextAvailableDate(UUID uuid){
+        List<DonationVisit> donationvisit = donationVisitRepository.getDonationVisitsByDonatorOrderByDate(uuid);
         if(donationvisit.isEmpty()){
             return new Date();
         }
