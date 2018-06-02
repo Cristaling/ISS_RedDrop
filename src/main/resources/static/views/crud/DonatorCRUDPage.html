@@ -19,9 +19,28 @@
                 </div>
                 <div class="panel-body">
                     <md-list>
-                        <md-list-item ng-repeat="donator in ctrl.donators"
-                                      ng-click="ctrl.goToHospitalPage(hospital.uuid)">
-                            <p>{{ donator.cnp }} - {{donator.nume}} {{donator.prenume}}</p>
+                        <md-list-item ng-click="null">
+                            <div class="col-md-2">
+                                CNP
+                            </div>
+                            <div class="col-md-3">
+                                Full Name
+                            </div>
+                            <div class="col-md-6">
+
+                            </div>
+                            <div class="col-md-1">
+                                Options
+                            </div>
+                        </md-list-item>
+                        <md-list-item ng-repeat="donator in ctrl.donators" ng-click="null">
+                            <div class="col-md-2">
+                                {{ donator.cnp }}
+                            </div>
+                            <div class="col-md-3">
+                                {{donator.nume}} {{donator.prenume}}
+                            </div>
+                            <!--<p>{{ donator.cnp }} - {{donator.nume}} {{donator.prenume}}</p>-->
                             <div class="md-secondary" aria-label="Delete Donator"
                                  ng-click="ctrl.deleteDonator(donator.uuid)">
                                 <i class="material-icons">delete</i>
