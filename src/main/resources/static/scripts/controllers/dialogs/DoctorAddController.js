@@ -17,6 +17,11 @@
                 $location.path("/admin/login");
             }
 
+            $('#registerform').submit(function(event){
+                event.preventDefault();
+                vm.addDoctor();
+            });
+
             vm.addDoctor = function () {
                 $http({
                     method: 'POST',

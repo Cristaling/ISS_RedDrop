@@ -6,26 +6,24 @@
         <form>
             <div class="form-group">
                 <label for="hospitalName">Name</label>
-                <input ng-model="ctrl.hospitalName" type="text" minlength="3" class="form-control" id="hospitalName"
+                <input ng-model="ctrl.hospitalName" type="text" required minlength="3" class="form-control" id="hospitalName"
                        placeholder="Hospital Name">
             </div>
 
             <div class="form-group">
                 <label for="hospitalCounty">County</label>
-                <input ng-model="ctrl.hospitalCounty" type="text" minlength="4" class="form-control" id="hospitalCounty"
+                <input ng-model="ctrl.hospitalCounty" type="text" required minlength="4" class="form-control" id="hospitalCounty"
                        placeholder="County">
             </div>
 
             <div class="form-group">
                 <label for="hospitalCity">City</label>
-                <input ng-model="ctrl.hospitalCity" type="text" class="form-control" id="hospitalCity"
+                <input ng-model="ctrl.hospitalCity" type="text" required minlength="4" class="form-control" id="hospitalCity"
                        placeholder="City">
             </div>
 
-            <div class="btn-lg btn-reddrop form-group" style="text-align: center"
-                 ng-click="ctrl.addHospital()">
-                Add Hospital
-            </div>
+            <input type="submit" class="btn-lg btn-reddrop col-md-12" value="Add Hospital">
+
         </form>
 
     </div>
