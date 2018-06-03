@@ -63,19 +63,16 @@
                             </div>
                         </md-list-item>
                         <md-divider ></md-divider>
-                        <md-list-item ng-repeat="visit in ctrl.visits | orderBy:'date'" ng-click="null">
+                        <md-list-item ng-repeat="visit in ctrl.visits | orderBy:'date'">
                             <div class="col-md-2">
                                 {{ visit.date | date:"dd/MM/yyyy" }}
                             </div>
                             <div class="col-md-3">
                                 {{ visit.donatorName }}
                             </div>
-                            <div class="md-secondary" aria-label="Confirm Visit"
-                                 ng-click="ctrl.confirmVisitDialog(visit.uuid)">
-                                <i class="material-icons">assignment</i>
-                            </div>
-                            <div class="md-secondary" aria-label="Delete Visit" ng-click="ctrl.deleteDonationVisit(visit.uuid)">
-                                <i class="material-icons">delete</i>
+                            <div class="col-md-7" style="text-align: right">
+                                <i class="material-icons" ng-click="ctrl.confirmVisitDialog(visit.uuid)">assignment</i>
+                                <i class="material-icons" ng-click="ctrl.deleteDonationVisit(visit.uuid)">delete</i>
                             </div>
                         </md-list-item>
                     </md-list>

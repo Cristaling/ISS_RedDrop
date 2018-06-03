@@ -81,4 +81,8 @@ public class DonatorService {
 	public List<Donator> getAllDonators() {
         return donatorRepository.findAll();
 	}
+
+	public void deleteDonator(UUID actualUuid) {
+        donatorRepository.deleteById(actualUuid);
+	}
 }

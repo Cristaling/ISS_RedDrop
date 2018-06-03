@@ -35,8 +35,11 @@
                             <div class="col-md-3">
                                 {{ doctor.fullName }}
                             </div>
-                            <div class="md-secondary" aria-label="Delete Doctor" ng-click="ctrl.deleteDoctor(doctor.uuid)">
-                                <i class="material-icons">delete</i>
+                            <div class="col-md-6">
+
+                            </div>
+                            <div class="col-md-3" style="text-align: right">
+                                <i class="material-icons" ng-click="ctrl.deleteDoctor(doctor.uuid)">delete</i>
                             </div>
                         </md-list-item>
                     </md-list>

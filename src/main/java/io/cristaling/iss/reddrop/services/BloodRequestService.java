@@ -1,13 +1,16 @@
 package io.cristaling.iss.reddrop.services;
 
+import io.cristaling.iss.reddrop.core.BloodBag;
 import io.cristaling.iss.reddrop.core.BloodBagType;
 import io.cristaling.iss.reddrop.core.BloodRequest;
 import io.cristaling.iss.reddrop.core.BloodStock;
 import io.cristaling.iss.reddrop.core.BloodType;
+import io.cristaling.iss.reddrop.repositories.BloodBagRepository;
 import io.cristaling.iss.reddrop.repositories.BloodBagTypeRepository;
 import io.cristaling.iss.reddrop.repositories.BloodRequestRepository;
 import io.cristaling.iss.reddrop.repositories.BloodTypeRepository;
 import io.cristaling.iss.reddrop.utils.StockUtils;
+import io.cristaling.iss.reddrop.utils.enums.BloodBagStatus;
 import io.cristaling.iss.reddrop.utils.enums.BloodRequestStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,14 +29,20 @@ public class BloodRequestService {
     BloodRequestRepository requestRepository;
     BloodTypeRepository bloodTypeRepository;
     BloodBagTypeRepository bloodBagTypeRepository;
+    BloodBagRepository bloodBagRepository;
 
     BloodBagService bloodBagService;
 
     @Autowired
-    public BloodRequestService(BloodRequestRepository requestRepository, BloodTypeRepository bloodTypeRepository, BloodBagTypeRepository bloodBagTypeRepository, BloodBagService bloodBagService) {
+    public BloodRequestService(BloodRequestRepository requestRepository,
+                               BloodTypeRepository bloodTypeRepository,
+                               BloodBagTypeRepository bloodBagTypeRepository,
+                               BloodBagRepository bloodBagRepository,
+                               BloodBagService bloodBagService) {
         this.requestRepository = requestRepository;
         this.bloodTypeRepository = bloodTypeRepository;
         this.bloodBagTypeRepository = bloodBagTypeRepository;
+        this.bloodBagRepository = bloodBagRepository;
         this.bloodBagService = bloodBagService;
     }
 
@@ -76,13 +85,83 @@ public class BloodRequestService {
         for (BloodRequest bloodRequest : result) {
             BloodType bloodType = bloodTypeRepository.getOne(bloodRequest.getBloodType());
             BloodBagType bloodBagType = bloodBagTypeRepository.getOne(bloodRequest.getBloodBagType());
+            BloodBagType wholeBagType = bloodBagTypeRepository.getBloodBagTypeByName("Whole");
             if (StockUtils.hasInStock(stock, bloodType, bloodBagType)) {
                 StockUtils.removeFromStock(stock, bloodType, bloodBagType, 1);
                 bloodRequest.setStatus(BloodRequestStatus.AWAITING_CONFIRMATION);
+                continue;
             }
+            if (StockUtils.hasInStock(stock, bloodType, wholeBagType)) {
+                StockUtils.removeFromStock(stock, bloodType, bloodBagType, 1);
+                bloodRequest.setStatus(BloodRequestStatus.NEEDS_BREAKDOWN);
+                continue;
+            }
+            bloodRequest.setStatus(BloodRequestStatus.UNRESOLVED);
         }
 
         return result;
     }
 
+    public void solveBloodRequest(UUID actualUuid) {
+
+        BloodRequest toSolve = requestRepository.getOne(actualUuid);
+
+        BloodType toSolveBloodType = bloodTypeRepository.getOne(toSolve.getBloodType());
+        BloodBagType toSolveBagType = bloodBagTypeRepository.getOne(toSolve.getBloodBagType());
+        BloodBagType wholeBagType = bloodBagTypeRepository.getBloodBagTypeByName("Whole");
+
+        HashMap<BloodType, BloodStock> stock = bloodBagService.getBloodStockAsMap();
+
+        if (StockUtils.hasInStock(stock, toSolveBloodType, toSolveBagType)) {
+            List<BloodBag> bloodBags = bloodBagRepository.getBloodBagsByBloodBagStatusAndBloodBagTypeAndBloodType(BloodBagStatus.DEPOSITED, toSolveBagType.getUuid(), toSolveBloodType.getUuid());
+            if (bloodBags.size() < 1) {
+                System.out.println("No blood bag");
+                return;
+            }
+            BloodBag toUse = bloodBags.get(0);
+            toUse.setBloodBagStatus(BloodBagStatus.USED);
+            bloodBagRepository.save(toUse);
+            toSolve.setStatus(BloodRequestStatus.COMPLETED);
+            requestRepository.save(toSolve);
+        }
+
+        if (toSolve.getBloodBagType().equals(wholeBagType.getUuid())) {
+            System.out.println("No blood bag");
+            return;
+        }
+
+        List<BloodBag> bloodBags = bloodBagRepository.getBloodBagsByBloodBagStatusAndBloodBagTypeAndBloodType(BloodBagStatus.DEPOSITED, wholeBagType.getUuid(), toSolveBloodType.getUuid());
+
+        if (bloodBags.size() < 1) {
+            System.out.println("No whole blood bag");
+            return;
+        }
+
+        BloodBag toUse = bloodBags.get(0);
+        toUse.setBloodBagStatus(BloodBagStatus.USED);
+        bloodBagRepository.save(toUse);
+        toSolve.setStatus(BloodRequestStatus.COMPLETED);
+        requestRepository.save(toSolve);
+
+        List<BloodBagType> newBagTypes = bloodBagTypeRepository.findAll();
+        newBagTypes.remove(wholeBagType);
+        newBagTypes.remove(toSolveBagType);
+
+        for (BloodBagType bloodBagType : newBagTypes) {
+            BloodBag bloodBag = new BloodBag();
+
+            bloodBag.setUuid(UUID.randomUUID());
+            bloodBag.setBloodBagStatus(BloodBagStatus.DEPOSITED);
+
+            bloodBag.setBloodType(toSolveBloodType.getUuid());
+            bloodBag.setBloodBagType(bloodBagType.getUuid());
+
+            Date date = new Date();
+            date.setTime(date.getTime() + bloodBagType.getDaysToExpire() * 86400000);
+            bloodBag.setExpireDate(date);
+
+            bloodBagRepository.save(bloodBag);
+        }
+
+    }
 }

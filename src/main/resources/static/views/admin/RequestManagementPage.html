@@ -90,7 +90,12 @@
                                 <span class="label label-primary">{{ request.status }}</span>
                             </div>
                             <div class="col-md-2" style="text-align: right">
-                                <i class="material-icons" ng-click="null">delete</i>
+                                <i class="material-icons"
+                                   ng-show="request.status == 'AWAITING_CONFIRMATION'"
+                                   ng-click="ctrl.solveRequest(request.uuid)">how_to_vote</i>
+                                <i class="material-icons"
+                                   ng-show="request.status == 'NEEDS_BREAKDOWN'"
+                                   ng-click="ctrl.solveRequest(request.uuid)">broken_image</i>
                             </div>
                         </md-list-item>
                     </md-list>

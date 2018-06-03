@@ -49,6 +49,19 @@ public class BloodRequestController {
         bloodRequestService.deleteBloodRequest(actualUuid);
     }
 
+    @RequestMapping("/solve")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void solveRequest(String token, String uuid) {
+        if (!permissionsService.hasPermission(token, Permission.ADMIN)) {
+            return;
+        }
+        UUID actualUuid = UUIDUtils.getUUIDFromString(uuid);
+        if (actualUuid == null) {
+            return;
+        }
+        bloodRequestService.solveBloodRequest(actualUuid);
+    }
+
     @RequestMapping("/getall")
     public List<BloodRequest> getAllRequests(String token) {
         if (!permissionsService.hasPermission(token, Permission.ADMIN)) {

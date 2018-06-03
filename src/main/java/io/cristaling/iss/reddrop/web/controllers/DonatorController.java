@@ -83,4 +83,17 @@ public class DonatorController {
 		return donatorService.getNextAvailableDate(actualUuid);
 	}
 
+	@RequestMapping("/delete")
+	@ResponseStatus(value = HttpStatus.NO_CONTENT)
+	public void deleteVisit(String token, String uuid) {
+		if (!permissionsService.hasPermission(token, Permission.DONATOR)) {
+			return;
+		}
+		UUID actualUuid = UUIDUtils.getUUIDFromString(uuid);
+		if (actualUuid == null) {
+			return;
+		}
+		donatorService.deleteDonator(actualUuid);
+	}
+
 }

@@ -55,6 +55,14 @@
             return result;
         };
 
+        vm.solveRequest = function (requestToken) {
+            $http.get('/api/bloodrequest/solve?token=' + vm.adminToken + "&uuid=" + requestToken).then(function (response) {
+                vm.refreshBloodBagStocks();
+                vm.refreshRequestList();
+            }, function (reason) {
+            });
+        };
+
         vm.refreshBloodBagStocks = function () {
             $http.get('/api/bloodbag/stock?token=' + vm.adminToken).then(function (response) {
                 vm.bloodStocks = response.data;

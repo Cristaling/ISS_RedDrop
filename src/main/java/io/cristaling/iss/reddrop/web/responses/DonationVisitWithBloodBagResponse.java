@@ -8,10 +8,10 @@ import io.cristaling.iss.reddrop.utils.enums.BloodBagStatus;
 public class DonationVisitWithBloodBagResponse {
 
 	@JsonUnwrapped
-	DonationVisit donationVisit;
+	BloodBag bloodBag;
 
 	@JsonUnwrapped
-	BloodBag bloodBag;
+	DonationVisit donationVisit;
 
 	public DonationVisitWithBloodBagResponse() {
 	}

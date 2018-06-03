@@ -13,9 +13,6 @@
                     <span>
                         Donators
                     </span>
-                    <div style="float: right;" ng-click="ctrl.addHospital()">
-                        <i class="material-icons">add</i>
-                    </div>
                 </div>
                 <div class="panel-body">
                     <md-list>
@@ -41,10 +38,8 @@
                             <div class="col-md-3">
                                 {{donator.nume}} {{donator.prenume}}
                             </div>
-                            <!--<p>{{ donator.cnp }} - {{donator.nume}} {{donator.prenume}}</p>-->
-                            <div class="md-secondary" aria-label="Delete Donator"
-                                 ng-click="ctrl.deleteDonator(donator.uuid)">
-                                <i class="material-icons">delete</i>
+                            <div class="col-md-7" style="text-align: right">
+                                <i class="material-icons" ng-click="ctrl.deleteDonator(donator.uuid)">delete</i>
                             </div>
                         </md-list-item>
                     </md-list>

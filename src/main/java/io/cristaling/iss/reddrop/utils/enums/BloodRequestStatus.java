@@ -4,6 +4,7 @@ public enum BloodRequestStatus {
 
 	UNRESOLVED("Unresolved"),
 	AWAITING_CONFIRMATION("Awaiting Confirmation"),
+	NEEDS_BREAKDOWN("Needs braekdown"),
 	COMPLETED("Completed");
 
 	String name;
