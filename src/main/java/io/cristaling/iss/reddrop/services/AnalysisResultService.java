@@ -2,6 +2,7 @@ package io.cristaling.iss.reddrop.services;
 
 import io.cristaling.iss.reddrop.core.AnalysisResult;
 import io.cristaling.iss.reddrop.core.BloodBag;
+import io.cristaling.iss.reddrop.core.BloodType;
 import io.cristaling.iss.reddrop.core.DonationVisit;
 import io.cristaling.iss.reddrop.core.Donator;
 import io.cristaling.iss.reddrop.repositories.AnalysisResultRepository;
@@ -36,13 +37,14 @@ public class AnalysisResultService {
     }
 
     public void addAnalysis(AnalysisResult analysisResult) {
+        BloodBag bloodBag = bloodBagRepository.getBloodBagByDonationVisit(analysisResult.getDonationVisit());
+
         if (analysisResult.getUuid() == null) {
             analysisResult.setUuid(UUID.randomUUID());
         }
-        analysisResult.setBloodtype(donatorRepository.getOne(donationVisitRepository.getOne(analysisResult.getDonationVisit()).getDonator()).getBloodType());
-        analysisResultRepository.save(analysisResult);
 
-        BloodBag bloodBag = bloodBagRepository.getBloodBagByDonationVisit(analysisResult.getDonationVisit());
+        analysisResult.setBloodtype(bloodBag.getBloodType());
+        analysisResultRepository.save(analysisResult);
 
         if (checkAnalysisValues(analysisResult)) {
             bloodBag.setBloodBagStatus(BloodBagStatus.DEPOSITED);
@@ -51,8 +53,6 @@ public class AnalysisResultService {
         }
 
         bloodBagRepository.save(bloodBag);
-
-
     }
 
     public List<AnalysisResult> getAllForDonator(UUID donatorUUID) {

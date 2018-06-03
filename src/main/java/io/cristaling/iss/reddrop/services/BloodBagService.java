@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -68,10 +69,24 @@ public class BloodBagService {
     }
 
     public void addBloodBag(BloodBag bloodBag) {
-
-
         bloodBag.setUuid(UUID.randomUUID());
         bloodBag.setBloodBagStatus(BloodBagStatus.UNTESTED);
+
+        DonationVisit donationVisit = new DonationVisit();
+        donationVisit.setUuid(UUID.randomUUID());
+        donationVisit.setDonatorName("Unknown");
+        donationVisit.setDone(true);
+        donationVisit.setDate(new Date());
+        donationVisitRepository.save(donationVisit);
+
+        bloodBag.setDonationVisit(donationVisit.getUuid());
+
+        BloodBagType bloodBagType = bloodBagTypeRepository.getOne(bloodBag.getBloodBagType());
+
+        Date date = new Date();
+        date.setTime(date.getTime() + bloodBagType.getDaysToExpire() * 86400000);
+        bloodBag.setExpireDate(date);
+
         bloodBagRepository.save(bloodBag);
     }
 
