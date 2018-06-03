@@ -1,48 +1,53 @@
-<br>
-<div logout-btn></div>
-<div class="col-md-12">
+<div style="padding-top: 5vh;">
 
     <div class="col-md-6 col-md-offset-3">
-        <div class="panel panel-reddrop">
-            <div class="panel-heading">
-                Past Visits
-            </div>
-            <div class="panel-body">
-                <md-list>
-                    <md-list-item ng-repeat="visit in ctrl.visits" ng-click="ctrl.goToAnalysisPage(visit)">
-                        <p>{{ visit.date | date:"dd/MM/yyyy" }}</p>
-                        <span class="badge badge-light">{{ visit.bloodBagStatus.name }}</span>
-                    </md-list-item>
-                </md-list>
-            </div>
+
+        <div class="col-md-12">
+            <div logout-btn></div>
         </div>
-    </div>
-    <div class="col-md-4 col-md-offset-4 button-wrapper" style="padding-top: 25vh;">
 
+        <div class="col-md-3">
 
+            <div class="panel panel-reddrop">
+                <div class="panel-heading">
+                    Set up a visit to the Clinic
+                </div>
+                <div class="panel-body">
+                    <md-input-container>
+                        <label>Enter date</label>
+                        <md-datepicker ng-model="ctrl.visitDate" md-min-date="ctrl.minDate" md-max-date="ctrl.maxDate"></md-datepicker>
+                    </md-input-container>
 
-
-        <div class="panel panel-reddrop">
-            <div class="panel-heading">
-                Set up a visit to the Clinic
-            </div>
-            <div class="panel-body">
-                <form>
-                    <div class="form-group">
-
-                        <md-input-container>
-                            <label>Enter date</label>
-                            <md-datepicker ng-model="ctrl.visitDate" md-min-date="ctrl.minDate" md-max-date="ctrl.maxDate"></md-datepicker>
-                        </md-input-container>
-                    </div>
-                    <div class="btn-lg btn-reddrop form-group" style="text-align: center; float: right"
+                    <div class="btn-lg btn-reddrop" style="text-align: center;"
                          ng-click="ctrl.setVisit(ctrl.visitDate)">
                         Add Visit
                     </div>
 
-                </form>
+                    </form>
+                </div>
             </div>
+
         </div>
+
+        <div class="col-md-9">
+
+            <div class="panel panel-reddrop">
+                <div class="panel-heading">
+                    Past Visits
+                </div>
+                <div class="panel-body">
+                    <md-list>
+                        <md-list-item ng-repeat="visit in ctrl.visits" ng-click="ctrl.goToAnalysisPage(visit)">
+                            <p>{{ visit.date | date:"dd/MM/yyyy" }}</p>
+                            <span class="badge badge-light">{{ visit.bloodBagStatus.name }}</span>
+                        </md-list-item>
+                    </md-list>
+                </div>
+            </div>
+
+        </div>
+
     </div>
+
 </div>
 

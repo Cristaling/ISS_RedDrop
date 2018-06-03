@@ -52,10 +52,10 @@
                             <div class="col-md-1">
                                 Date
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 Patient
                             </div>
-                            <div class="col-md-1">
+                            <div class="col-md-2">
                                 Importance
                             </div>
                             <div class="col-md-2">
@@ -65,18 +65,21 @@
                                 Status
                             </div>
                             <div class="col-md-1">
+
+                            </div>
+                            <div class="col-md-1">
                                 Options
                             </div>
                         </md-list-item>
                         <md-divider ></md-divider>
-                        <md-list-item ng-repeat="request in ctrl.requests" ng-click="null">
+                        <md-list-item ng-repeat="request in ctrl.requests">
                             <div class="col-md-1">
                                 {{ request.date | date:"dd/MM/yyyy" }}
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 {{ request.patientFullName }}
                             </div>
-                            <div class="col-md-1">
+                            <div class="col-md-2">
                                 <span class="label label-success">{{ request.importance }}</span>
                             </div>
                             <div class="col-md-2">
@@ -84,15 +87,11 @@
                                 <span class="label label-primary">{{ ctrl.getBloodBagTypeByUUID(request.bloodBagType) }}</span>
                             </div>
                             <div class="col-md-2">
-                                <span class="label label-light">{{ request.status }}</span>
+                                <span class="label label-primary">{{ request.status }}</span>
                             </div>
-                            <!--<div class="md-secondary" aria-label="Fill Analysis"
-                                 ng-click="ctrl.openFillAnalysisDialog(visit.uuid)">
-                                <i class="material-icons">assignment</i>
+                            <div class="col-md-2" style="text-align: right">
+                                <i class="material-icons" ng-click="null">delete</i>
                             </div>
-                            <div class="md-secondary" aria-label="Delete Hospital" ng-click="null">
-                                <i class="material-icons">delete</i>
-                            </div>-->
                         </md-list-item>
                     </md-list>
                 </div>
