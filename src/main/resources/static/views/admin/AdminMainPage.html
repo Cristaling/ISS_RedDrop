@@ -2,22 +2,31 @@
 
     <div class="col-md-6 col-md-offset-3">
 
-        <div class="col-md-12" style="margin-bottom: 15px;">
+        <div class="col-md-8" style="margin-bottom: 15px;">
 
-            <div class="btn btn-reddrop" ng-click="ctrl.goToHospitalsPage()">
-                Hospitals
+            <div class="btn btn-reddrop" ng-click="ctrl.goToRequestsPage()">
+                Blood Bag Requests
             </div>
+
+            <div class="btn btn-reddrop" ng-click="ctrl.goToVisitsPage()">
+                Scheduled Visits
+            </div>
+
+
+            <div class="btn btn-reddrop" ng-click="ctrl.goToFillAnalysisPage()">
+                Untested Blood Bags
+            </div>
+
+        </div>
+
+        <div class="col-md-4" style="margin-bottom: 15px; text-align: right">
 
             <div class="btn btn-reddrop" ng-click="ctrl.goToDonatorsPage()">
                 Donators
             </div>
 
-            <div class="btn btn-reddrop" ng-click="ctrl.goToRequestsPage()">
-                Requests
-            </div>
-
-            <div class="btn btn-reddrop" ng-click="ctrl.goToVisitsPage()">
-                Visits
+            <div class="btn btn-reddrop" ng-click="ctrl.goToHospitalsPage()">
+                Hospitals
             </div>
 
         </div>
@@ -31,9 +40,6 @@
                         </span>
                     <div style="float: right;" ng-click="ctrl.openAddBloodBagDialog()">
                         <i class="material-icons">add</i>
-                    </div>
-                    <div style="float: right;" ng-click="ctrl.goToFillAnalysisPage()">
-                        <i class="material-icons">move_to_inbox</i>
                     </div>
                 </div>
                 <div class="panel-body">
