@@ -14,7 +14,7 @@
         vm.lastDate = "";
         vm.minDate = "";
         vm.maxDate = "";
-        vm.visitDate="";
+        vm.visitDate = null;
 
         vm.goToAnalysisPage = function (visit) {
 
@@ -23,8 +23,8 @@
                 $mdToast.show(
                     $mdToast.simple()
                         .textContent('This blood bag was not tested yet!')
-                        .position('top right')
-                        .hideDelay(3000)
+                        .position('bottom right')
+                        .hideDelay(1000)
                 ).then(function (value) {
                 }, function (reason) {
                 });
@@ -36,61 +36,70 @@
         };
 
         vm.setVisit = function (visitDate) {
-            $mdDialog.show({
-                controller: function () {
+            if (visitDate == null) {
+                $mdToast.show(
+                    $mdToast.simple()
+                        .textContent('You need to select a date to set up a visit!')
+                        .position('bottom right')
+                        .hideDelay(1000)
+                ).then(function (value) {
+                }, function (reason) {
+                });
+            } else {
+                $mdDialog.show({
+                    controller: function () {
 
-                    var vm = this;
+                        var vm = this;
 
-                    vm.agreed=false;
+                        vm.agreed = false;
 
-                    vm.donatorToken = $cookies.get("donatorToken");
+                        vm.donatorToken = $cookies.get("donatorToken");
 
-                    if (!vm.donatorToken) {
-                        $location.path("/donator/login");
-                    }
+                        if (!vm.donatorToken) {
+                            $location.path("/donator/login");
+                        }
 
-                    vm.tryConsent = function () {
-                        if(vm.agreed){
-                            $http({
-                                method: 'POST',
-                                url: apiIP + '/api/donationvisit/add?token=' + vm.donatorToken,
-                                data: {
-                                    uuid: "",
-                                    donator: vm.donatorToken,
-                                    date: visitDate
-                                }
-                            }).then(function () {
+                        vm.tryConsent = function () {
+                            if (vm.agreed) {
+                                $http({
+                                    method: 'POST',
+                                    url: apiIP + '/api/donationvisit/add?token=' + vm.donatorToken,
+                                    data: {
+                                        uuid: "",
+                                        donator: vm.donatorToken,
+                                        date: visitDate
+                                    }
+                                }).then(function () {
+                                        $mdDialog.show(
+                                            $mdDialog.alert()
+                                                .clickOutsideToClose(true)
+                                                .textContent('You have set yourself up for a visit.')
+                                                .ariaLabel('Alert Dialog Demo')
+                                                .ok('Thank you!')
+                                        );
+
+                                    }, function (error) {
+
+                                    }
+                                );
+                            } else {
                                 $mdDialog.show(
                                     $mdDialog.alert()
                                         .clickOutsideToClose(true)
-                                        .title('Successful!')
-                                        .textContent('You have set yourself up for a visit.')
+                                        .textContent('You need to give your consent to set up a visit.')
                                         .ariaLabel('Alert Dialog Demo')
-                                        .ok('Thank you!')
+                                        .ok('Got it!')
                                 );
+                            }
 
-                            }, function (error) {
-
-                                }
-                            );
-                        }else{
-                            $mdDialog.show(
-                                $mdDialog.alert()
-                                    .clickOutsideToClose(true)
-                                    .title('Error!')
-                                    .textContent('You need to give your consent to set up a visit.')
-                                    .ariaLabel('Alert Dialog Demo')
-                                    .ok('Got it!')
-                            );
-                        }
-
-                    };
-                },
-                controllerAs: 'ctrl',
-                templateUrl: '/views/donator/EligibilityConsentDialog.html',
-                parent: angular.element(document.body),
-                clickOutsideToClose: true
-            }).then();
+                        };
+                    },
+                    controllerAs: 'ctrl',
+                    templateUrl: '/views/donator/EligibilityConsentDialog.html',
+                    parent: angular.element(document.body),
+                    clickOutsideToClose: true
+                }).then();
+            }
         };
 
         vm.refreshVisitsList = function () {
@@ -108,13 +117,13 @@
 
             });
         };
-        
-        vm.functie=function () {
+
+        vm.functie = function () {
             if (agreed) {
 
 
             }
-            
+
         }
 
         vm.getLastDonationDate();
