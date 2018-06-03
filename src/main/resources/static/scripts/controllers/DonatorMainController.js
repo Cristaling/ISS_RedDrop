@@ -1,7 +1,7 @@
 (function () {
     'use strict'
     var app = angular.module('RedDrop');
-    app.controller('DonatorMainController', ['$location', '$cookies', '$http', '$mdDialog', '$mdToast', 'apiIP', function ($location, $cookies, $http, $mdDialog, $mdToast, apiIP) {
+    app.controller('DonatorMainController', ['$location', '$cookies', '$http', '$mdDialog', '$mdToast', function ($location, $cookies, $http, $mdDialog, $mdToast) {
         var vm = this;
 
         vm.donatorToken = $cookies.get("donatorToken");
@@ -65,7 +65,7 @@
                             if (vm.agreed) {
                                 $http({
                                     method: 'POST',
-                                    url: apiIP + '/api/donationvisit/add?token=' + vm.donatorToken,
+                                    url: '/api/donationvisit/add?token=' + vm.donatorToken,
                                     data: {
                                         uuid: "",
                                         donator: vm.donatorToken,
@@ -105,7 +105,7 @@
         };
 
         vm.refreshVisitsList = function () {
-            $http.get(apiIP + '/api/donationvisit/getvisitedvisits?token=' + vm.donatorToken + '&uuid=' + vm.donatorToken).then(function (response) {
+            $http.get('/api/donationvisit/getvisitedvisits?token=' + vm.donatorToken + '&uuid=' + vm.donatorToken).then(function (response) {
                 vm.visits = response.data;
             }, function (reason) {
 
@@ -113,7 +113,7 @@
         };
 
         vm.getLastDonationDate = function () {
-            $http.get(apiIP + '/api/donator/getnextvisit?token=' + vm.donatorToken).then(function (response) {
+            $http.get('/api/donator/getnextvisit?token=' + vm.donatorToken).then(function (response) {
                 vm.minDate = new Date(response.data);
             }, function (reason) {
 

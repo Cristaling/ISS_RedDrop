@@ -6,8 +6,7 @@
         '$http',
         '$mdDialog',
         '$routeParams',
-        'apiIP',
-        function ($location, $cookies, $http, $mdDialog, $routeParams, apiIP) {
+        function ($location, $cookies, $http, $mdDialog, $routeParams) {
 
             var vm = this;
 
@@ -21,7 +20,7 @@
             vm.addDoctor = function () {
                 $http({
                     method: 'POST',
-                    url: apiIP + '/api/doctor/add?token=' + vm.adminToken,
+                    url: '/api/doctor/add?token=' + vm.adminToken,
                     data: {
                         uuid: "",
                         password: vm.doctorPassword,

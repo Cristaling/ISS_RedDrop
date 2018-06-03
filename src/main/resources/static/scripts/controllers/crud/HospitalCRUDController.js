@@ -6,8 +6,7 @@
         '$http',
         '$mdDialog',
         '$routeParams',
-        'apiIP',
-        function ($location, $cookies, $http, $mdDialog, $routeParams, apiIP) {
+        function ($location, $cookies, $http, $mdDialog, $routeParams) {
 
             var vm = this;
 
@@ -35,7 +34,7 @@
 
             vm.openRegisterDoctorDialog = function (hospitalToken) {
                 $mdDialog.show({
-                    controller: function ($mdDialog, $http, apiIP) {
+                    controller: function ($mdDialog, $http) {
                         var vm = this;
 
                         vm.adminToken = $cookies.get("adminToken");
@@ -48,7 +47,7 @@
                         vm.addDoctor = function () {
                             $http({
                                 method: 'POST',
-                                url: apiIP + '/api/doctor/add?token=' + vm.adminToken,
+                                url: '/api/doctor/add?token=' + vm.adminToken,
                                 data: {
                                     uuid: "",
                                     password: vm.doctorPassword,
@@ -71,7 +70,7 @@
             };
 
             vm.deleteHospital = function (hospitalId) {
-                $http.get(apiIP + '/api/hospital/delete?token=' + vm.adminToken + '&uuid=' + hospitalId).then(function (response) {
+                $http.get('/api/hospital/delete?token=' + vm.adminToken + '&uuid=' + hospitalId).then(function (response) {
                     vm.refreshHospitalList();
                 }, function (reason) {
 
@@ -79,7 +78,7 @@
             };
 
             vm.refreshHospitalList = function () {
-                $http.get(apiIP + '/api/hospital/getall?token=' + vm.adminToken).then(function (response) {
+                $http.get('/api/hospital/getall?token=' + vm.adminToken).then(function (response) {
                     vm.hospitals = response.data;
                 }, function (reason) {
                 });

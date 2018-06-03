@@ -4,10 +4,7 @@
     app.controller('DonatorCRUDController', ['$location',
         '$cookies',
         '$http',
-        '$mdDialog',
-        '$routeParams',
-        'apiIP',
-        function ($location, $cookies, $http, $mdDialog, $routeParams, apiIP) {
+        function ($location, $cookies, $http) {
 
             var vm = this;
 
@@ -20,7 +17,7 @@
             vm.donators = [];
 
             vm.deleteDonator = function (donatorId) {
-                $http.get(apiIP + '/api/donator/delete?token=' + vm.adminToken + '&uuid=' + donatorId).then(function (response) {
+                $http.get('/api/donator/delete?token=' + vm.adminToken + '&uuid=' + donatorId).then(function (response) {
                     vm.refreshDonatorList();
                 }, function (reason) {
 
@@ -28,7 +25,7 @@
             };
 
             vm.refreshDonatorList = function () {
-                $http.get(apiIP + '/api/donator/getall?token=' + vm.adminToken).then(function (response) {
+                $http.get('/api/donator/getall?token=' + vm.adminToken).then(function (response) {
                     vm.donators = response.data;
                 }, function (reason) {
                 });

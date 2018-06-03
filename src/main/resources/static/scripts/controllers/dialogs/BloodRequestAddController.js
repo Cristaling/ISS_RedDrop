@@ -6,8 +6,7 @@
         '$http',
         '$mdDialog',
         '$routeParams',
-        'apiIP',
-        function ($location, $cookies, $http, $mdDialog, $routeParams, apiIP) {
+        function ($location, $cookies, $http, $mdDialog, $routeParams) {
 
             var vm = this;
 
@@ -21,19 +20,19 @@
             vm.importances = [];
             vm.bagTypes = [];
 
-            $http.get(apiIP + '/api/bloodtype/getall?token=' + vm.doctorToken).then(function (response) {
+            $http.get('/api/bloodtype/getall?token=' + vm.doctorToken).then(function (response) {
                 vm.bloodTypes = response.data;
                 vm.patientBloodType = vm.bloodTypes[0];
             }, function (reason) {
             });
 
-            $http.get(apiIP + '/api/bloodbagtype/getall?token=' + vm.doctorToken).then(function (response) {
+            $http.get('/api/bloodbagtype/getall?token=' + vm.doctorToken).then(function (response) {
                 vm.bagTypes = response.data;
                 vm.bagType = vm.bagTypes[0];
             }, function (reason) {
             });
 
-            $http.get(apiIP + '/api/utils/getimportances').then(function (response) {
+            $http.get('/api/utils/getimportances').then(function (response) {
                 vm.importances = response.data;
                 vm.patientRegisterImportance = vm.importances[0];
             }, function (reason) {
@@ -43,7 +42,7 @@
             vm.addBloodRequest = function () {
                 $http({
                     method: 'POST',
-                    url: apiIP + '/api/bloodrequest/add?token=' + vm.doctorToken,
+                    url: '/api/bloodrequest/add?token=' + vm.doctorToken,
                     data: {
                         uuid: "",
                         patientCnp: vm.patientRegisterCnp,

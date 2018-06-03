@@ -1,7 +1,7 @@
 (function () {
     'use strict'
     var app = angular.module('RedDrop');
-    app.controller('DoctorMainController', ['$location', '$cookies', '$http', '$mdDialog', 'apiIP', function ($location, $cookies, $http, $mdDialog, apiIP) {
+    app.controller('DoctorMainController', ['$location', '$cookies', '$http', '$mdDialog', function ($location, $cookies, $http, $mdDialog) {
         var vm = this;
 
         vm.doctorToken = $cookies.get("doctorToken");
@@ -15,12 +15,12 @@
         vm.bloodBagTypes = [];
         vm.firstTime = false;
 
-        $http.get(apiIP + '/api/bloodbagtype/getall?token=' + vm.doctorToken).then(function (response) {
+        $http.get('/api/bloodbagtype/getall?token=' + vm.doctorToken).then(function (response) {
             vm.bloodBagTypes = response.data;
         }, function (reason) {
         });
 
-        $http.get(apiIP + '/api/bloodtype/getall?token=' + vm.doctorToken).then(function (response) {
+        $http.get('/api/bloodtype/getall?token=' + vm.doctorToken).then(function (response) {
             vm.bloodTypes = response.data;
         }, function (reason) {
         });
@@ -67,7 +67,7 @@
         };
 
         vm.deleteRequest = function (requestID) {
-            $http.get(apiIP + '/api/bloodrequest/delete?token=' + vm.doctorToken + '&uuid=' + requestID).then(function (response) {
+            $http.get('/api/bloodrequest/delete?token=' + vm.doctorToken + '&uuid=' + requestID).then(function (response) {
                 vm.refreshRequestList();
             }, function (reason) {
 
@@ -75,14 +75,14 @@
         };
 
         vm.refreshRequestList = function () {
-            $http.get(apiIP + '/api/bloodrequest/getfrom?token=' + vm.doctorToken + '&uuid=' + vm.doctorToken).then(function (response) {
+            $http.get('/api/bloodrequest/getfrom?token=' + vm.doctorToken + '&uuid=' + vm.doctorToken).then(function (response) {
                 vm.requests = response.data;
             }, function (reason) {
             });
         };
 
         vm.refreshBloodBagStocks = function () {
-            $http.get(apiIP + '/api/bloodbag/stock?token=' + vm.doctorToken).then(function (response) {
+            $http.get('/api/bloodbag/stock?token=' + vm.doctorToken).then(function (response) {
                 vm.bloodStocks = response.data;
                 for (var key in vm.bloodStocks) {
                     vm.bloodStocks[key].stock = vm.convertStock(response.data[key].stock);
@@ -93,7 +93,7 @@
 
         vm.checkFirstTime = function () {
 
-            $http.get(apiIP + '/api/doctor/checkfirst?token=' + vm.doctorToken).then(function (response) {
+            $http.get('/api/doctor/checkfirst?token=' + vm.doctorToken).then(function (response) {
                 $mdDialog.show({
                     controller: function () {
 
@@ -112,7 +112,7 @@
                         vm.changePassword = function () {
                             $http({
                                 method: 'POST',
-                                url: apiIP + '/api/doctor/changepassword?token=' + vm.doctorToken,
+                                url: '/api/doctor/changepassword?token=' + vm.doctorToken,
                                 data: {
                                     password1: vm.password1,
                                     password2: vm.password2

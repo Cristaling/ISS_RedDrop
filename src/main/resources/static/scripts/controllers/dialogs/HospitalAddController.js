@@ -6,8 +6,7 @@
         '$http',
         '$mdDialog',
         '$routeParams',
-        'apiIP',
-        function ($location, $cookies, $http, $mdDialog, $routeParams, apiIP) {
+        function ($location, $cookies, $http, $mdDialog, $routeParams) {
 
             var vm = this;
 
@@ -20,7 +19,7 @@
             vm.addHospital = function () {
                 $http({
                     method: 'POST',
-                    url: apiIP + '/api/hospital/add?token=' + vm.adminToken,
+                    url: '/api/hospital/add?token=' + vm.adminToken,
                     data: {
                         uuid: "",
                         name: vm.hospitalName,

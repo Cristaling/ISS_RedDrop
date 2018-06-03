@@ -1,7 +1,7 @@
 (function () {
     'use strict'
     var app = angular.module('RedDrop');
-    app.controller('VisitManagementController', ['$location', '$cookies', '$http', '$mdDialog', 'apiIP', function ($location, $cookies, $http, $mdDialog, apiIP) {
+    app.controller('VisitManagementController', ['$location', '$cookies', '$http', '$mdDialog', function ($location, $cookies, $http, $mdDialog) {
         var vm = this;
 
         vm.adminToken = $cookies.get("adminToken");
@@ -15,12 +15,12 @@
         vm.bloodBagTypes = [];
         vm.bloodTypes = [];
 
-        $http.get(apiIP + '/api/bloodbagtype/getall?token=' + vm.adminToken).then(function (response) {
+        $http.get('/api/bloodbagtype/getall?token=' + vm.adminToken).then(function (response) {
             vm.bloodBagTypes = response.data;
         }, function (reason) {
         });
 
-        $http.get(apiIP + '/api/bloodtype/getall?token=' + vm.adminToken).then(function (response) {
+        $http.get('/api/bloodtype/getall?token=' + vm.adminToken).then(function (response) {
             vm.bloodTypes = response.data;
         }, function (reason) {
         });
@@ -56,10 +56,10 @@
         };
 
         vm.confirmVisitDialog=function (donationVisitToken) {
-            $http.get(apiIP + '/api/donationvisit/markdone?token=' + vm.adminToken+"&donationVisitUUID="+donationVisitToken).then(function (response) {
+            $http.get('/api/donationvisit/markdone?token=' + vm.adminToken+"&donationVisitUUID="+donationVisitToken).then(function (response) {
                 if(!response.data.successful) {
                     $mdDialog.show({
-                        controller: function ($mdDialog, $http, apiIP) {
+                        controller: function ($mdDialog, $http) {
                             var vm = this;
 
                             vm.adminToken = $cookies.get("adminToken");
@@ -68,7 +68,7 @@
                             if (!vm.adminToken) {
                                 $location.path("/admin/login");
                             }
-                            $http.get(apiIP + '/api/bloodtype/getall?token=' + vm.adminToken).then(function (response) {
+                            $http.get('/api/bloodtype/getall?token=' + vm.adminToken).then(function (response) {
                                 vm.bloodTypes = response.data;
                                 vm.patientBloodType = vm.bloodTypes[0];
                             }, function (reason) {
@@ -77,7 +77,7 @@
 
 
                             vm.markDone = function () {
-                                $http.get(apiIP + '/api/donationvisit/markdone?token=' + vm.adminToken + "&donationVisitUUID=" + donationVisitToken + "&bloodTypeUUID=" + vm.patientBloodType.uuid).then(function (response) {
+                                $http.get('/api/donationvisit/markdone?token=' + vm.adminToken + "&donationVisitUUID=" + donationVisitToken + "&bloodTypeUUID=" + vm.patientBloodType.uuid).then(function (response) {
                                     $mdDialog.hide();
                                 }, function (reason) {
                                     $mdDialog.hide();
@@ -98,7 +98,7 @@
         };
 
         vm.deleteDonationVisit= function (visitId) {
-            $http.get(apiIP + '/api/donationvisit/delete?token=' + vm.adminToken + '&uuid=' + visitId).then(function (response) {
+            $http.get('/api/donationvisit/delete?token=' + vm.adminToken + '&uuid=' + visitId).then(function (response) {
                 vm.refreshVisitList();
             }, function (reason) {
                 vm.refreshVisitList();
@@ -106,7 +106,7 @@
         };
 
         vm.refreshBloodBagStocks = function () {
-            $http.get(apiIP + '/api/bloodbag/stock?token=' + vm.adminToken).then(function (response) {
+            $http.get('/api/bloodbag/stock?token=' + vm.adminToken).then(function (response) {
                 vm.bloodStocks = response.data;
                 for (var key in vm.bloodStocks) {
                     vm.bloodStocks[key].stock = vm.convertStock(response.data[key].stock);
@@ -116,7 +116,7 @@
         };
 
         vm.refreshVisitList = function () {
-            $http.get(apiIP + '/api/donationvisit/getunvisitedvisits?token=' + vm.adminToken).then(function (response) {
+            $http.get('/api/donationvisit/getunvisitedvisits?token=' + vm.adminToken).then(function (response) {
                 vm.visits = response.data;
             }, function (reason) {
             });

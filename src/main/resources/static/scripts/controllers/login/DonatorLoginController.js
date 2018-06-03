@@ -1,7 +1,7 @@
 (function(){
     'use strict'
     var app = angular.module('RedDrop');
-    app.controller('DonatorLoginController', ['$location', '$cookies', '$http', 'apiIP', function($location, $cookies, $http, apiIP)
+    app.controller('DonatorLoginController', ['$location', '$cookies', '$http', function($location, $cookies, $http)
     {
         var vm = this;
 
@@ -18,7 +18,7 @@
         vm.tryLoginDonator = function () {
             $http({
                 method: 'POST',
-                url: apiIP + '/api/donator/login',
+                url: '/api/donator/login',
                 data: {
                     cnp: vm.donatorCNP,
                     password: vm.donatorPassword

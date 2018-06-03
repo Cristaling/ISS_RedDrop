@@ -1,7 +1,7 @@
 (function () {
     'use strict'
     var app = angular.module('RedDrop');
-    app.controller('RequestManagementController', ['$location', '$cookies', '$http', '$mdDialog', 'apiIP', function ($location, $cookies, $http, $mdDialog, apiIP) {
+    app.controller('RequestManagementController', ['$location', '$cookies', '$http', '$mdDialog', function ($location, $cookies, $http, $mdDialog) {
         var vm = this;
 
         vm.adminToken = $cookies.get("adminToken");
@@ -15,12 +15,12 @@
         vm.bloodBagTypes = [];
         vm.bloodTypes = [];
 
-        $http.get(apiIP + '/api/bloodbagtype/getall?token=' + vm.adminToken).then(function (response) {
+        $http.get('/api/bloodbagtype/getall?token=' + vm.adminToken).then(function (response) {
             vm.bloodBagTypes = response.data;
         }, function (reason) {
         });
 
-        $http.get(apiIP + '/api/bloodtype/getall?token=' + vm.adminToken).then(function (response) {
+        $http.get('/api/bloodtype/getall?token=' + vm.adminToken).then(function (response) {
             vm.bloodTypes = response.data;
         }, function (reason) {
         });
@@ -56,7 +56,7 @@
         };
 
         vm.refreshBloodBagStocks = function () {
-            $http.get(apiIP + '/api/bloodbag/stock?token=' + vm.adminToken).then(function (response) {
+            $http.get('/api/bloodbag/stock?token=' + vm.adminToken).then(function (response) {
                 vm.bloodStocks = response.data;
                 for (var key in vm.bloodStocks) {
                     vm.bloodStocks[key].stock = vm.convertStock(response.data[key].stock);
@@ -66,7 +66,7 @@
         };
 
         vm.refreshRequestList = function () {
-            $http.get(apiIP + '/api/bloodrequest/getall?token=' + vm.adminToken).then(function (response) {
+            $http.get('/api/bloodrequest/getall?token=' + vm.adminToken).then(function (response) {
                 vm.requests = response.data;
             }, function (reason) {
             });
