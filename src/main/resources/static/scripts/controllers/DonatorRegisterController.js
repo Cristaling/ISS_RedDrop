@@ -30,8 +30,8 @@
                         password : vm.donatorPassword,
                         city : vm.donatorCity,
                         county : vm.donatorCounty,
-                        address : vm.donatorAddress,
-                        bloodType : "UNKNOWN"
+                        email:vm.donatorEmail,
+                        address : vm.donatorAddress
                     }
                 }).then(function (response) {
                     $location.path("/donator/login");

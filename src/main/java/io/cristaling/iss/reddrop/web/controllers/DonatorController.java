@@ -1,7 +1,10 @@
 package io.cristaling.iss.reddrop.web.controllers;
 
 import io.cristaling.iss.reddrop.core.Donator;
+import io.cristaling.iss.reddrop.repositories.BloodTypeRepository;
+import io.cristaling.iss.reddrop.services.BloodTypeService;
 import io.cristaling.iss.reddrop.services.DonatorService;
+import io.cristaling.iss.reddrop.services.EmailSenderService;
 import io.cristaling.iss.reddrop.services.PermissionsService;
 import io.cristaling.iss.reddrop.utils.enums.Permission;
 import io.cristaling.iss.reddrop.web.requests.LoginRequest;
@@ -16,6 +19,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+
 @CrossOrigin
 @RestController
 @RequestMapping("/api/donator")
@@ -23,17 +27,28 @@ public class DonatorController {
 
 	DonatorService donatorService;
 	PermissionsService permissionsService;
+	EmailSenderService emailSenderService;
+	BloodTypeService bloodTypeService;
 
 	@Autowired
-	public DonatorController(DonatorService donatorService, PermissionsService permissionsService) {
+	public DonatorController(DonatorService donatorService, PermissionsService permissionsService,EmailSenderService emailSenderService,BloodTypeService bloodTypeService) {
 		this.donatorService = donatorService;
 		this.permissionsService=permissionsService;
+		this.emailSenderService=emailSenderService;
+		this.bloodTypeService=bloodTypeService;
 	}
 
 	@RequestMapping("/login")
 	public LoginResponse loginDonator(@RequestBody LoginRequest loginRequest) {
 		UUID token = donatorService.tryToLogin(loginRequest.getCnp(), loginRequest.getPassword());
-		return LoginUtils.generateLoginResponse(token);
+		LoginResponse response= LoginUtils.generateLoginResponse(token);
+
+		Donator donator=donatorService.getDonatorById(token);
+		if(donator.getVerified()!=null){
+			response.setSuccesful(false);
+		}
+
+		return response;
 	}
 
 	@RequestMapping("/register")
@@ -41,8 +56,11 @@ public class DonatorController {
 	public void registerDonator(@RequestBody Donator donator){
 		if (donator.getUuid() == null) {
 			donator.setUuid(UUID.randomUUID());
+			donator.setVerified(UUID.randomUUID());
 		}
 		donatorService.registerDonator(donator);
+
+		emailSenderService.sendEmailToDonator(donator.getUuid());
 	}
 
 	@RequestMapping("/getall")

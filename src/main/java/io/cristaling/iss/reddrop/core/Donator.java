@@ -1,5 +1,7 @@
 package io.cristaling.iss.reddrop.core;
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 import java.util.UUID;
 
@@ -22,6 +24,10 @@ public class Donator {
     private String password;
 
     @Column
+    private String email;
+    @Column
+    private UUID verified;
+    @Column
     private String city;
     @Column
     private String county;
@@ -38,6 +44,22 @@ public class Donator {
     public String getNume() {
 
         return nume;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public UUID getVerified() {
+        return verified;
+    }
+
+    public void setVerified(UUID verified) {
+        this.verified = verified;
     }
 
     public void setNume(String nume) {

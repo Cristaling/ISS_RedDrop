@@ -26,9 +26,19 @@ public class DonatorService {
         donator.setCnp("1971211055084");
         donator.setPassword("1971211055084");
         donator.setNume("DONATOR");
+        donator.setVerified(UUID.randomUUID());
         donator.setPrenume("PRIME");
+        donator.setEmail("squishymaster12@gmail.com");
         donator.setNrTel("0751080998");
         donatorRepository.save(donator);
+    }
+
+    public Donator getDonatorById(UUID uuid){
+        return donatorRepository.getOne(uuid);
+    }
+
+    public Donator getDonatorbyVerified(UUID uuid){
+        return donatorRepository.getDonatorByVerified(uuid);
     }
 
     public UUID tryToLogin(String cnp, String password) {
