@@ -14,6 +14,8 @@ public class BloodBagType {
     UUID uuid;
     @Column
     String name;
+    @Column
+    int daysToExpire;
 
     public UUID getUuid() {
         return uuid;
@@ -29,5 +31,13 @@ public class BloodBagType {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getDaysToExpire() {
+        return daysToExpire;
+    }
+
+    public void setDaysToExpire(int daysToExpire) {
+        this.daysToExpire = daysToExpire;
     }
 }

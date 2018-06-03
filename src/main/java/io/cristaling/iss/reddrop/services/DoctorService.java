@@ -32,6 +32,7 @@ public class DoctorService {
         doctor.setCnp("1971211055085");
         doctor.setPassword("1971211055085");
         doctor.setFullName("Dr. Susan Dofenjmirtz");
+        doctor.setFirstLogin(true);
         doctorRepository.save(doctor);
     }
 
@@ -71,6 +72,12 @@ public class DoctorService {
     public void updateDoctor(Doctor doctor){
         doctorRepository.deleteById(doctor.getUuid());
         doctorRepository.save(doctor);
+    }
+    public boolean checkFirstLogin(UUID uuid){
+        return doctorRepository.getDoctorByUuid(uuid).isFirstLogin();
+    }
+    public Doctor getByUUID(UUID uuid){
+        return doctorRepository.getOne(uuid);
     }
 
 }

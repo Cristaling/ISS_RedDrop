@@ -98,3 +98,7 @@ fieldset[disabled] .btn-reddrop.active {
 .form-control{
     color:rgb(188, 188, 188);
 }
+
+md-toast.md-reddrop-toast-theme .md-toast-content {
+    background-color: #AA3030;
+}

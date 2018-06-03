@@ -2,9 +2,6 @@
     'use strict'
     var app = angular.module('RedDrop', ['ngRoute', 'ngAnimate', 'ngCookies', 'ngAria', 'ngMaterial', 'ngMessages'])
 
-    app.value('apiIP', 'http://127.0.0.1');
-    //app.value('apiIP',  'http://192.168.0.112');
-
     app.config(function ($routeProvider) {
         $routeProvider
             .when("/landing", {
@@ -27,6 +24,11 @@
                 controller: 'DonatorMainController',
                 controllerAs: 'ctrl'
             })
+            .when("/donator/analysis/:visitToken", {
+                templateUrl: "views/donator/AnalysisShowPage.html",
+                controller: 'AnalysisShowController',
+                controllerAs: 'ctrl'
+            })
             .when("/admin/login", {
                 templateUrl: "views/login/AdminLoginPage.html",
                 controller: 'AdminLoginController',
@@ -35,6 +37,16 @@
             .when("/admin/main", {
                 templateUrl: "views/admin/AdminMainPage.html",
                 controller: 'AdminMainController',
+                controllerAs: 'ctrl'
+            })
+            .when("/admin/requests", {
+                templateUrl: "views/admin/RequestManagementPage.html",
+                controller: 'RequestManagementController',
+                controllerAs: 'ctrl'
+            })
+            .when("/admin/visits", {
+                templateUrl: "views/admin/VisitManagementPage.html",
+                controller: 'VisitManagementController',
                 controllerAs: 'ctrl'
             })
             .when("/doctor/login", {
@@ -52,10 +64,26 @@
                 controller: 'DoctorCRUDController',
                 controllerAs: 'ctrl'
             })
+            .when("/crud/hospital", {
+                templateUrl: "views/crud/HospitalCRUDPage.html",
+                controller: 'HospitalCRUDController',
+                controllerAs: 'ctrl'
+            })
+            .when("/crud/donator", {
+                templateUrl: "views/crud/DonatorCRUDPage.html",
+                controller: 'DonatorCRUDController',
+                controllerAs: 'ctrl'
+            })
+            .when("/admin/bloodanalysis/", {
+                templateUrl: "views/admin/BloodAnalysisPage.html",
+                controller: 'AdminBloodAnalysisController',
+                controllerAs: 'ctrl'
+            })
             .otherwise({redirectTo: "/landing"});
     });
     app.config(function ($mdThemingProvider) {
         $mdThemingProvider.theme('default')
             .dark();
+        $mdThemingProvider.theme('reddrop-toast');
     });
 })();

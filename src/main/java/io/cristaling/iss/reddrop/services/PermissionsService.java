@@ -6,10 +6,11 @@ import io.cristaling.iss.reddrop.core.Donator;
 import io.cristaling.iss.reddrop.repositories.AdminRepository;
 import io.cristaling.iss.reddrop.repositories.DoctorRepository;
 import io.cristaling.iss.reddrop.repositories.DonatorRepository;
-import io.cristaling.iss.reddrop.utils.Permission;
+import io.cristaling.iss.reddrop.utils.enums.Permission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.UUID;
 
 @Service
@@ -39,18 +40,34 @@ public class PermissionsService {
 	}
 
 	public boolean hasPermission(UUID token, Permission permission) {
-		if (permission == Permission.ADMIN) {
+
+		try {
 			Admin admin = adminRepository.getOne(token);
-			return admin != null;
+			return true;
+		} catch (EntityNotFoundException ex) {
+			if (permission == Permission.ADMIN) {
+				return false;
+			}
 		}
+
 		if (permission == Permission.DOCTOR) {
-			Doctor doctor = doctorRepository.getOne(token);
-			return doctor != null;
+			try {
+				Doctor doctor = doctorRepository.getOne(token);
+				return true;
+			} catch (EntityNotFoundException ex) {
+				return false;
+			}
 		}
+
 		if (permission == Permission.DONATOR) {
-			Donator donator = donatorRepository.getOne(token);
-			return donator != null;
+			try {
+				Donator donator = donatorRepository.getOne(token);
+				return true;
+			} catch (EntityNotFoundException ex) {
+				return false;
+			}
 		}
+
 		return false;
 	}
 

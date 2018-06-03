@@ -6,8 +6,7 @@
         '$http',
         '$mdDialog',
         '$routeParams',
-        'apiIP',
-        function ($location, $cookies, $http, $mdDialog, $routeParams, apiIP) {
+        function ($location, $cookies, $http, $mdDialog, $routeParams) {
 
             var vm = this;
 
@@ -31,7 +30,7 @@
             };
 
             vm.deleteDoctor = function (doctorId) {
-                $http.get(apiIP + '/api/doctor/delete?token=' + vm.adminToken + '&uuid=' + doctorId).then(function () {
+                $http.get('/api/doctor/delete?token=' + vm.adminToken + '&uuid=' + doctorId).then(function () {
                     vm.refreshDoctorList();
                 }, function (reason) {
 
@@ -39,7 +38,7 @@
             };
 
             vm.refreshDoctorList = function () {
-                $http.get(apiIP + '/api/doctor/getbyhospital?token=' + vm.adminToken + '&uuid=' + vm.hospitalID).then(function (response) {
+                $http.get('/api/doctor/getbyhospital?token=' + vm.adminToken + '&uuid=' + vm.hospitalID).then(function (response) {
                     vm.doctors = response.data;
                 }, function (reason) {
 

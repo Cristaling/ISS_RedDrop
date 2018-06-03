@@ -9,7 +9,7 @@
                 <form>
                     <div class="form-group">
                         <label for="cnpLogin">C.N.P.</label>
-                        <input ng-model="ctrl.donatorCNP" type="text" class="form-control" id="cnpLogin"
+                        <input ng-model="ctrl.donatorCNP" type="text" maxlength="13" minlength="13" class="form-control" id="cnpLogin"
                                aria-describedby="cnpHelp" placeholder="Enter CNP">
                         <small id="cnpHelp" class="form-text text-muted">We'll never share your CNP with anyone else.
                         </small>
@@ -17,7 +17,7 @@
 
                     <div class="form-group">
                         <label for="passwordLogin">Password</label>
-                        <input ng-model="ctrl.donatorPassword" type="password" class="form-control" id="passwordLogin"
+                        <input ng-model="ctrl.donatorPassword" type="password" minlength="6" class="form-control" id="passwordLogin"
                                placeholder="Password">
                     </div>
 

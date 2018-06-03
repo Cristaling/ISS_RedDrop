@@ -6,7 +6,7 @@
 (function(){
     'use strict'
     var app = angular.module('RedDrop');
-    app.controller('DonatorRegisterController', ['$location','$http','$cookies','apiIP', function($location,$http,$cookies,apiIP)
+    app.controller('DonatorRegisterController', ['$location','$http','$cookies', function($location,$http,$cookies)
     {
         var vm = this;
 
@@ -20,7 +20,7 @@
             if(vm.donatorPassword === vm.donatorConfirmPassword){
                 $http({
                     method: 'POST',
-                    url: apiIP + '/api/donator/register',
+                    url: '/api/donator/register',
                     data: {
                         uuid : "",
                         nume : vm.donatorSurname,
@@ -30,8 +30,8 @@
                         password : vm.donatorPassword,
                         city : vm.donatorCity,
                         county : vm.donatorCounty,
-                        address : vm.donatorAddress,
-                        bloodType : "UNKNOWN"
+                        email:vm.donatorEmail,
+                        address : vm.donatorAddress
                     }
                 }).then(function (response) {
                     $location.path("/donator/login");

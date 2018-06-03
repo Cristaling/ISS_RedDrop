@@ -1,7 +1,7 @@
 (function(){
     'use strict'
     var app = angular.module('RedDrop');
-    app.controller('DoctorLoginController', ['$location', '$cookies', '$http', 'apiIP', function($location, $cookies, $http, apiIP)
+    app.controller('DoctorLoginController', ['$location', '$cookies', '$http', function($location, $cookies, $http)
     {
         var vm = this;
 
@@ -14,7 +14,7 @@
         vm.tryLoginDoctor = function () {
             $http({
                 method: 'POST',
-                url: apiIP + '/api/doctor/login',
+                url: '/api/doctor/login',
                 data: {
                     cnp: vm.doctorCNP,
                     password: vm.doctorPassword

@@ -1,0 +1,109 @@
+<div style="padding-top: 5vh;">
+
+    <div class="col-md-10 col-md-offset-1">
+
+        <div class="col-md-12">
+            <div back-btn></div>
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="panel panel-reddrop">
+                <div class="panel-heading">
+                    <span>
+                        Blood Stock
+                    </span>
+                </div>
+                <div class="panel-body">
+                    <md-list>
+                        <md-list-item>
+                            <div class="col-md-3">Blood Type</div>
+                            <div class="col-md-3" ng-repeat="bagType in ctrl.bloodBagTypes | orderBy:'name':true"
+                                 style="text-align: center">
+                                {{bagType.name }}
+                            </div>
+                        </md-list-item>
+                        <md-divider ></md-divider>
+                        <md-list-item ng-repeat="bloodStock in ctrl.bloodStocks | orderBy:'bloodType.type'"
+                                      ng-click="null">
+                            <div class="col-md-3">{{bloodStock.bloodType.type}}</div>
+                            <div class="col-md-3" ng-repeat="bloodBagType in bloodStock.stock | orderBy:'name':true"
+                                 style="text-align: center">
+                                {{ bloodBagType.value }}
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-8">
+
+            <div class="panel panel-reddrop">
+                <div class="panel-heading">
+                    <span>
+                        Blood Requests
+                    </span>
+                </div>
+                <div class="panel-body">
+                    <md-list>
+                        <md-list-item>
+                            <div class="col-md-1">
+                                Date
+                            </div>
+                            <div class="col-md-3">
+                                Patient
+                            </div>
+                            <div class="col-md-2">
+                                Importance
+                            </div>
+                            <div class="col-md-2">
+                                Type
+                            </div>
+                            <div class="col-md-2">
+                                Status
+                            </div>
+                            <div class="col-md-1">
+
+                            </div>
+                            <div class="col-md-1">
+                                Options
+                            </div>
+                        </md-list-item>
+                        <md-divider ></md-divider>
+                        <md-list-item ng-repeat="request in ctrl.requests">
+                            <div class="col-md-1">
+                                {{ request.date | date:"dd/MM/yyyy" }}
+                            </div>
+                            <div class="col-md-3">
+                                {{ request.patientFullName }}
+                            </div>
+                            <div class="col-md-2">
+                                <span class="label label-success">{{ request.importance }}</span>
+                            </div>
+                            <div class="col-md-2">
+                                <span class="label label-danger">{{ ctrl.getBloodTypeByUUID(request.bloodType) }}</span>
+                                <span class="label label-primary">{{ ctrl.getBloodBagTypeByUUID(request.bloodBagType) }}</span>
+                            </div>
+                            <div class="col-md-2">
+                                <span class="label label-primary">{{ request.status }}</span>
+                            </div>
+                            <div class="col-md-2" style="text-align: right">
+                                <i class="material-icons"
+                                   ng-show="request.status == 'AWAITING_CONFIRMATION'"
+                                   ng-click="ctrl.solveRequest(request.uuid)">how_to_vote</i>
+                                <i class="material-icons"
+                                   ng-show="request.status == 'NEEDS_BREAKDOWN'"
+                                   ng-click="ctrl.solveRequest(request.uuid)">broken_image</i>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,81 +1,63 @@
 <div style="padding-top: 5vh;">
 
-    <div class="col-md-10 col-md-offset-1">
-        <div class="col-md-5">
+    <div class="col-md-6 col-md-offset-3">
+
+        <div class="col-md-8" style="margin-bottom: 15px;">
+
+            <div class="btn btn-reddrop" ng-click="ctrl.goToRequestsPage()">
+                Blood Bag Requests
+            </div>
+
+            <div class="btn btn-reddrop" ng-click="ctrl.goToVisitsPage()">
+                Scheduled Visits
+            </div>
+
+
+            <div class="btn btn-reddrop" ng-click="ctrl.goToFillAnalysisPage()">
+                Untested Blood Bags
+            </div>
+
+        </div>
+
+        <div class="col-md-4" style="margin-bottom: 15px; text-align: right">
+
+            <div class="btn btn-reddrop" ng-click="ctrl.goToDonatorsPage()">
+                Donators
+            </div>
+
+            <div class="btn btn-reddrop" ng-click="ctrl.goToHospitalsPage()">
+                Hospitals
+            </div>
+
+        </div>
+
+        <div class="col-md-12">
 
             <div class="panel panel-reddrop">
                 <div class="panel-heading">
-                        <span>
-                            Blood Stock
-                        </span>
+                    <span>
+                        Blood Stock
+                    </span>
                     <div style="float: right;" ng-click="ctrl.openAddBloodBagDialog()">
                         <i class="material-icons">add</i>
                     </div>
                 </div>
                 <div class="panel-body">
                     <md-list>
-                        <md-list-item ng-click="null">
+                        <md-list-item>
                             <div class="col-md-3">Blood Type</div>
-                            <div class="col-md-3" ng-repeat="bagType in ctrl.bagTypes" style="text-align: center">
+                            <div class="col-md-3" ng-repeat="bagType in ctrl.bloodBagTypes | orderBy:'name':true"
+                                 style="text-align: center">
                                 {{bagType.name }}
                             </div>
                         </md-list-item>
-                        <md-list-item ng-repeat="bloodStock in ctrl.bloodStocks" ng-click="null">
+                        <md-divider ></md-divider>
+                        <md-list-item ng-repeat="bloodStock in ctrl.bloodStocks | orderBy:'bloodType.type'"
+                                      ng-click="null">
                             <div class="col-md-3">{{bloodStock.bloodType.type}}</div>
-                            <div class="col-md-3" ng-repeat="bloodBagType in bloodStock.stock" style="text-align: center">
-                                {{ bloodBagType }}
-                            </div>
-                        </md-list-item>
-                    </md-list>
-                </div>
-            </div>
-
-            <div class="panel panel-reddrop">
-                <div class="panel-heading">
-                <span>
-                    Hospitals
-                </span>
-                    <div style="float: right;" ng-click="ctrl.openAddHospitalDialog()">
-                        <i class="material-icons">add</i>
-                    </div>
-                </div>
-                <div class="panel-body">
-                    <md-list>
-                        <md-list-item ng-repeat="hospital in ctrl.hospitals"
-                                      ng-click="ctrl.goToHospitalPage(hospital.uuid)">
-                            <p>{{ hospital.name }}</p>
-                            <div class="md-secondary" aria-label="Add Doctor"
-                                 ng-click="ctrl.openRegisterDoctorDialog(hospital.uuid)">
-                                <i class="material-icons">person_add</i>
-                            </div>
-                            <div class="md-secondary" aria-label="Delete Hospital"
-                                 ng-click="ctrl.deleteHospital(hospital.uuid)">
-                                <i class="material-icons">delete</i>
-                            </div>
-                        </md-list-item>
-                    </md-list>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-3">
-
-            <div class="panel panel-reddrop">
-                <div class="panel-heading">
-                    <span>
-                        Scheduled Visits
-                    </span>
-                </div>
-                <div class="panel-body">
-                    <md-list>
-                        <md-list-item ng-repeat="visit in ctrl.visits | orderBy:'date'" ng-click="null">
-                            <p>{{ visit.date | date:"dd/MM/yyyy" }} - {{ visit.donatorName }}</p>
-                            <div class="md-secondary" aria-label="Fill Analysis"
-                                 ng-click="ctrl.openFillAnalysisDialog(visit.uuid)">
-                                <i class="material-icons">assignment</i>
-                            </div>
-                            <div class="md-secondary" aria-label="Delete Hospital" ng-click="null">
-                                <i class="material-icons">delete</i>
+                            <div class="col-md-3" ng-repeat="bloodBagType in bloodStock.stock | orderBy:'name':true"
+                                 style="text-align: center">
+                                {{ bloodBagType.value }}
                             </div>
                         </md-list-item>
                     </md-list>
@@ -84,33 +66,8 @@
 
         </div>
 
-        <div class="col-md-4">
-
-            <div class="panel panel-reddrop">
-                <div class="panel-heading">
-                    <span>
-                        Blood Requests
-                    </span>
-                </div>
-                <div class="panel-body">
-                    <md-list>
-                        <md-list-item ng-repeat="request in ctrl.requests" ng-click="null">
-                            <p>{{ request.date | date:"dd/MM/yyyy" }} - {{ request.patientFullName }}</p>
-                            <!--<div class="md-secondary" aria-label="Fill Analysis"
-                                 ng-click="ctrl.openFillAnalysisDialog(visit.uuid)">
-                                <i class="material-icons">assignment</i>
-                            </div>
-                            <div class="md-secondary" aria-label="Delete Hospital" ng-click="null">
-                                <i class="material-icons">delete</i>
-                            </div>-->
-                        </md-list-item>
-                    </md-list>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="col-md-5" style="text-align: center">
+        <div class="col-md-12" style="text-align: center">
+            The country is greatful for your service
             <div logout-btn></div>
         </div>
 

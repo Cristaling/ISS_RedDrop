@@ -1,14 +1,12 @@
 package io.cristaling.iss.reddrop.web.controllers;
 
 import io.cristaling.iss.reddrop.core.Hospital;
-import io.cristaling.iss.reddrop.repositories.HospitalRepository;
 import io.cristaling.iss.reddrop.services.HospitalService;
 import io.cristaling.iss.reddrop.services.PermissionsService;
-import io.cristaling.iss.reddrop.utils.Permission;
+import io.cristaling.iss.reddrop.utils.enums.Permission;
 import io.cristaling.iss.reddrop.web.utils.UUIDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

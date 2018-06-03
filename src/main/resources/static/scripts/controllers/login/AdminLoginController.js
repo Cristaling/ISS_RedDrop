@@ -1,20 +1,20 @@
 (function(){
     'use strict'
     var app = angular.module('RedDrop');
-    app.controller('AdminLoginController', ['$location', '$cookies', '$http', 'apiIP', function($location, $cookies, $http, apiIP)
+    app.controller('AdminLoginController', ['$location', '$cookies', '$http', function($location, $cookies, $http)
     {
         var vm = this;
 
         vm.adminToken = $cookies.get("adminToken");
 
         if (vm.adminToken) {
-            $location.path("/admin/login");
+            $location.path("/admin/main");
         }
 
         vm.tryLoginAdmin = function () {
             $http({
                 method: 'POST',
-                url: apiIP + '/api/admin/login',
+                url: '/api/admin/login',
                 data: {
                     cnp: vm.adminCNP,
                     password: vm.adminPassword

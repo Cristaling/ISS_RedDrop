@@ -4,7 +4,7 @@ package io.cristaling.iss.reddrop.web.controllers;
 import io.cristaling.iss.reddrop.core.AnalysisResult;
 import io.cristaling.iss.reddrop.services.AnalysisResultService;
 import io.cristaling.iss.reddrop.services.PermissionsService;
-import io.cristaling.iss.reddrop.utils.Permission;
+import io.cristaling.iss.reddrop.utils.enums.Permission;
 import io.cristaling.iss.reddrop.web.utils.UUIDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -45,6 +45,18 @@ public class AnalysisResultController {
             return null;
         }
         return analysisResultService.getAllForDonator(actualUuid);
+    }
+
+    @RequestMapping("/getbyvisit")
+    public AnalysisResult getAnalysisResultByVisit(String token, String uuid) {
+        if (!permissionsService.hasPermission(token, Permission.DONATOR)) {
+            return null;
+        }
+        UUID actualUuid = UUIDUtils.getUUIDFromString(uuid);
+        if (actualUuid == null) {
+            return null;
+        }
+        return analysisResultService.getByDonationVisit(actualUuid);
     }
 
 }

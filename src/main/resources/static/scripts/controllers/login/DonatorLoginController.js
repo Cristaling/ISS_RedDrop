@@ -1,7 +1,7 @@
 (function(){
     'use strict'
     var app = angular.module('RedDrop');
-    app.controller('DonatorLoginController', ['$location', '$cookies', '$http', 'apiIP', function($location, $cookies, $http, apiIP)
+    app.controller('DonatorLoginController', ['$location', '$cookies', '$http','$mdToast', function($location, $cookies, $http,$mdToast)
     {
         var vm = this;
 
@@ -18,7 +18,7 @@
         vm.tryLoginDonator = function () {
             $http({
                 method: 'POST',
-                url: apiIP + '/api/donator/login',
+                url: '/api/donator/login',
                 data: {
                     cnp: vm.donatorCNP,
                     password: vm.donatorPassword
@@ -27,6 +27,16 @@
                 if (response.data.succesful) {
                     $cookies.put("donatorToken", response.data.token);
                     $location.path("/donator/main");
+                }else{
+                    $mdToast.show(
+                        $mdToast.simple()
+                            .textContent('Check if the password/cnp match, id they do please verify your email to confirm the account.')
+                            .position('bottom right')
+                            .theme('reddrop-toast')
+                            .hideDelay(2500)
+                    ).then(function (value) {
+                    }, function (reason) {
+                    });
                 }
             }, function (error) { });
         }

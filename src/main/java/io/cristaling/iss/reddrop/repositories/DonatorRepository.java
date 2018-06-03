@@ -10,5 +10,6 @@ import java.util.UUID;
 public interface DonatorRepository extends JpaRepository<Donator,UUID> {
 
 	Donator getDonatorByCnp(String cnp);
+	Donator getDonatorByVerified(UUID uuid);
 
 }

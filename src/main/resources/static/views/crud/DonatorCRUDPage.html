@@ -1,0 +1,53 @@
+<div style="padding-top: 5vh;">
+
+    <div class="col-md-6 col-md-offset-3">
+
+        <div class="col-md-12">
+            <div back-btn></div>
+        </div>
+
+        <div class="col-md-12">
+
+            <div class="panel panel-reddrop">
+                <div class="panel-heading">
+                    <span>
+                        Donators
+                    </span>
+                </div>
+                <div class="panel-body">
+                    <md-list>
+                        <md-list-item>
+                            <div class="col-md-2">
+                                CNP
+                            </div>
+                            <div class="col-md-3">
+                                Full Name
+                            </div>
+                            <div class="col-md-6">
+
+                            </div>
+                            <div class="col-md-1">
+                                Options
+                            </div>
+                        </md-list-item>
+                        <md-divider ></md-divider>
+                        <md-list-item ng-repeat="donator in ctrl.donators" ng-click="null">
+                            <div class="col-md-2">
+                                {{ donator.cnp }}
+                            </div>
+                            <div class="col-md-3">
+                                {{donator.nume}} {{donator.prenume}}
+                            </div>
+                            <div class="col-md-7" style="text-align: right">
+                                <i class="material-icons" ng-click="ctrl.deleteDonator(donator.uuid)">delete</i>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

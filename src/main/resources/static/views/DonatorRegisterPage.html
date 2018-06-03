@@ -25,7 +25,7 @@
 
                         <div class="form-group">
                             <!--<label for="cnpLogin">C.N.P.</label>-->
-                            <input ng-model="ctrl.donatorCNP" type="text" required size="13" class="form-control" id="cnpLogin"
+                            <input ng-model="ctrl.donatorCNP" type="text" minlength="13" maxlength="13"  class="form-control" id="cnpLogin"
                                    aria-describedby="cnpHelp" placeholder="CNP">
                             <small id="cnpHelp" class="form-text text-muted">We'll never share your CNP with anyone else.
                             </small>
@@ -45,14 +45,20 @@
                         </div>
 
                         <div class="form-group">
+                            <!--<label for="telephone">Telephone</label>-->
+                            <input ng-model="ctrl.donatorEmail" type="email" class="form-control" id="email"
+                                   aria-describedby="emailHelp" placeholder="E-mail">
+                        </div>
+
+                        <div class="form-group">
                             <!--<label for="city">City</label>-->
-                            <input ng-model="ctrl.donatorCity" type="text" minlength="1" class="form-control" id="city"
+                            <input ng-model="ctrl.donatorCity" type="text" minlength="3" class="form-control" id="city"
                                    aria-describedby="cityHelp" placeholder="City">
                         </div>
 
                         <div class="form-group">
                             <!--<label for="county">County</label>-->
-                            <input ng-model="ctrl.donatorCounty" type="text" minlength="1" class="form-control" id="county"
+                            <input ng-model="ctrl.donatorCounty" type="text" minlength="3" class="form-control" id="county"
                                    aria-describedby="countyHelp" placeholder="County">
                         </div>
 
