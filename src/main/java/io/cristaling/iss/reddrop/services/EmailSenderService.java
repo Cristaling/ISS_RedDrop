@@ -38,7 +38,9 @@ public class EmailSenderService {
         message.setTo(donator.getEmail());
         message.setSubject("Confirm Registration Account on ISS_RedDrop");
         message.setText("Please follow this link to register your account and receive notifications when there's a desire for your blood type: http://127.0.0.1/api/emails/setconfirmed?cookie=" + donator.getVerified());
-        emailSender.send(message);
+        new Thread(() -> {
+            emailSender.send(message);
+        }).start();
     }
 
     public boolean isDonatorVerified(UUID uuid) {
