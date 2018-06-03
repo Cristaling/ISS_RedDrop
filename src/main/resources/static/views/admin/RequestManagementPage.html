@@ -77,14 +77,14 @@
                                 {{ request.patientFullName }}
                             </div>
                             <div class="col-md-1">
-                                <span class="badge badge-success">{{ request.importance }}</span>
+                                <span class="label label-success">{{ request.importance }}</span>
                             </div>
                             <div class="col-md-2">
-                                <span class="badge badge-danger">{{ ctrl.getBloodTypeByUUID(request.bloodType) }}</span>
-                                <span class="badge badge-primary">{{ ctrl.getBloodBagTypeByUUID(request.bloodBagType) }}</span>
+                                <span class="label label-danger">{{ ctrl.getBloodTypeByUUID(request.bloodType) }}</span>
+                                <span class="label label-primary">{{ ctrl.getBloodBagTypeByUUID(request.bloodBagType) }}</span>
                             </div>
                             <div class="col-md-2">
-                                <span class="badge badge-light">{{ request.status }}</span>
+                                <span class="label label-light">{{ request.status }}</span>
                             </div>
                             <!--<div class="md-secondary" aria-label="Fill Analysis"
                                  ng-click="ctrl.openFillAnalysisDialog(visit.uuid)">
