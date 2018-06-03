@@ -18,6 +18,8 @@ public class Doctor {
     String fullName;
     @Column
     String password;
+    @Column(columnDefinition = "boolean default true",nullable = false)
+    boolean firstLogin;
 
     public Doctor() { }
 
@@ -64,5 +66,13 @@ public class Doctor {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isFirstLogin() {
+        return firstLogin;
+    }
+
+    public void setFirstLogin(boolean firstLogin) {
+        this.firstLogin = firstLogin;
     }
 }

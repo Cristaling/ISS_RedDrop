@@ -13,6 +13,7 @@
         vm.requests = [];
         vm.bloodTypes = [];
         vm.bloodBagTypes = [];
+        vm.firstTime = false;
 
         $http.get(apiIP + '/api/bloodbagtype/getall?token=' + vm.doctorToken).then(function (response) {
             vm.bloodBagTypes = response.data;
@@ -23,6 +24,7 @@
             vm.bloodTypes = response.data;
         }, function (reason) {
         });
+
 
         vm.getBloodTypeByUUID = function (uuid) {
             for (var i in vm.bloodTypes) {
@@ -89,6 +91,72 @@
             });
         };
 
+        vm.checkFirstTime = function () {
+
+            $http.get(apiIP + '/api/doctor/checkfirst?token=' + vm.doctorToken).then(function (response) {
+                $mdDialog.show({
+                    controller: function () {
+
+                        var vm = this;
+
+                        vm.agreed = false;
+                        vm.password1 = "a";
+                        vm.password2 = "f";
+
+                        vm.doctorToken = $cookies.get("doctorToken");
+
+                        if (!vm.doctorToken) {
+                            $location.path("/doctor/login");
+                        }
+
+                        vm.changePassword = function () {
+                            $http({
+                                method: 'POST',
+                                url: apiIP + '/api/doctor/changepassword?token=' + vm.doctorToken,
+                                data: {
+                                    password1: vm.password1,
+                                    password2: vm.password2
+                                }
+                            }).then(function (response) {
+                                    if (response.data) {
+                                        $mdDialog.show(
+                                            $mdDialog.alert()
+                                                .clickOutsideToClose(true)
+                                                .textContent('You have changed your password.')
+                                                .ariaLabel('Alert Dialog Demo')
+                                                .ok('Thank you!')
+                                        );
+                                    } else {
+                                        $mdDialog.show(
+                                            $mdDialog.alert()
+                                                .clickOutsideToClose(true)
+                                                .textContent('Passwords dont match.')
+                                                .ariaLabel('Alert Dialog Demo')
+                                                .ok('Try again!')
+                                        );
+                                    }
+
+                                }, function (error) {
+
+                                }
+                            );
+
+                        };
+                    },
+                    controllerAs: 'ctrl',
+                    templateUrl: '/views/doctor/DoctorChangePassword.html',
+                    parent: angular.element(document.body),
+                    clickOutsideToClose: true
+                }).then();
+            }, function (reason) {
+            });
+            if (vm.firstTime.successful) {
+
+            }
+
+        }
+
+        vm.checkFirstTime();
         vm.refreshBloodBagStocks();
         vm.refreshRequestList();
 
