@@ -4,18 +4,18 @@ import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import io.cristaling.iss.reddrop.core.DonationVisit;
 import io.cristaling.iss.reddrop.utils.enums.BloodBagStatus;
 
-public class DonationVisitResponse {
+public class DonationVisitStatusResponse {
 
 	@JsonUnwrapped
 	DonationVisit donationVisit;
 
 	BloodBagStatus bloodBagStatus;
 
-	public DonationVisitResponse() {
+	public DonationVisitStatusResponse() {
 
 	}
 
-	public DonationVisitResponse(DonationVisit donationVisit, BloodBagStatus bloodBagStatus) {
+	public DonationVisitStatusResponse(DonationVisit donationVisit, BloodBagStatus bloodBagStatus) {
 		this.donationVisit = donationVisit;
 		this.bloodBagStatus = bloodBagStatus;
 	}

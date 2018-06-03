@@ -6,7 +6,8 @@ import io.cristaling.iss.reddrop.services.DonationVisitService;
 import io.cristaling.iss.reddrop.services.PermissionsService;
 import io.cristaling.iss.reddrop.utils.enums.Permission;
 import io.cristaling.iss.reddrop.web.responses.DonationVisitMarkResponse;
-import io.cristaling.iss.reddrop.web.responses.DonationVisitResponse;
+import io.cristaling.iss.reddrop.web.responses.DonationVisitStatusResponse;
+import io.cristaling.iss.reddrop.web.responses.DonationVisitWithBloodBagResponse;
 import io.cristaling.iss.reddrop.web.utils.UUIDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -64,7 +65,7 @@ public class DonationVisitController {
     }
 
     @RequestMapping("/getvisitedvisits")
-    public List<DonationVisitResponse> getVisitedVisits(String token, String uuid) {
+    public List<DonationVisitStatusResponse> getVisitedVisits(String token, String uuid) {
         if (!permissionsService.hasPermission(token, Permission.ADMIN)) {
             return null;
         }
@@ -98,7 +99,7 @@ public class DonationVisitController {
     }
 
     @RequestMapping("/getpendingvisits")
-    public List<DonationVisit> getPendingVisits(String token){
+    public List<DonationVisitWithBloodBagResponse> getPendingVisits(String token){
         if (!permissionsService.hasPermission(token, Permission.ADMIN)) {
             return null;
         }
