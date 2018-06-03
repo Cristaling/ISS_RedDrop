@@ -42,6 +42,7 @@
                     $mdToast.simple()
                         .textContent('You need to select a date to set up a visit!')
                         .position('bottom right')
+                        .theme('reddrop-toast')
                         .hideDelay(1000)
                 ).then(function (value) {
                 }, function (reason) {
