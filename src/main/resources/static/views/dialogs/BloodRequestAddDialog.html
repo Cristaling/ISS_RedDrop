@@ -6,13 +6,13 @@
         <form>
             <div class="form-group">
                 <label for="patientCnp">C.N.P.</label>
-                <input ng-model="ctrl.patientRegisterCnp" type="text" class="form-control" id="patientCnp"
+                <input ng-model="ctrl.patientRegisterCnp" type="text" minlength="13" maxlenght="13" class="form-control" id="patientCnp"
                        placeholder="Enter CNP">
             </div>
 
             <div class="form-group">
                 <label for="patientName">Full Name</label>
-                <input ng-model="ctrl.patientRegisterFullName" type="text" class="form-control" id="patientName"
+                <input ng-model="ctrl.patientRegisterFullName" type="text" minlenght="5" class="form-control" id="patientName"
                        placeholder="Full Name">
             </div>
 
