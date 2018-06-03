@@ -26,7 +26,7 @@ public class DonatorService {
         donator.setCnp("1971211055084");
         donator.setPassword("1971211055084");
         donator.setNume("DONATOR");
-        donator.setVerified(UUID.randomUUID());
+        donator.setVerified(null);
         donator.setPrenume("PRIME");
         donator.setEmail("squishymaster12@gmail.com");
         donator.setNrTel("0751080998");

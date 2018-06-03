@@ -72,26 +72,31 @@
                                         date: visitDate
                                     }
                                 }).then(function () {
-                                        $mdDialog.show(
-                                            $mdDialog.alert()
-                                                .clickOutsideToClose(true)
-                                                .textContent('You have set yourself up for a visit.')
-                                                .ariaLabel('Alert Dialog Demo')
-                                                .ok('Thank you!')
-                                        );
+                                    $mdToast.show(
+                                        $mdToast.simple()
+                                            .textContent('You have set yourself up for a visit.')
+                                            .position('bottom right')
+                                            .theme('reddrop-toast')
+                                            .hideDelay(1000)
+                                    ).then(function (value) {
+                                    }, function (reason) {
+                                    });
+
 
                                     }, function (error) {
 
                                     }
                                 );
                             } else {
-                                $mdDialog.show(
-                                    $mdDialog.alert()
-                                        .clickOutsideToClose(true)
-                                        .textContent('You need to give your consent to set up a visit.')
-                                        .ariaLabel('Alert Dialog Demo')
-                                        .ok('Got it!')
-                                );
+                                $mdToast.show(
+                                    $mdToast.simple()
+                                        .textContent('You need to agree to the terms.')
+                                        .position('bottom right')
+                                        .theme('reddrop-toast')
+                                        .hideDelay(1000)
+                                ).then(function (value) {
+                                }, function (reason) {
+                                });
                             }
 
                         };
