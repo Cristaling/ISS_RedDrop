@@ -123,6 +123,7 @@ public class BloodRequestService {
             bloodBagRepository.save(toUse);
             toSolve.setStatus(BloodRequestStatus.COMPLETED);
             requestRepository.save(toSolve);
+            return;
         }
 
         if (toSolve.getBloodBagType().equals(wholeBagType.getUuid())) {

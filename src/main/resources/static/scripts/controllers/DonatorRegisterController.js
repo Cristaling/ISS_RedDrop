@@ -1,8 +1,3 @@
-/*$("#donatorCNP").keyup(function(){
-    $("#cnpLoginCredential").val(this.value);
-});*/
-//TODO Remove/fix acordingly
-
 (function(){
     'use strict'
     var app = angular.module('RedDrop');
