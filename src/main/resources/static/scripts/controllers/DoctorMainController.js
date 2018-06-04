@@ -105,7 +105,7 @@
                                 vm.password2 = "f";
 
                                 vm.doctorToken = $cookies.get("doctorToken");
-                                
+
                                 if (!vm.doctorToken) {
                                     $location.path("/doctor/login");
                                 }
