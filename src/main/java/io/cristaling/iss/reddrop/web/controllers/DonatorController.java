@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.Date;
 import java.util.List;
 import java.util.Timer;
@@ -27,75 +28,77 @@ import java.util.UUID;
 @RequestMapping("/api/donator")
 public class DonatorController {
 
-	DonatorService donatorService;
-	PermissionsService permissionsService;
-	EmailSenderService emailSenderService;
-	BloodTypeService bloodTypeService;
+    DonatorService donatorService;
+    PermissionsService permissionsService;
+    EmailSenderService emailSenderService;
+    BloodTypeService bloodTypeService;
 
-	@Autowired
-	public DonatorController(DonatorService donatorService, PermissionsService permissionsService,EmailSenderService emailSenderService,BloodTypeService bloodTypeService) {
-		this.donatorService = donatorService;
-		this.permissionsService=permissionsService;
-		this.emailSenderService=emailSenderService;
-		this.bloodTypeService=bloodTypeService;
-	}
+    @Autowired
+    public DonatorController(DonatorService donatorService, PermissionsService permissionsService, EmailSenderService emailSenderService, BloodTypeService bloodTypeService) {
+        this.donatorService = donatorService;
+        this.permissionsService = permissionsService;
+        this.emailSenderService = emailSenderService;
+        this.bloodTypeService = bloodTypeService;
+    }
 
-	@RequestMapping("/login")
-	public LoginResponse loginDonator(@RequestBody LoginRequest loginRequest) {
-		UUID token = donatorService.tryToLogin(loginRequest.getCnp(), loginRequest.getPassword());
-		LoginResponse response= LoginUtils.generateLoginResponse(token);
+    @RequestMapping("/login")
+    public LoginResponse loginDonator(@RequestBody LoginRequest loginRequest) {
+        UUID token = donatorService.tryToLogin(loginRequest.getCnp(), loginRequest.getPassword());
+        LoginResponse response = LoginUtils.generateLoginResponse(token);
 
-		Donator donator=donatorService.getDonatorById(token);
-		if(donator.getVerified()!=null){
-			response.setSuccesful(false);
-		}
+        if (response.isSuccesful()) {
+            Donator donator = donatorService.getDonatorById(token);
+            if (donator.getVerified() != null) {
+                response.setSuccesful(false);
+            }
+        }
 
-		return response;
-	}
+        return response;
+    }
 
-	@RequestMapping("/register")
-	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	public void registerDonator(@RequestBody Donator donator){
-		if (donator.getUuid() == null) {
-			donator.setUuid(UUID.randomUUID());
-			donator.setVerified(UUID.randomUUID());
-		}
-		donatorService.registerDonator(donator);
+    @RequestMapping("/register")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void registerDonator(@RequestBody Donator donator) {
+        if (donator.getUuid() == null) {
+            donator.setUuid(UUID.randomUUID());
+            donator.setVerified(UUID.randomUUID());
+        }
+        donatorService.registerDonator(donator);
 
-		emailSenderService.sendVerifyEmailToDonator(donator.getUuid());
-	}
+        emailSenderService.sendVerifyEmailToDonator(donator.getUuid());
+    }
 
-	@RequestMapping("/getall")
-	public List<Donator> getAllHospitals(String token) {
-		if (!permissionsService.hasPermission(token, Permission.ADMIN)) {
-			return null;
-		}
-		return donatorService.getAllDonators();
-	}
+    @RequestMapping("/getall")
+    public List<Donator> getAllHospitals(String token) {
+        if (!permissionsService.hasPermission(token, Permission.ADMIN)) {
+            return null;
+        }
+        return donatorService.getAllDonators();
+    }
 
-	@RequestMapping("/getnextvisit")
-	public Date getLastVisit(String token){
-		if (!permissionsService.hasPermission(token, Permission.DONATOR)) {
-			return null;
-		}
-		UUID actualUuid = UUIDUtils.getUUIDFromString(token);
-		if (actualUuid == null) {
-			return null;
-		}
-		return donatorService.getNextAvailableDate(actualUuid);
-	}
+    @RequestMapping("/getnextvisit")
+    public Date getLastVisit(String token) {
+        if (!permissionsService.hasPermission(token, Permission.DONATOR)) {
+            return null;
+        }
+        UUID actualUuid = UUIDUtils.getUUIDFromString(token);
+        if (actualUuid == null) {
+            return null;
+        }
+        return donatorService.getNextAvailableDate(actualUuid);
+    }
 
-	@RequestMapping("/delete")
-	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	public void deleteVisit(String token, String uuid) {
-		if (!permissionsService.hasPermission(token, Permission.DONATOR)) {
-			return;
-		}
-		UUID actualUuid = UUIDUtils.getUUIDFromString(uuid);
-		if (actualUuid == null) {
-			return;
-		}
-		donatorService.deleteDonator(actualUuid);
-	}
+    @RequestMapping("/delete")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void deleteVisit(String token, String uuid) {
+        if (!permissionsService.hasPermission(token, Permission.DONATOR)) {
+            return;
+        }
+        UUID actualUuid = UUIDUtils.getUUIDFromString(uuid);
+        if (actualUuid == null) {
+            return;
+        }
+        donatorService.deleteDonator(actualUuid);
+    }
 
 }
