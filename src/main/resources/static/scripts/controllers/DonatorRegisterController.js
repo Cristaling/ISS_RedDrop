@@ -1,7 +1,7 @@
 (function(){
     'use strict'
     var app = angular.module('RedDrop');
-    app.controller('DonatorRegisterController', ['$location','$http','$cookies', function($location,$http,$cookies)
+    app.controller('DonatorRegisterController', ['$location','$http','$cookies', '$mdToast', function($location,$http,$cookies, $mdToast)
     {
         var vm = this;
 
@@ -31,6 +31,16 @@
                 }).then(function (response) {
                     $location.path("/donator/login");
                 }, function (error) { });
+            }else{
+                $mdToast.show(
+                    $mdToast.simple()
+                        .textContent('Passwords do not match.')
+                        .position('bottom right')
+                        .theme('reddrop-toast')
+                        .hideDelay(2500)
+                ).then(function (value) {
+                }, function (reason) {
+                });
             }
         }
     }]);
