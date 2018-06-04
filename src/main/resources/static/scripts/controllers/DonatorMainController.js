@@ -103,7 +103,7 @@
                     templateUrl: '/views/donator/EligibilityConsentDialog.html',
                     parent: angular.element(document.body),
                     clickOutsideToClose: true
-                }).then();
+                }).then(vm.getLastDonationDate,vm.getLastDonationDate);
             }
         };
 
@@ -116,6 +116,7 @@
         };
 
         vm.getLastDonationDate = function () {
+            vm.visitDate=undefined;
             $http.get('/api/donator/getnextvisit?token=' + vm.donatorToken).then(function (response) {
                 vm.minDate = new Date(response.data);
             }, function (reason) {
