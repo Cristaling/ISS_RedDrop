@@ -35,7 +35,7 @@ public class EmailSenderController {
         if (actualUuid == null) {
             return;
         }
-        emailSenderService.sendEmailToDonator(actualUuid);
+        emailSenderService.sendVerifyEmailToDonator(actualUuid);
     }
 
     @RequestMapping("/getconfirmed")

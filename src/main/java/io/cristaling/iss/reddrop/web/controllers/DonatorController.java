@@ -62,7 +62,7 @@ public class DonatorController {
 		}
 		donatorService.registerDonator(donator);
 
-		emailSenderService.sendEmailToDonator(donator.getUuid());
+		emailSenderService.sendVerifyEmailToDonator(donator.getUuid());
 	}
 
 	@RequestMapping("/getall")
