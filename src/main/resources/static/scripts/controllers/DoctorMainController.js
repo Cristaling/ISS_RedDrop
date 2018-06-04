@@ -94,67 +94,71 @@
         vm.checkFirstTime = function () {
 
             $http.get('/api/doctor/checkfirst?token=' + vm.doctorToken).then(function (response) {
-                $mdDialog.show({
-                    controller: function () {
+                    if (response.data.successful) {
+                        $mdDialog.show({
+                            controller: function () {
 
-                        var vm = this;
+                                var vm = this;
 
-                        vm.agreed = false;
-                        vm.password1 = "a";
-                        vm.password2 = "f";
+                                vm.agreed = false;
+                                vm.password1 = "a";
+                                vm.password2 = "f";
 
-                        vm.doctorToken = $cookies.get("doctorToken");
+                                vm.doctorToken = $cookies.get("doctorToken");
 
-                        if (!vm.doctorToken) {
-                            $location.path("/doctor/login");
-                        }
-
-                        $('#registerform').submit(function(event){
-                            event.preventDefault();
-                            vm.changePassword();
-                        });
-
-                        vm.changePassword = function () {
-                            $http({
-                                method: 'POST',
-                                url: '/api/doctor/changepassword?token=' + vm.doctorToken,
-                                data: {
-                                    password1: vm.password1,
-                                    password2: vm.password2
+                                if (!vm.doctorToken) {
+                                    $location.path("/doctor/login");
                                 }
-                            }).then(function (response) {
-                                    if (response.data) {
-                                        $mdDialog.show(
-                                            $mdDialog.alert()
-                                                .clickOutsideToClose(true)
-                                                .textContent('You have changed your password.')
-                                                .ariaLabel('Alert Dialog Demo')
-                                                .ok('Thank you!')
-                                        );
-                                    } else {
-                                        $mdDialog.show(
-                                            $mdDialog.alert()
-                                                .clickOutsideToClose(true)
-                                                .textContent('Passwords dont match.')
-                                                .ariaLabel('Alert Dialog Demo')
-                                                .ok('Try again!')
-                                        );
-                                    }
 
-                                }, function (error) {
+                                $('#registerform').submit(function (event) {
+                                    event.preventDefault();
+                                    vm.changePassword();
+                                });
 
-                                }
-                            );
+                                vm.changePassword = function () {
+                                    $http({
+                                        method: 'POST',
+                                        url: '/api/doctor/changepassword?token=' + vm.doctorToken,
+                                        data: {
+                                            password1: vm.password1,
+                                            password2: vm.password2
+                                        }
+                                    }).then(function (response) {
+                                            if (response.data) {
+                                                $mdDialog.show(
+                                                    $mdDialog.alert()
+                                                        .clickOutsideToClose(true)
+                                                        .textContent('You have changed your password.')
+                                                        .ariaLabel('Alert Dialog Demo')
+                                                        .ok('Thank you!')
+                                                );
+                                            } else {
+                                                $mdDialog.show(
+                                                    $mdDialog.alert()
+                                                        .clickOutsideToClose(true)
+                                                        .textContent('Passwords dont match.')
+                                                        .ariaLabel('Alert Dialog Demo')
+                                                        .ok('Try again!')
+                                                );
+                                            }
 
-                        };
-                    },
-                    controllerAs: 'ctrl',
-                    templateUrl: '/views/doctor/DoctorChangePassword.html',
-                    parent: angular.element(document.body),
-                    clickOutsideToClose: true
-                }).then();
-            }, function (reason) {
-            });
+
+                                        }, function (error) {
+
+                                        }
+                                    );
+
+                                };
+                            },
+                            controllerAs: 'ctrl',
+                            templateUrl: '/views/doctor/DoctorChangePassword.html',
+                            parent: angular.element(document.body),
+                            clickOutsideToClose: true
+                        }).then();
+                    }
+                }, function (reason) {
+                }
+            );
             if (vm.firstTime.successful) {
 
             }
@@ -165,5 +169,7 @@
         vm.refreshBloodBagStocks();
         vm.refreshRequestList();
 
-    }]);
-})();
+    }])
+    ;
+})
+();
