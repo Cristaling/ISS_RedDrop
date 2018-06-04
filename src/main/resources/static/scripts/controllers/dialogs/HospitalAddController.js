@@ -16,11 +16,6 @@
                 $location.path("/admin/login");
             }
 
-            $('#registerform').submit(function(event){
-                event.preventDefault();
-                vm.addHospital();
-            });
-
             vm.addHospital = function () {
                 $http({
                     method: 'POST',

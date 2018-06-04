@@ -5,8 +5,9 @@
         '$cookies',
         '$http',
         '$mdDialog',
+        '$scope',
         '$routeParams',
-        function ($location, $cookies, $http, $mdDialog, $routeParams) {
+        function ($location, $cookies, $http, $mdDialog, $scope, $routeParams) {
 
             var vm = this;
 
@@ -16,11 +17,6 @@
             if (!vm.adminToken) {
                 $location.path("/admin/login");
             }
-
-            $('#registerform').submit(function(event){
-                event.preventDefault();
-                vm.addDoctor();
-            });
 
             vm.addDoctor = function () {
                 $http({

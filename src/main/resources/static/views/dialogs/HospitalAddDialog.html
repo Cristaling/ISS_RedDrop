@@ -3,7 +3,7 @@
         Add a Hospital
     </div>
     <div class="panel-body">
-        <form>
+        <form ng-submit="ctrl.addHospital()">
             <div class="form-group">
                 <label for="hospitalName">Name</label>
                 <input ng-model="ctrl.hospitalName" type="text" required minlength="3" class="form-control" id="hospitalName"

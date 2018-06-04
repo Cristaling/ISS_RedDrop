@@ -11,11 +11,6 @@
             $location.path("/donator/main");
         }
 
-        $('#registerform').submit(function(event){
-            event.preventDefault();
-            vm.goToRegisterDonator();
-        });
-
         vm.goToRegisterDonator = function () {
             if(vm.donatorPassword === vm.donatorConfirmPassword){
                 $http({

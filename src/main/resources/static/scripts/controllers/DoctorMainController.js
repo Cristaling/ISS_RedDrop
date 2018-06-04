@@ -105,15 +105,10 @@
                                 vm.password2 = "f";
 
                                 vm.doctorToken = $cookies.get("doctorToken");
-
+                                
                                 if (!vm.doctorToken) {
                                     $location.path("/doctor/login");
                                 }
-
-                                $('#registerform').submit(function (event) {
-                                    event.preventDefault();
-                                    vm.changePassword();
-                                });
 
                                 vm.changePassword = function () {
                                     $http({

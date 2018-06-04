@@ -3,7 +3,7 @@
         Register a Doctor
     </div>
     <div class="panel-body">
-        <form id="registerform">
+        <form ng-submit="ctrl.addDoctor()">
             <div class="form-group">
                 <label for="cnpRegister">C.N.P.</label>
                 <input ng-model="ctrl.doctorCNP" type="text" require minlength="13" maxlenght="13" class="form-control" id="cnpRegister"
