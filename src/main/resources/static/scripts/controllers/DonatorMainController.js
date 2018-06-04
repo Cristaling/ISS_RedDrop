@@ -78,9 +78,7 @@
                                             .position('bottom right')
                                             .theme('reddrop-toast')
                                             .hideDelay(1000)
-                                    ).then(function (value) {
-                                    }, function (reason) {
-                                    });
+                                    ).then($mdDialog.hide(),$mdDialog.hide());
 
 
                                     }, function (error) {
