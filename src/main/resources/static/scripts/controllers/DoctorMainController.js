@@ -109,6 +109,11 @@
                             $location.path("/doctor/login");
                         }
 
+                        $('#registerform').submit(function(event){
+                            event.preventDefault();
+                            vm.changePassword();
+                        });
+
                         vm.changePassword = function () {
                             $http({
                                 method: 'POST',
