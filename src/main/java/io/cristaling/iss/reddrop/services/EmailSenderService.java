@@ -36,7 +36,7 @@ public class EmailSenderService {
 	    }
 		sendEmailToDonator(donator.getEmail(),
 				"Confirm Registration Account on ISS_RedDrop",
-				"Please follow this link to register your account and receive notifications when there's a desire for your blood type: http://127.0.0.1/api/emails/setconfirmed?cookie=" + donator.getVerified());
+				"Please follow this link to register your account and receive notifications when there's a desire for your blood type: http://cristaling.tk/api/emails/setconfirmed?cookie=" + donator.getVerified());
     }
 
 	public void askDonatorToDonate(UUID uuid) {
@@ -48,7 +48,7 @@ public class EmailSenderService {
 				"Someone could make use of your blood!",
 				"We noticed you haven't donated in a while!\n" +
 						"Someone could make great use of your blood right now!" +
-						"Schedule a donation visit right now at: http://127.0.0.1/");
+						"Schedule a donation visit right now at: http://cristaling.tk/");
 	}
 
     public void sendEmailToDonator(String email, String subject, String body) {
