@@ -1,7 +1,7 @@
 (function () {
     'use strict'
     var app = angular.module('RedDrop');
-    app.controller('DoctorMainController', ['$location', '$cookies', '$http', '$mdDialog', function ($location, $cookies, $http, $mdDialog) {
+    app.controller('DoctorMainController', ['$location', '$cookies', '$http', '$mdDialog', '$mdToast', function ($location, $cookies, $http, $mdDialog, $mdToast) {
         var vm = this;
 
         vm.doctorToken = $cookies.get("doctorToken");
@@ -111,14 +111,15 @@
                                 }
 
                                 vm.changePassword = function () {
-                                    $http({
-                                        method: 'POST',
-                                        url: '/api/doctor/changepassword?token=' + vm.doctorToken,
-                                        data: {
-                                            password1: vm.password1,
-                                            password2: vm.password2
-                                        }
-                                    }).then(function (response) {
+                                    if(vm.password1 === vm.password2){
+                                        $http({
+                                            method: 'POST',
+                                            url: '/api/doctor/changepassword?token=' + vm.doctorToken,
+                                            data: {
+                                                password1: vm.password1,
+                                                password2: vm.password2
+                                            }
+                                        }).then(function (response) {
                                             if (response.data) {
                                                 $mdDialog.show(
                                                     $mdDialog.alert()
@@ -127,22 +128,24 @@
                                                         .ariaLabel('Alert Dialog Demo')
                                                         .ok('Thank you!')
                                                 );
-                                            } else {
-                                                $mdDialog.show(
-                                                    $mdDialog.alert()
-                                                        .clickOutsideToClose(true)
-                                                        .textContent('Passwords dont match.')
-                                                        .ariaLabel('Alert Dialog Demo')
-                                                        .ok('Try again!')
-                                                );
                                             }
 
 
                                         }, function (error) {
 
-                                        }
-                                    );
-
+                                            }
+                                        );
+                                    }else {
+                                        $mdToast.show(
+                                            $mdToast.simple()
+                                                .textContent('Passwords do not match.')
+                                                .position('bottom right')
+                                                .theme('reddrop-toast')
+                                                .hideDelay(2500)
+                                        ).then(function (value) {
+                                        }, function (reason) {
+                                        });
+                                    }
                                 };
                             },
                             controllerAs: 'ctrl',
