@@ -5,8 +5,9 @@
         '$cookies',
         '$http',
         '$mdDialog',
+        '$scope',
         '$routeParams',
-        function ($location, $cookies, $http, $mdDialog, $routeParams) {
+        function ($location, $cookies, $http, $mdDialog, $scope, $routeParams) {
 
             var vm = this;
 

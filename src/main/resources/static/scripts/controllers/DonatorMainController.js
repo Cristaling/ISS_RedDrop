@@ -16,6 +16,7 @@
         vm.maxDate = "";
         vm.visitDate = null;
 
+
         vm.goToAnalysisPage = function (visit) {
 
             if (visit.bloodBagStatus.type == "UNTESTED") {
@@ -31,9 +32,36 @@
                 });
 
                 return;
-            }
+            } else {
+                $mdDialog.show({
+                    controller: function ($http) {
+                        var vm = this;
 
-            $location.path("/donator/analysis/" + visit.uuid);
+                        vm.donatorToken = $cookies.get("donatorToken");
+
+                        if (!vm.donatorToken) {
+                            $location.path("/donator/login");
+                        }
+
+                        vm.analysis;
+
+                        vm.getAnalysisData = function () {
+                            $http.get('/api/analysisresult/getbyvisit?token=' + vm.donatorToken + '&uuid=' + visit.uuid).then(function (response) {
+                                vm.analysis = response.data;
+                            }, function (reason) {
+
+                            });
+                        };
+
+                        vm.getAnalysisData();
+
+                    },
+                    controllerAs: 'ctrl',
+                    templateUrl: '/views/donator/AnalysisShowPage.html',
+                    parent: angular.element(document.body),
+                    clickOutsideToClose: true
+                }).then(vm.refreshVisitList, vm.refreshVisitList);
+            }
         };
 
         vm.setVisit = function (visitDate) {
@@ -72,26 +100,29 @@
                                         date: visitDate
                                     }
                                 }).then(function () {
-                                        $mdDialog.show(
-                                            $mdDialog.alert()
-                                                .clickOutsideToClose(true)
+                                        $mdToast.show(
+                                            $mdToast.simple()
                                                 .textContent('You have set yourself up for a visit.')
-                                                .ariaLabel('Alert Dialog Demo')
-                                                .ok('Thank you!')
-                                        );
+                                                .position('bottom right')
+                                                .theme('reddrop-toast')
+                                                .hideDelay(1000)
+                                        ).then($mdDialog.hide(), $mdDialog.hide());
+
 
                                     }, function (error) {
 
                                     }
                                 );
                             } else {
-                                $mdDialog.show(
-                                    $mdDialog.alert()
-                                        .clickOutsideToClose(true)
-                                        .textContent('You need to give your consent to set up a visit.')
-                                        .ariaLabel('Alert Dialog Demo')
-                                        .ok('Got it!')
-                                );
+                                $mdToast.show(
+                                    $mdToast.simple()
+                                        .textContent('You need to agree to the terms.')
+                                        .position('bottom right')
+                                        .theme('reddrop-toast')
+                                        .hideDelay(1000)
+                                ).then(function (value) {
+                                }, function (reason) {
+                                });
                             }
 
                         };
@@ -100,7 +131,7 @@
                     templateUrl: '/views/donator/EligibilityConsentDialog.html',
                     parent: angular.element(document.body),
                     clickOutsideToClose: true
-                }).then();
+                }).then(vm.getLastDonationDate, vm.getLastDonationDate);
             }
         };
 
@@ -113,20 +144,13 @@
         };
 
         vm.getLastDonationDate = function () {
+            vm.visitDate = undefined;
             $http.get('/api/donator/getnextvisit?token=' + vm.donatorToken).then(function (response) {
                 vm.minDate = new Date(response.data);
             }, function (reason) {
 
             });
         };
-
-        vm.functie = function () {
-            if (agreed) {
-
-
-            }
-
-        }
 
         vm.getLastDonationDate();
         vm.refreshVisitsList();

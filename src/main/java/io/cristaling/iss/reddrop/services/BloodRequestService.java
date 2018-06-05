@@ -5,10 +5,12 @@ import io.cristaling.iss.reddrop.core.BloodBagType;
 import io.cristaling.iss.reddrop.core.BloodRequest;
 import io.cristaling.iss.reddrop.core.BloodStock;
 import io.cristaling.iss.reddrop.core.BloodType;
+import io.cristaling.iss.reddrop.core.Donator;
 import io.cristaling.iss.reddrop.repositories.BloodBagRepository;
 import io.cristaling.iss.reddrop.repositories.BloodBagTypeRepository;
 import io.cristaling.iss.reddrop.repositories.BloodRequestRepository;
 import io.cristaling.iss.reddrop.repositories.BloodTypeRepository;
+import io.cristaling.iss.reddrop.repositories.DonatorRepository;
 import io.cristaling.iss.reddrop.utils.StockUtils;
 import io.cristaling.iss.reddrop.utils.enums.BloodBagStatus;
 import io.cristaling.iss.reddrop.utils.enums.BloodRequestStatus;
@@ -30,20 +32,29 @@ public class BloodRequestService {
     BloodTypeRepository bloodTypeRepository;
     BloodBagTypeRepository bloodBagTypeRepository;
     BloodBagRepository bloodBagRepository;
+    DonatorRepository donatorRepository;
 
     BloodBagService bloodBagService;
+    DonatorService donatorService;
+    EmailSenderService emailSenderService;
 
     @Autowired
     public BloodRequestService(BloodRequestRepository requestRepository,
                                BloodTypeRepository bloodTypeRepository,
                                BloodBagTypeRepository bloodBagTypeRepository,
                                BloodBagRepository bloodBagRepository,
-                               BloodBagService bloodBagService) {
+                               DonatorRepository donatorRepository,
+                               BloodBagService bloodBagService,
+                               DonatorService donatorService,
+                               EmailSenderService emailSenderService) {
         this.requestRepository = requestRepository;
         this.bloodTypeRepository = bloodTypeRepository;
         this.bloodBagTypeRepository = bloodBagTypeRepository;
         this.bloodBagRepository = bloodBagRepository;
+        this.donatorRepository = donatorRepository;
         this.bloodBagService = bloodBagService;
+        this.donatorService = donatorService;
+        this.emailSenderService = emailSenderService;
     }
 
     public void deleteBloodRequest(UUID uuid) {
@@ -62,6 +73,25 @@ public class BloodRequestService {
             bloodRequest.setStatus(BloodRequestStatus.UNRESOLVED);
         }
         requestRepository.save(bloodRequest);
+
+        HashMap<BloodType, BloodStock> stock = bloodBagService.getBloodStockAsMap();
+
+        BloodType requestBloodType = bloodTypeRepository.getOne(bloodRequest.getBloodType());
+        BloodBagType requestBagType = bloodBagTypeRepository.getOne(bloodRequest.getBloodBagType());
+
+        if (!StockUtils.hasInStock(stock, requestBloodType, requestBagType) && false) {
+            List<Donator> donators = donatorRepository.getDonatorsByBloodType(requestBloodType.getUuid());
+
+            Date today = new Date();
+
+            for (Donator donator : donators) {
+                Date nextVisit = donatorService.getNextAvailableDate(donator.getUuid());
+                if (nextVisit.after(today)) {
+                    emailSenderService.askDonatorToDonate(donator.getUuid());
+                }
+            }
+        }
+
     }
 
     public List<BloodRequest> getBloodRequestByDoctor(UUID doctorID) {
@@ -123,6 +153,7 @@ public class BloodRequestService {
             bloodBagRepository.save(toUse);
             toSolve.setStatus(BloodRequestStatus.COMPLETED);
             requestRepository.save(toSolve);
+            return;
         }
 
         if (toSolve.getBloodBagType().equals(wholeBagType.getUuid())) {

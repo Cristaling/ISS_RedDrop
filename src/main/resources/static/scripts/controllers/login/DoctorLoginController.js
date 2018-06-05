@@ -1,7 +1,7 @@
 (function(){
     'use strict'
     var app = angular.module('RedDrop');
-    app.controller('DoctorLoginController', ['$location', '$cookies', '$http', function($location, $cookies, $http)
+    app.controller('DoctorLoginController', ['$location', '$cookies', '$http', '$mdToast', function($location, $cookies, $http, $mdToast)
     {
         var vm = this;
 
@@ -23,6 +23,16 @@
                 if (response.data.succesful) {
                     $cookies.put("doctorToken", response.data.token);
                     $location.path("/doctor/main");
+                }else{
+                    $mdToast.show(
+                        $mdToast.simple()
+                            .textContent('Check if the password/CNP match or if you do not have an account, please ask an administrator to create one for you.')
+                            .position('bottom right')
+                            .theme('reddrop-toast')
+                            .hideDelay(3500)
+                    ).then(function (value) {
+                    }, function (reason) {
+                    });
                 }
             }, function (error) { });
         }

@@ -30,7 +30,7 @@
                 }else{
                     $mdToast.show(
                         $mdToast.simple()
-                            .textContent('Check if the password/cnp match, id they do please verify your email to confirm the account.')
+                            .textContent('Check if the password/CNP match, if they do please verify your email to confirm the account.')
                             .position('bottom right')
                             .theme('reddrop-toast')
                             .hideDelay(2500)

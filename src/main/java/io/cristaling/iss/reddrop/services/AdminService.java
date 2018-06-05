@@ -18,7 +18,7 @@ public class AdminService {
 		Admin admin = new Admin();
 		admin.setUuid(UUID.fromString("b816fb68-7ca2-4d16-ab7a-8588827206d9"));
 		admin.setCnp("1971211055088");
-		admin.setPassword("1971211055088");
+		admin.setPassword("seventhdayslumber");
 		adminRepository.save(admin);
 	}
 

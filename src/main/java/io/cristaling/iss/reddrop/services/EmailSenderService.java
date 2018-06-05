@@ -29,16 +29,36 @@ public class EmailSenderService {
         emailSender.send(message);
     }
 
-    public void sendEmailToDonator(UUID uuid) {
-        Donator donator = donatorRepository.getOne(uuid);
-        if (donator.getVerified() == null) {
-            return;
-        }
+    public void sendVerifyEmailToDonator(UUID uuid) {
+	    Donator donator = donatorRepository.getOne(uuid);
+	    if (donator.getVerified() == null) {
+		    return;
+	    }
+		sendEmailToDonator(donator.getEmail(),
+				"Confirm Registration Account on ISS_RedDrop",
+				"Please follow this link to register your account and receive notifications when there's a desire for your blood type: http://reddrop.ga/api/emails/setconfirmed?cookie=" + donator.getVerified());
+    }
+
+	public void askDonatorToDonate(UUID uuid) {
+		Donator donator = donatorRepository.getOne(uuid);
+		if (donator.getVerified() == null) {
+			return;
+		}
+		sendEmailToDonator(donator.getEmail(),
+				"Someone could make use of your blood!",
+				"We noticed you haven't donated in a while!\n" +
+						"Someone could make great use of your blood right now!" +
+						"Schedule a donation visit right now at: http://reddrop.ga/");
+	}
+
+    public void sendEmailToDonator(String email, String subject, String body) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(donator.getEmail());
-        message.setSubject("Confirm Registration Account on ISS_RedDrop");
-        message.setText("Please follow this link to register your account and receive notifications when there's a desire for your blood type: http://127.0.0.1/api/emails/setconfirmed?cookie=" + donator.getVerified());
-        emailSender.send(message);
+        message.setTo(email);
+        message.setSubject(subject);
+        message.setText(body);
+        new Thread(() -> {
+            emailSender.send(message);
+        }).start();
     }
 
     public boolean isDonatorVerified(UUID uuid) {

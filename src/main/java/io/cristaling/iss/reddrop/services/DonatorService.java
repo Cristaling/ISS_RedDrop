@@ -24,12 +24,12 @@ public class DonatorService {
         Donator donator = new Donator();
         donator.setUuid(UUID.randomUUID());
         donator.setCnp("1971211055084");
-        donator.setPassword("1971211055084");
-        donator.setNume("DONATOR");
-        donator.setVerified(UUID.randomUUID());
-        donator.setPrenume("PRIME");
+        donator.setPassword("password");
+        donator.setNume("Fodor");
+        donator.setVerified(null);
+        donator.setPrenume("Ciprian");
         donator.setEmail("squishymaster12@gmail.com");
-        donator.setNrTel("0751080998");
+        donator.setNrTel("0770122227");
         donatorRepository.save(donator);
     }
 

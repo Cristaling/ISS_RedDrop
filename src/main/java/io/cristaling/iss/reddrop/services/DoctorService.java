@@ -24,15 +24,15 @@ public class DoctorService {
         this.hospitalRepository = hospitalRepository;
         Hospital hospital = new Hospital();
         hospital.setUuid(UUID.fromString("6aa537ca-e706-47b3-8640-54ae85692dcf"));
-        hospital.setName("Hospital 1");
+        hospital.setName("County Main Hospital");
         hospitalRepository.save(hospital);
         Doctor doctor = new Doctor();
         doctor.setUuid(UUID.randomUUID());
         doctor.setHospital(hospital.getUuid());
         doctor.setCnp("1971211055085");
-        doctor.setPassword("1971211055085");
+        doctor.setPassword("seventhdayslumber");
         doctor.setFullName("Dr. Susan Dofenjmirtz");
-        doctor.setFirstLogin(true);
+        doctor.setFirstLogin(false);
         doctorRepository.save(doctor);
     }
 
@@ -45,6 +45,7 @@ public class DoctorService {
         if (doctor.getUuid() == null) {
             doctor.setUuid(UUID.randomUUID());
         }
+        doctor.setFirstLogin(true);
         doctorRepository.save(doctor);
     }
 

@@ -39,7 +39,10 @@
                     <md-list>
                         <md-list-item ng-repeat="visit in ctrl.visits" ng-click="ctrl.goToAnalysisPage(visit)">
                             <p>{{ visit.date | date:"dd/MM/yyyy" }}</p>
-                            <span class="badge badge-light">{{ visit.bloodBagStatus.name }}</span>
+                            <span class="label" ng-show="visit.bloodBagStatus.type == 'UNTESTED'">{{ visit.bloodBagStatus.name }}</span>
+                            <span class="label label-primary" ng-show="visit.bloodBagStatus.type == 'DEPOSITED'">{{ visit.bloodBagStatus.name }}</span>
+                            <span class="label label-danger" ng-show="visit.bloodBagStatus.type == 'REFUSED'">{{ visit.bloodBagStatus.name }}</span>
+                            <span class="label label-success" ng-show="visit.bloodBagStatus.type == 'USED'">{{ visit.bloodBagStatus.name }}</span>
                         </md-list-item>
                     </md-list>
                 </div>
